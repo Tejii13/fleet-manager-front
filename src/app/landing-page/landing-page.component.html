@@ -1,0 +1,19 @@
+<h2>Veuillez écrire vos identifiants pour vous connecter</h2>
+
+<form (ngSubmit)="onSubmit()">
+  <label for="id_input">Votre nom d'utilisateur</label>
+  <input
+    type="text"
+    name="username"
+    placeholder="Nom d'utilisateur"
+    [(ngModel)]="username"
+  />
+  <label for="token_input">Votre token d'authentification</label>
+  <input
+    type="password"
+    name="authToken"
+    placeholder="Token d'authentification"
+    [(ngModel)]="authToken"
+  />
+  <button type="submit">Valider</button>
+</form>
