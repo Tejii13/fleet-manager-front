@@ -9,20 +9,20 @@ import { FetchDataService } from '../fetch-data.service';
 })
 export class LandingPageComponent implements OnInit {
   username!: string;
-  authToken!: string;
+  password!: string;
+  members: any[] = [];
 
   constructor(private fetch: FetchDataService) {}
 
   ngOnInit(): void {}
 
   async onSubmit() {
-    if (this.username && this.authToken) {
-      console.log(this.username);
-      console.log(this.authToken);
-
-      const data = await this.fetch.getUser(this.username, this.authToken);
+    if (this.username && this.password) {
+      this.fetch.login(this.username, this.password).subscribe((data) => {
+        console.log(data);
+      });
     } else {
-      console.log('Veuillez remplir tous les chams');
+      console.log('Veuillez remplir tous les champs');
     }
   }
 }
