@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchDataService } from '../fetch-data.service';
 
-import { connectionStatus } from '../interfaces';
+import { ConnectionStatus } from '../interfaces';
 
 import { Router } from '@angular/router';
 
@@ -21,9 +21,11 @@ export class LandingPageComponent implements OnInit {
 
   async onSubmit() {
     if (this.username && this.password) {
+      console.log(this.username);
+      console.log(this.password);
       this.fetch
         .login(this.username, this.password)
-        .subscribe((data: connectionStatus) => {
+        .subscribe((data: ConnectionStatus) => {
           console.log(data);
           if (data.code === 201) {
             this.router.navigate([`/mon-espace/${data.id}`]);

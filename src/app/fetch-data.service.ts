@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs';
 
 import { APP_API_URL } from 'src/environments/environment.local';
-import { connectionStatus } from './interfaces';
+import { ConnectionStatus, Member } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FetchDataService {
   constructor(private http: HttpClient) {}
+  private roles = ['ROLE_ADMIN'];
 
-  login(username: string, password: string): Observable<connectionStatus> {
-    const roles = ['admin'];
+  login(username: string, password: string): Observable<ConnectionStatus> {
+    const role = this.roles;
     return this.http
-      .post<connectionStatus>(`${APP_API_URL}/login`, {
+      .post<ConnectionStatus>(`${APP_API_URL}/login`, {
         username,
-        roles,
+        role,
         password,
       })
       .pipe(
@@ -35,5 +36,30 @@ export class FetchDataService {
       );
   }
 
-  // getUsername() {}
+  getUserinfo(id: number): Observable<Member> {
+    const url = `${APP_API_URL}/users/${id}`;
+    const headers = new HttpHeaders({
+      accept: 'application/ld+json',
+    });
+
+    return this.http.get<Member>(url, { headers });
+  }
+
+  registerUser(username: string, role: Array<string>): Observable<any> {
+    const url = `${APP_API_URL}/register`;
+    const headers = new HttpHeaders({
+      accept: 'application/ld+json',
+      'Content-Type': 'application/ld+json',
+    });
+
+    console.log('Service: ' + username);
+    console.log('Service: ' + role);
+
+    const requestBody = {
+      username: username,
+      roles: [role],
+    };
+
+    return this.http.post(url, requestBody, { headers: headers });
+  }
 }

@@ -1,8 +1,8 @@
 export interface Member {
   id: number;
-  name: string;
-  auth_token: string;
-  is_admin?: boolean;
+  username: string;
+  roles: Array<string>;
+  password: string;
 }
 
 export interface Ship {
@@ -12,7 +12,7 @@ export interface Ship {
   nickname?: string;
 }
 
-export interface connectionStatus {
+export interface ConnectionStatus {
   message: string;
   code: number;
   id?: number;
