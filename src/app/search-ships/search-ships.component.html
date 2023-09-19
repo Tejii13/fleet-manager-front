@@ -1,0 +1,12 @@
+<h2>Recherchez un vaisseau à ajouter</h2>
+
+<form (ngSubmit)="handleShipAdd()">
+  <label for="id_input">Nouveau vaisseau à ajouter:&nbsp;</label>
+  <input
+    type="text"
+    name="shipInput"
+    placeholder="Aurora MR"
+    [(ngModel)]="shipInput"
+  />
+  <button type="submit">Ajouter</button>
+</form>

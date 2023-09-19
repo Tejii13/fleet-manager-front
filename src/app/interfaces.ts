@@ -11,3 +11,9 @@ export interface Ship {
   name: string;
   nickname?: string;
 }
+
+export interface connectionStatus {
+  message: string;
+  code: number;
+  id?: number;
+}
