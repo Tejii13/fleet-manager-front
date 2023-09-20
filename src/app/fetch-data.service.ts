@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs';
+import { Observable, of, catchError, switchMap } from 'rxjs';
+
+import { CookieService } from 'ngx-cookie-service';
 
 import { APP_API_URL } from 'src/environments/environment.local';
-import { ConnectionStatus, Member } from './interfaces';
+import { ConnectionStatus } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FetchDataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
   private roles = ['ROLE_ADMIN'];
 
   login(username: string, password: string): Observable<ConnectionStatus> {
@@ -31,18 +32,10 @@ export class FetchDataService {
           return of({
             message: "Impossible de s'identifier.",
             code: 401,
+            auth: '',
           });
         })
       );
-  }
-
-  getUserinfo(id: number): Observable<Member> {
-    const url = `${APP_API_URL}/users/${id}`;
-    const headers = new HttpHeaders({
-      accept: 'application/ld+json',
-    });
-
-    return this.http.get<Member>(url, { headers });
   }
 
   registerUser(username: string, role: Array<string>): Observable<any> {
@@ -61,5 +54,63 @@ export class FetchDataService {
     };
 
     return this.http.post(url, requestBody, { headers: headers });
+  }
+
+  getUserinfo(id: number): Observable<any> {
+    return this.checkConnection(id).pipe(
+      switchMap((response: any) => {
+        if (!response) {
+          return of(false);
+        } else {
+          const url = `${APP_API_URL}/users/${id}`;
+          const headers = new HttpHeaders({
+            accept: 'application/ld+json',
+          });
+          return this.http.get<any>(url, { headers }).pipe(
+            catchError((error) => {
+              console.error(
+                'Erreur lors de la récupération des informations: ',
+                error
+              );
+              return of(false);
+            })
+          );
+        }
+      })
+    );
+  }
+
+  checkConnection(id: number) {
+    const url = `${APP_API_URL}/verify`;
+    const headers = new HttpHeaders({
+      accept: 'application/ld+json',
+    });
+
+    const authCookieExpires = this.cookieService.get('auth');
+
+    const requestBody = {
+      id: id,
+      auth: authCookieExpires,
+    };
+
+    return this.http
+      .put(url, requestBody, {
+        headers: headers,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error(
+            'Erreur lors de la vérification de la connexion: ',
+            error
+          );
+          return of(false);
+        })
+      );
+  }
+
+  getUsersList() {
+    return this.http.get(`${APP_API_URL}/users`, {
+      headers: { accept: 'application/ld+json' },
+    }); // FIXME #showMembers
   }
 }

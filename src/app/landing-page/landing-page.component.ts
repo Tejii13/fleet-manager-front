@@ -3,6 +3,7 @@ import { FetchDataService } from '../fetch-data.service';
 
 import { ConnectionStatus } from '../interfaces';
 
+import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +16,11 @@ export class LandingPageComponent implements OnInit {
   password!: string;
   members: any[] = [];
 
-  constructor(private fetch: FetchDataService, private router: Router) {}
+  constructor(
+    private fetch: FetchDataService,
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -28,6 +33,10 @@ export class LandingPageComponent implements OnInit {
         .subscribe((data: ConnectionStatus) => {
           console.log(data);
           if (data.code === 201) {
+            const expirationDate = new Date();
+            expirationDate.setMonth(expirationDate.getMonth() + 1);
+
+            this.cookieService.set('auth', data.auth, expirationDate, '/');
             this.router.navigate([`/mon-espace/${data.id}`]);
           }
         });

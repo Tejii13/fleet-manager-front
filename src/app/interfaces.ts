@@ -3,6 +3,7 @@ export interface Member {
   username: string;
   roles: Array<string>;
   password: string;
+  auth: string;
 }
 
 export interface Ship {
@@ -15,5 +16,6 @@ export interface Ship {
 export interface ConnectionStatus {
   message: string;
   code: number;
+  auth: string;
   id?: number;
 }

@@ -1,21 +1,15 @@
-<h2>Bienvenue dans votre espace personnel {{ username }}</h2>
+<div *ngIf="showData">
+  <button (click)="disconnect()">Déconnexion</button>
 
-<!-- <app-search-ships></app-search-ships> -->
+  <h2>Bienvenue dans votre espace personnel {{ username }}</h2>
+  <button (click)="viewMembers()">Voir membres</button>
+  <button (click)="addMembers()">Ajouter membres</button>
 
-<form (ngSubmit)="handleMemberAdd()">
-  <label for="id_input">Nom de l'utilisateur à ajouter:&nbsp;</label>
-  <input
-    type="text"
-    name="username"
-    placeholder="Nom d'utilisateur"
-    [(ngModel)]="inputUsername"
-  />
-  <label for="id_input">Le rôle à attribuer:&nbsp;</label>
-  <input
-    type="text"
-    name="role"
-    placeholder="ROLE_CITIZEN par défaut"
-    [(ngModel)]="inputRole"
-  />
-  <button type="submit">Ajouter</button>
-</form>
+  <div *ngIf="isAdmin && showAddMembers">
+    <app-add-user></app-add-user>
+  </div>
+  <div *ngIf="showMembers">
+    <li *ngFor="let member of members">{{ member }};</li>
+  </div>
+  <!-- <app-search-ships></app-search-ships> -->
+</div>
