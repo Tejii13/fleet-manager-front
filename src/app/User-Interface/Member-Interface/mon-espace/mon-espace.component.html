@@ -1,19 +1,28 @@
-<ng-container *ngIf="verifyPassword; else elseBlock">
-  <app-change-password [userId]="userId"></app-change-password>
+<div *ngIf="showData || verifyPassword">
+  <button (click)="disconnect()">Déconnexion</button>
+</div>
+
+<!-- Shows password change form if it's the first connection -->
+<ng-container *ngIf="verifyPassword; else elseShowData">
+  <app-change-password
+    [userId]="userId"
+    (passwordVerifiedEvent)="handlePasswordVerified($event)"
+  ></app-change-password>
 </ng-container>
 
-<ng-template #elseBlock>
+<!-- Shows data if it isn't the first connection -->
+<ng-template #elseShowData>
   <div *ngIf="showData">
-    <button (click)="disconnect()">Déconnexion</button>
     <h2>Bienvenue dans votre espace personnel {{ username }}</h2>
-    <button (click)="viewMembers()">Voir membres</button>
-    <button (click)="addMembers()">Ajouter membres</button>
-    <div *ngIf="isAdmin && showAddMembers">
-      <app-add-user></app-add-user>
-    </div>
-    <div *ngIf="showMembers">
-      <li *ngFor="let member of members">{{ member }};</li>
-    </div>
-    <!-- <app-search-ships></app-search-ships> -->
+
+    <!-- Shows admin panel -->
+    <ng-container *ngIf="isAdmin; else elseShowShips">
+      <app-admin-panel></app-admin-panel>
+    </ng-container>
+
+    <!-- Show ships as well if not admin -->
+    <ng-template #elseShowShips>
+      <app-display-ships></app-display-ships>
+    </ng-template>
   </div>
 </ng-template>

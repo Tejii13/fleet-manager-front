@@ -15,6 +15,8 @@ import { SearchShipsComponent } from './User-Interface/Member-Interface/search-s
 import { DisplayShipsComponent } from './User-Interface/Member-Interface/display-ships/display-ships.component';
 import { AddUserComponent } from './User-Interface/Admin-Interface/add-user/add-user.component';
 import { ChangePasswordComponent } from './User-Interface/Member-Interface/change-password/change-password.component';
+import { DisplayMembersComponent } from './User-Interface/Admin-Interface/display-members/display-members.component';
+import { AdminPanelComponent } from './User-Interface/Admin-Interface/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { ChangePasswordComponent } from './User-Interface/Member-Interface/chang
     DisplayShipsComponent,
     AddUserComponent,
     ChangePasswordComponent,
+    DisplayMembersComponent,
+    AdminPanelComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [CookieService],

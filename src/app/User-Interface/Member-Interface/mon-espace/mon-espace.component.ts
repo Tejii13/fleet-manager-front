@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie-service';
-import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-mon-espace',
@@ -15,8 +14,6 @@ export class MonEspaceComponent implements OnInit {
 
   public showData: boolean = false;
   public isAdmin: boolean = false;
-  public showMembers: boolean = false;
-  public showAddMembers: boolean = false;
   public verifyPassword: boolean = false;
   public members: Array<any> = [];
   public username!: string;
@@ -49,26 +46,7 @@ export class MonEspaceComponent implements OnInit {
           console.log('Pas connecté');
           this.router.navigate(['/']);
         } else {
-          this.showData = true;
-          this.username = data.username;
-          this.userId = data.id;
-
-          // Verifies if it's the first connection
-          if (!data.isVerified) {
-            this.verifyPassword = true;
-            this.isAdmin = false;
-            this.showData = false;
-          } else {
-            // If it's not the first connection
-            for (let role of data.roles) {
-              if (role === 'ROLE_ADMIN') {
-                this.isAdmin = true;
-              }
-            }
-            if (this.isAdmin) {
-              this.fetch.getUsersList(); // FIXME #showMembers
-            }
-          }
+          this.handleDataFetch(data);
         }
       });
     } else {
@@ -76,14 +54,38 @@ export class MonEspaceComponent implements OnInit {
     }
   }
 
-  addMembers() {
-    this.showAddMembers = true;
-    this.showMembers = false;
+  handleDataFetch(data: any) {
+    this.showData = true;
+    this.username = data.username;
+    this.userId = data.id;
+    console.log(data.verified);
+    // Verifies if it's the first connection
+    if (!data.verified) {
+      this.verifyPassword = true;
+      this.isAdmin = false;
+      this.showData = false;
+    } else {
+      // If it's not the first connection
+      for (let role of data.roles) {
+        if (role === 'ROLE_ADMIN') {
+          this.isAdmin = true;
+        }
+      }
+      if (this.isAdmin) {
+        this.getUsers();
+      }
+    }
   }
 
-  viewMembers() {
-    this.showMembers = true;
-    this.showAddMembers = false;
+  private getUsers() {
+    this.fetch.getUsersList(); // FIXME #showMembers
+  }
+
+  handlePasswordVerified(passwordVerified: boolean) {
+    if (passwordVerified) {
+      this.showData = true;
+      this.verifyPassword = false;
+    }
   }
 
   disconnect() {

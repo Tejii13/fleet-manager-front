@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { UpdateAccountService } from 'src/app/update-account.service';
 
@@ -12,10 +12,14 @@ export class ChangePasswordComponent {
 
   @Input() userId!: number;
 
+  @Output() passwordVerifiedEvent = new EventEmitter<boolean>();
+
   public message!: string;
 
   public newPassword!: string;
   public confirmPassword!: string;
+
+  public passwordVerified: boolean = false;
 
   handlePasswordChange() {
     if (
@@ -24,12 +28,13 @@ export class ChangePasswordComponent {
       this.newPassword !== '' &&
       this.newPassword === this.confirmPassword
     ) {
-      // this.updateAccount
-      //   .updatePassword(this.userId, this.confirmPassword)
-      //   .subscribe((data) => {
-      //     console.log(data);
-      //   });
-      this.updateAccount.getRandomId(this.userId);
+      this.updateAccount
+        .updatePassword(this.userId, this.confirmPassword)
+        .subscribe((data) => {
+          this.passwordVerified = true;
+          this.passwordVerifiedEvent.emit(true);
+          console.log(data);
+        });
     } else {
       this.message = 'Vérifiez le mot de passe et réessayez.';
     }

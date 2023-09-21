@@ -1,0 +1,15 @@
+<button (click)="viewShips()">Voir vaisseaux</button>
+<button (click)="viewMembers()">Voir membres</button>
+<button (click)="updateMembers()">Ajouter membres</button>
+
+<div *ngIf="showUpdateMembers">
+  <app-add-user></app-add-user>
+</div>
+
+<div *ngIf="showMembers">
+  <app-display-members></app-display-members>
+</div>
+
+<div *ngIf="showShips">
+  <app-display-ships></app-display-ships>
+</div>
