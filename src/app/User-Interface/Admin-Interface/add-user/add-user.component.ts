@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FetchDataService } from './../fetch-data.service';
+import { FetchDataService } from '../../../fetch-data.service';
 
 @Component({
   selector: 'app-add-user',

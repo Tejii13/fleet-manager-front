@@ -13,14 +13,11 @@ import { ConnectionStatus } from './interfaces';
 })
 export class FetchDataService {
   constructor(private http: HttpClient, private cookieService: CookieService) {}
-  private roles = ['ROLE_ADMIN'];
 
   login(username: string, password: string): Observable<ConnectionStatus> {
-    const role = this.roles;
     return this.http
       .post<ConnectionStatus>(`${APP_API_URL}/login`, {
         username,
-        role,
         password,
       })
       .pipe(

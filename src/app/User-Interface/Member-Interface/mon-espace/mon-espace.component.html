@@ -1,0 +1,19 @@
+<ng-container *ngIf="verifyPassword; else elseBlock">
+  <app-change-password [userId]="userId"></app-change-password>
+</ng-container>
+
+<ng-template #elseBlock>
+  <div *ngIf="showData">
+    <button (click)="disconnect()">Déconnexion</button>
+    <h2>Bienvenue dans votre espace personnel {{ username }}</h2>
+    <button (click)="viewMembers()">Voir membres</button>
+    <button (click)="addMembers()">Ajouter membres</button>
+    <div *ngIf="isAdmin && showAddMembers">
+      <app-add-user></app-add-user>
+    </div>
+    <div *ngIf="showMembers">
+      <li *ngFor="let member of members">{{ member }};</li>
+    </div>
+    <!-- <app-search-ships></app-search-ships> -->
+  </div>
+</ng-template>

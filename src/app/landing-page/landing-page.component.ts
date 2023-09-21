@@ -12,9 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  username!: string;
-  password!: string;
-  members: any[] = [];
+  public username!: string;
+  public password!: string;
 
   constructor(
     private fetch: FetchDataService,

@@ -1,4 +1,4 @@
-import { FetchDataService } from './../fetch-data.service';
+import { FetchDataService } from '../../../fetch-data.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -13,13 +13,18 @@ import { switchMap } from 'rxjs';
 export class MonEspaceComponent implements OnInit {
   private id!: number;
 
-  public username!: string;
   public showData: boolean = false;
-  public mdpTemp!: string;
   public isAdmin: boolean = false;
   public showMembers: boolean = false;
   public showAddMembers: boolean = false;
+  public verifyPassword: boolean = false;
   public members: Array<any> = [];
+  public username!: string;
+  public mdpTemp!: string;
+  public newPassword!: string;
+  public confirmPassword!: string;
+
+  public userId!: number;
 
   inputUsername!: string;
   inputRole!: Array<string>;
@@ -46,13 +51,23 @@ export class MonEspaceComponent implements OnInit {
         } else {
           this.showData = true;
           this.username = data.username;
-          for (let role of data.roles) {
-            if (role === 'ROLE_ADMIN') {
-              this.isAdmin = true;
+          this.userId = data.id;
+
+          // Verifies if it's the first connection
+          if (!data.isVerified) {
+            this.verifyPassword = true;
+            this.isAdmin = false;
+            this.showData = false;
+          } else {
+            // If it's not the first connection
+            for (let role of data.roles) {
+              if (role === 'ROLE_ADMIN') {
+                this.isAdmin = true;
+              }
             }
-          }
-          if (this.isAdmin) {
-            this.fetch.getUsersList(); // FIXME #showMembers
+            if (this.isAdmin) {
+              this.fetch.getUsersList(); // FIXME #showMembers
+            }
           }
         }
       });

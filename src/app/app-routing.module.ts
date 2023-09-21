@@ -1,4 +1,4 @@
-import { MonEspaceComponent } from './mon-espace/mon-espace.component';
+import { MonEspaceComponent } from './User-Interface/Member-Interface/mon-espace/mon-espace.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
