@@ -21,18 +21,7 @@ export class UpdateAccountService {
     );
   }
 
-  getRandomId(userId: number) {
-    const headers = new HttpHeaders({
-      accept: 'application/ld+json',
-    });
-    return this.http
-      .put(
-        `http://localhost:8000/api/randomId`,
-        { userId },
-        { headers: headers }
-      )
-      .subscribe((data) => {
-        console.log(data);
-      });
+  deleteAccount(userId: string) {
+    return this.http.delete(`${this.url}/users/${userId}`);
   }
 }

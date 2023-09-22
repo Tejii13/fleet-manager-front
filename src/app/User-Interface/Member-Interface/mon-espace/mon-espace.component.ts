@@ -58,7 +58,6 @@ export class MonEspaceComponent implements OnInit {
     this.showData = true;
     this.username = data.username;
     this.userId = data.id;
-    console.log(data.verified);
     // Verifies if it's the first connection
     if (!data.verified) {
       this.verifyPassword = true;

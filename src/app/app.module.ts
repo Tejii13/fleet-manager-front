@@ -1,11 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CookieService } from 'ngx-cookie-service';
 
 import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+import { FetchDataService } from './fetch-data.service';
+import { StarCitizenApiService } from './star-citizen-api.service';
+import { UpdateAccountService } from './update-account.service';
 
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -31,8 +41,24 @@ import { AdminPanelComponent } from './User-Interface/Admin-Interface/admin-pane
     DisplayMembersComponent,
     AdminPanelComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
-  providers: [CookieService],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatProgressBarModule,
+    MatFormFieldModule,
+  ],
+  providers: [
+    CookieService,
+    StarCitizenApiService,
+    FetchDataService,
+    UpdateAccountService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

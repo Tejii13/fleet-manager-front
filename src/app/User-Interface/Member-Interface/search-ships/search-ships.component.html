@@ -1,12 +1,31 @@
 <h2>Recherchez un vaisseau à ajouter</h2>
 
-<form (ngSubmit)="handleShipAdd()">
-  <label for="id_input">Nouveau vaisseau à ajouter:&nbsp;</label>
-  <input
-    type="text"
-    name="shipInput"
-    placeholder="Aurora MR"
-    [(ngModel)]="shipInput"
-  />
-  <button type="submit">Ajouter</button>
-</form>
+<div *ngIf="isFetching">
+  <p>Récupération de données...</p>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div *ngIf="ships">
+  <form [formGroup]="shipForm">
+    <mat-form-field>
+      <mat-label>Nouveau vaisseau à ajouter:&nbsp;</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="shipInput"
+        placeholder="Ex: Aurora MR"
+        [matAutocomplete]="autoGroup"
+        (submit)="handleShipAdd()"
+        (input)="onInput()"
+      />
+      <mat-autocomplete #autoGroup="matAutocomplete">
+        <mat-optgroup *ngFor="let brand of workingBrands" [label]="brand.key">
+          <mat-option *ngFor="let name of brand.value" [value]="name">
+            {{ name }}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button type="button" (click)="handleShipAdd()">Ajouter</button>
+  </form>
+</div>

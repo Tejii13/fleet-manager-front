@@ -6,7 +6,7 @@ import { Observable, of, catchError, switchMap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { APP_API_URL } from 'src/environments/environment.local';
-import { ConnectionStatus } from './interfaces';
+import { ConnectionStatus, Member, UserListResponse } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -105,8 +105,8 @@ export class FetchDataService {
       );
   }
 
-  getUsersList() {
-    return this.http.get(`${APP_API_URL}/users`, {
+  getUsersList(): Observable<UserListResponse> {
+    return this.http.get<UserListResponse>(`${APP_API_URL}/users`, {
       headers: { accept: 'application/ld+json' },
     }); // FIXME #showMembers
   }

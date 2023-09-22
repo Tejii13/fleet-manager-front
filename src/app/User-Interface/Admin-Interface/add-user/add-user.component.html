@@ -17,5 +17,11 @@
 </form>
 <div *ngIf="mdpTemp">
   Mot de passe à fournir au nouvel utilisateur:
-  <span class="underline">{{ mdpTemp }}</span>
+  <button
+    class="hover:underline hover:italic"
+    (click)="copyToClipboard(mdpTemp)"
+    title="Cliquez pour copier"
+  >
+    {{ mdpTemp }}
+  </button>
 </div>
