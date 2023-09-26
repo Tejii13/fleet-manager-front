@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { FetchDataService } from './fetch-data.service';
 import { StarCitizenApiService } from './star-citizen-api.service';
+import { FetchFleetService } from './fetch-fleet.service';
 import { UpdateAccountService } from './update-account.service';
 
 import { AppComponent } from './app.component';
@@ -58,6 +59,7 @@ import { AdminPanelComponent } from './User-Interface/Admin-Interface/admin-pane
     StarCitizenApiService,
     FetchDataService,
     UpdateAccountService,
+    FetchFleetService,
   ],
   bootstrap: [AppComponent],
 })

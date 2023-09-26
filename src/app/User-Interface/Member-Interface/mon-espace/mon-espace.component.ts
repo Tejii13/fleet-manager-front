@@ -77,7 +77,7 @@ export class MonEspaceComponent implements OnInit {
   }
 
   private getUsers() {
-    this.fetch.getUsersList(); // FIXME #showMembers
+    this.fetch.getUsersList();
   }
 
   handlePasswordVerified(passwordVerified: boolean) {

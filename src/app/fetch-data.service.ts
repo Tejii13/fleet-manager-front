@@ -6,7 +6,7 @@ import { Observable, of, catchError, switchMap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { APP_API_URL } from 'src/environments/environment.local';
-import { ConnectionStatus, Member, UserListResponse } from './interfaces';
+import { ConnectionStatus, UserListResponse } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +37,7 @@ export class FetchDataService {
 
   registerUser(username: string, role: Array<string>): Observable<any> {
     const url = `${APP_API_URL}/register`;
+    console.log(url);
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
       'Content-Type': 'application/ld+json',
@@ -108,6 +109,6 @@ export class FetchDataService {
   getUsersList(): Observable<UserListResponse> {
     return this.http.get<UserListResponse>(`${APP_API_URL}/users`, {
       headers: { accept: 'application/ld+json' },
-    }); // FIXME #showMembers
+    });
   }
 }

@@ -17,9 +17,10 @@
         [matAutocomplete]="autoGroup"
         (submit)="handleShipAdd()"
         (input)="onInput()"
+        #autocompleteOrigin
       />
       <mat-autocomplete #autoGroup="matAutocomplete">
-        <mat-optgroup *ngFor="let brand of workingBrands" [label]="brand.key">
+        <mat-optgroup *ngFor="let brand of filteredBrands" [label]="brand.key">
           <mat-option *ngFor="let name of brand.value" [value]="name">
             {{ name }}
           </mat-option>
@@ -29,3 +30,5 @@
     <button type="button" (click)="handleShipAdd()">Ajouter</button>
   </form>
 </div>
+
+<app-display-ships></app-display-ships>
