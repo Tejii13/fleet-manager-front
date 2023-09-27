@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { ShipData } from 'src/app/interfaces';
 
@@ -13,6 +13,8 @@ import { FetchFleetService } from 'src/app/fetch-fleet.service';
   styleUrls: ['./search-ships.component.scss'],
 })
 export class SearchShipsComponent implements OnInit {
+  @Input() userId!: number;
+
   public shipForm: FormGroup;
 
   constructor(
@@ -25,16 +27,17 @@ export class SearchShipsComponent implements OnInit {
     });
   }
 
-  public isFetching: boolean = true;
+  public isFetching: boolean = false; // FIXME Change it to true when adding getData
 
   public ships!: ShipData[];
   public filteredBrands: any[] = [];
   public staticBrands = new Map();
 
   private brandName!: string;
+  private shipSize!: number;
 
   ngOnInit(): void {
-    this.getData();
+    // this.getData(); // FIXME Add it to fetch ships
   }
 
   private getData() {
@@ -109,10 +112,42 @@ export class SearchShipsComponent implements OnInit {
     );
   }
 
+  getShipSize(shipName: string): number {
+    for (let ship of this.ships) {
+      if (ship && ship.name === shipName) {
+        switch (ship.size) {
+          case 'snub':
+            this.shipSize = 0;
+            break;
+          case 'small':
+            this.shipSize = 1;
+            break;
+          case 'medium':
+            this.shipSize = 2;
+            break;
+          case 'large':
+            this.shipSize = 3;
+            break;
+          case 'capital':
+            this.shipSize = 4;
+            break;
+          default:
+            this.shipSize = 5;
+        }
+      }
+    }
+
+    console.log('Ship size: ' + this.shipSize);
+
+    return this.shipSize;
+  }
+
   handleShipAdd() {
-    console.log('Clicked!');
     const shipToAdd = this.shipForm.get('shipInput')?.value;
-    console.log('ShipName: ' + shipToAdd);
-    this.handleShips.saveShip(62, shipToAdd, 4).subscribe();
+    console.log('User id: ' + this.userId);
+    console.log('Ship name: ' + shipToAdd);
+    this.handleShips
+      .saveShip(this.userId, shipToAdd, this.getShipSize(shipToAdd))
+      .subscribe();
   }
 }

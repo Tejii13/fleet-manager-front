@@ -3,6 +3,7 @@ export interface Member {
   id: number;
   username: string;
   roles: Array<string>;
+  ships: string[];
   auth: string;
 }
 
@@ -11,6 +12,7 @@ export interface Ship {
   owner_id?: number;
   name: string;
   nickname?: string;
+  size: number;
 }
 
 export interface ConnectionStatus {
@@ -24,6 +26,14 @@ export interface UserListResponse {
   '@id': string;
   '@type': string;
   'hydra:member': Member[];
+  'hydra:totalItems': number;
+}
+
+export interface ShipListResponse {
+  '@context': string;
+  '@id': string;
+  '@type': string;
+  'hydra:member': Ship[];
   'hydra:totalItems': number;
 }
 

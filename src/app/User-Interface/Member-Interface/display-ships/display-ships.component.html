@@ -1,14 +1,13 @@
-<!-- <app-search-ships></app-search-ships> -->
-
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
-<p>Display ships workds</p>
+<div>
+  <ul>
+    <li *ngFor="let ship of ships">
+      {{ ship.name }}
+      {{ ship.size }}
+      <input
+        value="{{ ship.nickname }}"
+        title="Tellement original!"
+        placeholder="Nommez votre vaisseau!"
+      />
+    </li>
+  </ul>
+</div>

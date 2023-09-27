@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-admin-panel',
@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-panel.component.scss'],
 })
 export class AdminPanelComponent {
+  @Input() userId!: number;
+
   public showMembers: boolean = false;
   public showUpdateMembers: boolean = false;
   public showShips: boolean = true;

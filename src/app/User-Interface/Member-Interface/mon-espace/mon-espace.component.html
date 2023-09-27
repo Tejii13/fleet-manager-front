@@ -17,12 +17,12 @@
 
     <!-- Shows admin panel -->
     <ng-container *ngIf="isAdmin; else elseShowShips">
-      <app-admin-panel></app-admin-panel>
+      <app-admin-panel [userId]="userId"></app-admin-panel>
     </ng-container>
 
     <!-- Show ships as well if not admin -->
     <ng-template #elseShowShips>
-      <app-search-ships></app-search-ships>
+      <app-search-ships [userId]="userId"></app-search-ships>
     </ng-template>
   </div>
 </ng-template>

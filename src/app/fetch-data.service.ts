@@ -14,9 +14,11 @@ import { ConnectionStatus, UserListResponse } from './interfaces';
 export class FetchDataService {
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
+  private url = APP_API_URL;
+
   login(username: string, password: string): Observable<ConnectionStatus> {
     return this.http
-      .post<ConnectionStatus>(`${APP_API_URL}/login`, {
+      .post<ConnectionStatus>(`${this.url}/api/login`, {
         username,
         password,
       })
@@ -36,7 +38,7 @@ export class FetchDataService {
   }
 
   registerUser(username: string, role: Array<string>): Observable<any> {
-    const url = `${APP_API_URL}/register`;
+    const url = `${this.url}/api/register`;
     console.log(url);
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
@@ -60,7 +62,7 @@ export class FetchDataService {
         if (!response) {
           return of(false);
         } else {
-          const url = `${APP_API_URL}/users/${id}`;
+          const url = `${this.url}/api/users/${id}`;
           const headers = new HttpHeaders({
             accept: 'application/ld+json',
           });
@@ -79,7 +81,7 @@ export class FetchDataService {
   }
 
   checkConnection(id: number) {
-    const url = `${APP_API_URL}/verify`;
+    const url = `${this.url}/api/verify`;
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
     });
@@ -107,7 +109,7 @@ export class FetchDataService {
   }
 
   getUsersList(): Observable<UserListResponse> {
-    return this.http.get<UserListResponse>(`${APP_API_URL}/users`, {
+    return this.http.get<UserListResponse>(`${this.url}/api/users`, {
       headers: { accept: 'application/ld+json' },
     });
   }
