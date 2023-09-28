@@ -7,7 +7,15 @@
         value="{{ ship.nickname }}"
         title="Tellement original!"
         placeholder="Nommez votre vaisseau!"
+        [readonly]="false"
       />
+      <button (click)="handleEdit()" aria-label="Edit the ships name">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="handleCheck()" aria-label="Validate the ships name">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button (click)="handleShipRemove(ship.id)">Supprimer</button>
     </li>
   </ul>
 </div>

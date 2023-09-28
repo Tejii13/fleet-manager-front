@@ -13,7 +13,7 @@ export class FetchFleetService {
 
   private url = APP_API_URL;
 
-  saveShip(id: number, shipName: string, size: number, nickname?: string) {
+  saveShip(id: number, shipName: string, size: string, nickname?: string) {
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
       'Content-type': 'application/ld+json',
@@ -30,10 +30,15 @@ export class FetchFleetService {
     });
   }
 
-  deleteShip() {}
+  deleteShip(shipId: number) {
+    return this.http.delete(`${this.url}/api/ships/${shipId}`);
+  }
 
-  getShipInfo(shipUrl: string): Observable<Ship> {
-    return this.http.get<Ship>(`${this.url}${shipUrl}`, {
+  getShipInfo(userId: number): Observable<Ship[]> {
+    const requestBody = {
+      userId: userId,
+    };
+    return this.http.post<Ship[]>(`${this.url}/api/shipsList`, requestBody, {
       headers: { accept: 'application/json' },
     });
   }

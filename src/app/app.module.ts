@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { FetchDataService } from './fetch-data.service';
 import { StarCitizenApiService } from './star-citizen-api.service';
@@ -28,6 +30,8 @@ import { AddUserComponent } from './User-Interface/Admin-Interface/add-user/add-
 import { ChangePasswordComponent } from './User-Interface/Member-Interface/change-password/change-password.component';
 import { DisplayMembersComponent } from './User-Interface/Admin-Interface/display-members/display-members.component';
 import { AdminPanelComponent } from './User-Interface/Admin-Interface/admin-panel/admin-panel.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { TooltipDirective } from './copy-check.directive';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,8 @@ import { AdminPanelComponent } from './User-Interface/Admin-Interface/admin-pane
     ChangePasswordComponent,
     DisplayMembersComponent,
     AdminPanelComponent,
+    NavbarComponent,
+    TooltipDirective,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +59,8 @@ import { AdminPanelComponent } from './User-Interface/Admin-Interface/admin-pane
     MatAutocompleteModule,
     MatProgressBarModule,
     MatFormFieldModule,
+    MatIconModule,
+    MatToolbarModule,
   ],
   providers: [
     CookieService,

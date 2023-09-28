@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { StarCitizenApiService } from 'src/app/star-citizen-api.service';
 import { FetchFleetService } from 'src/app/fetch-fleet.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-search-ships',
@@ -27,7 +28,9 @@ export class SearchShipsComponent implements OnInit {
     });
   }
 
-  public isFetching: boolean = false; // FIXME Change it to true when adding getData
+  reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
+
+  public isFetching: boolean = true; // FIXME Change it to true when adding getData
 
   public ships!: ShipData[];
   public filteredBrands: any[] = [];
@@ -37,7 +40,7 @@ export class SearchShipsComponent implements OnInit {
   private shipSize!: number;
 
   ngOnInit(): void {
-    // this.getData(); // FIXME Add it to fetch ships
+    this.getData(); // FIXME Add it to fetch ships
   }
 
   private getData() {
@@ -102,7 +105,6 @@ export class SearchShipsComponent implements OnInit {
       }
     });
 
-    console.log(filteredBrands);
     return filteredBrands;
   }
 
@@ -112,42 +114,20 @@ export class SearchShipsComponent implements OnInit {
     );
   }
 
-  getShipSize(shipName: string): number {
-    for (let ship of this.ships) {
-      if (ship && ship.name === shipName) {
-        switch (ship.size) {
-          case 'snub':
-            this.shipSize = 0;
-            break;
-          case 'small':
-            this.shipSize = 1;
-            break;
-          case 'medium':
-            this.shipSize = 2;
-            break;
-          case 'large':
-            this.shipSize = 3;
-            break;
-          case 'capital':
-            this.shipSize = 4;
-            break;
-          default:
-            this.shipSize = 5;
-        }
-      }
-    }
-
-    console.log('Ship size: ' + this.shipSize);
-
-    return this.shipSize;
-  }
-
   handleShipAdd() {
     const shipToAdd = this.shipForm.get('shipInput')?.value;
-    console.log('User id: ' + this.userId);
-    console.log('Ship name: ' + shipToAdd);
-    this.handleShips
-      .saveShip(this.userId, shipToAdd, this.getShipSize(shipToAdd))
-      .subscribe();
+    this.shipForm.reset();
+    for (let ship of this.ships) {
+      if (ship.name.toLowerCase() === shipToAdd.toLowerCase()) {
+        this.handleShips
+          .saveShip(this.userId, ship.name, ship.size)
+          .subscribe((response) => {
+            if (response) {
+              console.log(response);
+              this.reloadShipsDisplay.next(true);
+            }
+          });
+      }
+    }
   }
 }

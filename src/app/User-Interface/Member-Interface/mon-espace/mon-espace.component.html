@@ -1,4 +1,4 @@
-<div *ngIf="showData || verifyPassword">
+<div *ngIf="verifyPassword">
   <button (click)="disconnect()">Déconnexion</button>
 </div>
 
@@ -13,7 +13,10 @@
 <!-- Shows data if it isn't the first connection -->
 <ng-template #elseShowData>
   <div *ngIf="showData">
-    <h2>Bienvenue dans votre espace personnel {{ username }}</h2>
+    <h2>
+      Bienvenue dans votre espace personnel {{ username }} sinon se déconnecter:
+      <button (click)="disconnect()">Déconnexion</button>
+    </h2>
 
     <!-- Shows admin panel -->
     <ng-container *ngIf="isAdmin; else elseShowShips">

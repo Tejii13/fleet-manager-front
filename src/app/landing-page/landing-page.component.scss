@@ -1,0 +1,32 @@
+.login {
+  background-color: rgba(2,59,92,0.8);
+  width: 30%;
+  margin: 0 auto;
+  border: solid black 1px;
+}
+
+h2 {
+  font-size: 1.2em;
+  text-align: center;
+  color: #b1fffb;
+  text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 82px #3ec9e1, 0 0 102px #3ec9e1;
+}
+
+input {
+  width: calc(100% - 80px);
+  height: 35px;
+  background-color: rgba(1, 80,126,0.5);
+  border: solid #adc8d3 1px;
+  border-radius: 2px;
+}
+
+::placeholder {
+  text-align: center;
+}
+
+button {
+  border: solid #adc8d3 1px;
+  width: 200px;
+  height: 50px;
+  color: #adc8d3;
+}

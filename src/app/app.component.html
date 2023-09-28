@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Bienvenue chez le Collectif des Synthétiques"
+      content="Bienvenue sur le seul gestionnaire de flottes dont vous aurez besoin!"
     />
     <title>Accueil</title>
   </head>
   <body>
-    <router-outlet></router-outlet>
+    <div class="background-blur"></div>
+    <div class="content">
+      <app-navbar></app-navbar>
+      <router-outlet></router-outlet>
+    </div>
   </body>
 </html>

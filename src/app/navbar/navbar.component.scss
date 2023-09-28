@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Angkor&display=swap');
+
+.title {
+  font-size: 2em;
+  color: #b1fffb;
+  margin: 0.5em auto;
+  text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 60px #3ec9e1, 0 0 80px #3ec9e1;
+  font-family: 'Angkor', cursive;
+}
+
+mat-toolbar {
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 3.5em;
+}

@@ -28,4 +28,8 @@ export class DisplayMembersComponent implements OnInit {
       }
     );
   }
+
+  handleMemberRemove(userId: number) {
+    console.log('Delete user: ' + userId);
+  }
 }

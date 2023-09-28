@@ -1,19 +1,19 @@
-<h2>Veuillez écrire vos identifiants pour vous connecter</h2>
-
-<form (ngSubmit)="onSubmit()">
-  <label for="id_input">Votre nom d'utilisateur</label>
-  <input
-    type="text"
-    name="username"
-    placeholder="Nom d'utilisateur"
-    [(ngModel)]="username"
-  />
-  <label for="token_input">Votre token d'authentification</label>
-  <input
-    type="password"
-    name="authToken"
-    placeholder="Token d'authentification"
-    [(ngModel)]="password"
-  />
-  <button type="submit">Valider</button>
-</form>
+<section class="login">
+  <form (ngSubmit)="onSubmit()" class="text-center">
+    <h2 class="my-4">Connexion</h2>
+    <input
+      type="text"
+      name="username"
+      placeholder="Nom d'utilisateur"
+      [(ngModel)]="username"
+    />
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+      class="mt-2"
+    />
+    <button type="submit" class="my-4">Se connecter</button>
+  </form>
+</section>

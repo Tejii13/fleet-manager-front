@@ -2,6 +2,7 @@
   <ul>
     <li *ngFor="let member of members">
       {{ member.username }}
+      <button (click)="handleMemberRemove(member.id)">Supprimer</button>
     </li>
   </ul>
 </div>

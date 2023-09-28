@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { FetchDataService } from 'src/app/fetch-data.service';
 import { FetchFleetService } from 'src/app/fetch-fleet.service';
 import { Member, Ship } from 'src/app/interfaces';
@@ -11,41 +12,53 @@ import { Member, Ship } from 'src/app/interfaces';
 export class DisplayShipsComponent implements OnInit {
   @Input() userId!: number;
 
+  @Input() reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
+
   constructor(
     private fetchData: FetchDataService,
     private fetchFleet: FetchFleetService
   ) {}
 
   public ships: Ship[] = [];
+  public firstRender: boolean = true;
 
-  private shipsLinks!: string[];
+  isDisabled = '';
 
   ngOnInit(): void {
-    if (this.userId) {
-      this.fetchData.getUserinfo(this.userId).subscribe(
-        (response: Member) => {
-          console.log(response);
-          if (response) {
-            console.log(response);
-            if (response.ships.length > 0) {
-              this.shipsLinks = response.ships;
-              for (let shipLink of this.shipsLinks) {
-                this.fetchFleet
-                  .getShipInfo(shipLink)
-                  .subscribe((shipData: Ship) => {
-                    console.log(shipData.name);
-                    this.ships.push(shipData);
-                    console.log(shipLink);
-                    console.log(this.ships);
-                  });
-              }
-            }
-          }
-        },
-        (error) => {
-          console.error('Error fetching ships list: ', error);
-        }
-      );
+    if (this.firstRender) {
+      console.log(this.firstRender);
+      this.firstRender = false;
+      this.getData();
     }
+    this.reloadShipsDisplay.subscribe((response) => {
+      if (response) {
+        this.getData();
+      }
+    });
+  }
+
+  getData() {
+    if (this.userId) {
+      this.fetchFleet.getShipInfo(this.userId).subscribe((response) => {
+        this.ships = [];
+        this.ships = response;
+        console.log(this.ships);
+      });
+    }
+  }
+
+  handleShipRemove(shipId: number) {
+    console.log(shipId);
+    if (shipId) {
+      this.fetchFleet.deleteShip(shipId).subscribe(() => this.getData());
+    }
+  }
+
+  handleEdit() {
+    console.log('Edit');
+  }
+
+  handleCheck() {
+    console.log('Check');
   }
 }
