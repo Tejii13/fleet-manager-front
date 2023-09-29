@@ -13,7 +13,7 @@ export class FetchFleetService {
 
   private url = APP_API_URL;
 
-  saveShip(id: number, shipName: string, size: string, nickname?: string) {
+  saveShip(id: number, shipName: string, size: string, nickname: string) {
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
       'Content-type': 'application/ld+json',
@@ -23,6 +23,7 @@ export class FetchFleetService {
       owner: `api/users/${id}`,
       name: shipName,
       size: size,
+      nickname: nickname,
     };
 
     return this.http.post<Ship>(`${this.url}/api/ships`, requestBody, {

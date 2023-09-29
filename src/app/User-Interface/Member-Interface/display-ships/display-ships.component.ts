@@ -22,7 +22,11 @@ export class DisplayShipsComponent implements OnInit {
   public ships: Ship[] = [];
   public firstRender: boolean = true;
 
-  isDisabled = '';
+  public shipNameChanges: { [shipId: number]: string } = {};
+  public shipNameChangeIsReadOnly: boolean = true;
+
+  public shipToChange!: number | null;
+  public show: boolean = true;
 
   ngOnInit(): void {
     if (this.firstRender) {
@@ -54,11 +58,27 @@ export class DisplayShipsComponent implements OnInit {
     }
   }
 
-  handleEdit() {
-    console.log('Edit');
+  handleEdit(shipId: number) {
+    this.shipToChange = shipId;
+    this.reload();
   }
 
-  handleCheck() {
-    console.log('Check');
+  handleCheck(shipId: number) {
+    this.shipToChange = null;
+    this.reload();
+    this.shipNameChangeIsReadOnly = true;
+    const modifiedName = this.shipNameChanges[shipId];
+    if (modifiedName !== undefined) {
+      const shipIndex = this.ships.findIndex((ship) => ship.id === shipId);
+      if (shipIndex !== -1) {
+        this.ships[shipIndex].nickname = modifiedName;
+        // TODO send info to the server here
+      }
+    }
+  }
+
+  reload() {
+    this.show = false;
+    setTimeout(() => (this.show = true));
   }
 }

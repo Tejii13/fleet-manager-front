@@ -21,6 +21,12 @@ export interface ConnectionStatus {
   auth: string;
   id?: number;
 }
+
+export interface CheckConnection {
+  message: string;
+  id?: number;
+  code: number;
+}
 export interface UserListResponse {
   '@context': string;
   '@id': string;

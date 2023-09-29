@@ -6,7 +6,11 @@ import { Observable, of, catchError, switchMap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { APP_API_URL } from 'src/environments/environment.local';
-import { ConnectionStatus, UserListResponse } from './interfaces';
+import {
+  CheckConnection,
+  ConnectionStatus,
+  UserListResponse,
+} from './interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -57,14 +61,14 @@ export class FetchDataService {
   }
 
   getUserinfo(id: number): Observable<any> {
-    return this.checkConnection(id).pipe(
-      switchMap((response: any) => {
+    return this.checkConnection().pipe(
+      switchMap((response) => {
         if (!response) {
           return of(false);
         } else {
           const url = `${this.url}/api/users/${id}`;
           const headers = new HttpHeaders({
-            accept: 'application/ld+json',
+            accept: 'application/json',
           });
           return this.http.get<any>(url, { headers }).pipe(
             catchError((error) => {
@@ -80,21 +84,20 @@ export class FetchDataService {
     );
   }
 
-  checkConnection(id: number) {
+  checkConnection(): Observable<CheckConnection> {
     const url = `${this.url}/api/verify`;
     const headers = new HttpHeaders({
-      accept: 'application/ld+json',
+      accept: 'application/json',
     });
 
-    const authCookieExpires = this.cookieService.get('auth');
+    const authCookie = this.cookieService.get('auth');
 
     const requestBody = {
-      id: id,
-      auth: authCookieExpires,
+      auth: authCookie,
     };
 
     return this.http
-      .put(url, requestBody, {
+      .put<CheckConnection>(url, requestBody, {
         headers: headers,
       })
       .pipe(
@@ -103,7 +106,10 @@ export class FetchDataService {
             'Erreur lors de la vérification de la connexion: ',
             error
           );
-          return of(false);
+          return of({
+            message: 'Erreur lors de la vérification de la connexion: ',
+            code: 401,
+          });
         })
       );
   }

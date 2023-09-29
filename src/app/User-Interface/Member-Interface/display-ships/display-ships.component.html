@@ -1,20 +1,30 @@
-<div>
+<div *ngIf="show">
   <ul>
     <li *ngFor="let ship of ships">
       {{ ship.name }}
       {{ ship.size }}
-      <input
-        value="{{ ship.nickname }}"
-        title="Tellement original!"
-        placeholder="Nommez votre vaisseau!"
-        [readonly]="false"
-      />
-      <button (click)="handleEdit()" aria-label="Edit the ships name">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button (click)="handleCheck()" aria-label="Validate the ships name">
-        <mat-icon>check</mat-icon>
-      </button>
+
+      <div *ngIf="shipToChange === ship.id">
+        <input
+          [(ngModel)]="shipNameChanges[ship.id]"
+          title="Tellement original!"
+          placeholder="Nommez votre vaisseau!"
+          [readonly]="false"
+        />
+        <button
+          (click)="handleCheck(ship.id)"
+          aria-label="Validate the ships name"
+        >
+          <mat-icon>check</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="shipToChange !== ship.id">
+        {{ ship.nickname || "Nommez votre vaisseau!" }}
+        <button (click)="handleEdit(ship.id)" aria-label="Edit the ships name">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+
       <button (click)="handleShipRemove(ship.id)">Supprimer</button>
     </li>
   </ul>

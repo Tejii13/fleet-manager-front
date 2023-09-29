@@ -1,3 +1,5 @@
+import { Member } from 'src/app/interfaces';
+import { CheckConnection } from './../interfaces';
 import { Component, OnInit } from '@angular/core';
 import { FetchDataService } from '../fetch-data.service';
 
@@ -12,18 +14,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  public username!: string;
-  public password!: string;
-
   constructor(
     private fetch: FetchDataService,
     private router: Router,
     private cookieService: CookieService
   ) {}
 
-  ngOnInit(): void {}
+  public username!: string;
+  public password!: string;
 
-  async onSubmit() {
+  public isConnected: boolean = false;
+  public member!: Member;
+
+  ngOnInit(): void {
+    this.fetch.checkConnection().subscribe((response: CheckConnection) => {
+      console.log(response);
+      if (response) {
+        this.isConnected = true;
+        if (response.id) {
+          this.fetch.getUserinfo(response.id).subscribe((response: Member) => {
+            this.member = response;
+            console.log(this.member);
+          });
+        }
+      }
+    });
+  }
+
+  onSubmit() {
     if (this.username && this.password) {
       console.log(this.username);
       console.log(this.password);
@@ -42,5 +60,10 @@ export class LandingPageComponent implements OnInit {
     } else {
       console.log('Veuillez remplir tous les champs');
     }
+  }
+
+  disconnect() {
+    this.cookieService.delete('auth', '/');
+    this.isConnected = false;
   }
 }

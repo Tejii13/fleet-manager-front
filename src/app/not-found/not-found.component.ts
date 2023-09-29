@@ -6,15 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./not-found.component.scss'],
 })
 export class NotFoundComponent {
-  public fruits: string[] = [
-    'Pineapple',
-    'Grape',
-    'Cranberry',
-    'Cherry',
-    'Orange',
-    'Watermelon',
-    'Banana',
-    'Apple',
-    'Coconut',
-  ];
+
 }

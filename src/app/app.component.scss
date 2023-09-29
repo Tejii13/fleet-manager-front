@@ -1,24 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
-body {
+.background-image {
   background-image: url('../assets/images/hangar.jpg');
   background-size: cover;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
+  position: fixed;
   font-family: 'Roboto', sans-serif;
+  z-index: 1;
 }
 
 .background-blur {
+  height: 100%;
+  width: 100%;
+  // overflow: hidden;
+  position: fixed;
   background-color: rgba(3, 0, 22, 0.5);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  height: 100%;
+  z-index: 2;
 }
 
 .content {
-  position: fixed;
-  height: 100%;
+  position: absolute;
+  // height: 100%;
   width: 100%;
   left: 0px;
   top: 0;
