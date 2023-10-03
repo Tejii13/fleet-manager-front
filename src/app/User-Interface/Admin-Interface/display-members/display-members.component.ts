@@ -11,6 +11,8 @@ import { Member, UserListResponse } from 'src/app/interfaces';
 export class DisplayMembersComponent implements OnInit {
   constructor(private fetchData: FetchDataService) {}
 
+  public showUpdateMembers: boolean = false;
+
   public members!: Member[];
 
   ngOnInit(): void {
@@ -31,5 +33,13 @@ export class DisplayMembersComponent implements OnInit {
 
   handleMemberRemove(userId: number) {
     console.log('Delete user: ' + userId);
+  }
+
+  updateMembers() {
+    this.showUpdateMembers = true;
+  }
+
+  cancelMemberAdd() {
+    this.showUpdateMembers = false;
   }
 }

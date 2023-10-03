@@ -30,7 +30,7 @@ export class SearchShipsComponent implements OnInit {
 
   reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
 
-  public isFetching: boolean = false; // FIXME Change it to true when adding getData
+  public isFetching: boolean = true; // FIXME Change it to true when adding getData
 
   public ships!: ShipData[];
   public filteredBrands: any[] = [];
@@ -119,7 +119,19 @@ export class SearchShipsComponent implements OnInit {
     for (let ship of this.ships) {
       if (ship.name.toLowerCase() === shipToAdd.toLowerCase()) {
         this.handleShips
-          .saveShip(this.userId, ship.name, ship.size, '')
+          .saveShip(
+            this.userId,
+            ship.name,
+            ship.size,
+            ship.production_status,
+            ship.manufacturer.name,
+            ship.type,
+            ship.max_crew,
+            ship.url,
+            ship.description,
+            ship.media[0].images.tavern_upload_medium,
+            ship.cargocapacity
+          )
           .subscribe((response) => {
             if (response) {
               console.log(response);

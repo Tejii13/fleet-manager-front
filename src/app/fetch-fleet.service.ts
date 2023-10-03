@@ -13,18 +13,41 @@ export class FetchFleetService {
 
   private url = APP_API_URL;
 
-  saveShip(id: number, shipName: string, size: string, nickname: string) {
+  saveShip(
+    id: number,
+    shipName: string,
+    size: string,
+    production_status: string,
+    manufacturer: string,
+    type: string,
+    max_crew: number,
+    url: string,
+    description: string,
+    image_url: string,
+    cargocapacity: number
+  ) {
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
       'Content-type': 'application/ld+json',
     });
 
+    console.log(production_status);
+
     const requestBody = {
       owner: `api/users/${id}`,
       name: shipName,
       size: size,
-      nickname: nickname,
+      productionStatus: production_status,
+      manufacturer: manufacturer,
+      type: type,
+      maxCrew: max_crew,
+      url: url,
+      description: description,
+      imageUrl: image_url,
+      cargoCapacity: cargocapacity,
     };
+
+    console.log(requestBody);
 
     return this.http.post<Ship>(`${this.url}/api/ships`, requestBody, {
       headers: headers,
@@ -42,5 +65,37 @@ export class FetchFleetService {
     return this.http.post<Ship[]>(`${this.url}/api/shipsList`, requestBody, {
       headers: { accept: 'application/json' },
     });
+  }
+
+  updateName(
+    id: number,
+    owner: string,
+    name: string,
+    nickname: string,
+    size: string,
+    loadout: object
+  ) {
+    if (!size) {
+      size = 'Non définie';
+    }
+
+    console.log(size);
+
+    const requestBody = {
+      id: id,
+      owner: `/api/users/${owner}`,
+      name: name,
+      nickname: nickname,
+      size: size,
+      loadouts: loadout,
+    };
+
+    console.log(requestBody);
+
+    return this.http.put(
+      `${this.url}/api/ships/${id}`,
+      { name: name, nickname: nickname },
+      { headers: { accept: 'application/json' } }
+    );
   }
 }

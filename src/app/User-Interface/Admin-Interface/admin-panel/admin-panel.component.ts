@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-admin-panel',
@@ -7,26 +7,22 @@ import { Component, Input } from '@angular/core';
 })
 export class AdminPanelComponent {
   @Input() userId!: number;
+  @Output() showShipsChange: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
   public showMembers: boolean = false;
-  public showUpdateMembers: boolean = false;
   public showShips: boolean = true;
-
-  updateMembers() {
-    this.showUpdateMembers = true;
-    this.showMembers = false;
-    this.showShips = false;
-  }
 
   viewMembers() {
     this.showMembers = true;
-    this.showUpdateMembers = false;
     this.showShips = false;
+    this.showShipsChange.emit(this.showShips);
   }
 
   viewShips() {
+    console.log(this.userId);
     this.showShips = true;
     this.showMembers = false;
-    this.showUpdateMembers = false;
+    this.showShipsChange.emit(this.showShips);
   }
 }

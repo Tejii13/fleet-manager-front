@@ -1,5 +1,5 @@
 import { FetchDataService } from '../../../fetch-data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -20,6 +20,7 @@ export class MonEspaceComponent implements OnInit {
   public mdpTemp!: string;
   public newPassword!: string;
   public confirmPassword!: string;
+  public showShips: boolean = true;
 
   public userId!: number;
 
@@ -38,9 +39,11 @@ export class MonEspaceComponent implements OnInit {
     const idFromRoute = this.route.snapshot.paramMap.get('id');
     if (idFromRoute !== null) {
       this.id = +idFromRoute;
+      console.log('Id: ' + this.id);
 
       // If not null, fetches user info if he is connected
       this.fetch.getUserinfo(this.id).subscribe((data) => {
+        console.log(data);
         // Verifies if the 2 uuids are the same
         if (!data) {
           console.log('Pas connecté');
@@ -70,16 +73,15 @@ export class MonEspaceComponent implements OnInit {
           this.isAdmin = true;
         }
       }
-      if (this.isAdmin) {
-        this.getUsers();
-      }
     }
   }
 
-  private getUsers() {
-    this.fetch.getUsersList();
+  onShowShipsChange(value: boolean) {
+    console.log(value);
+    this.showShips = value;
   }
 
+  // Verifies if a new password is already set
   handlePasswordVerified(passwordVerified: boolean) {
     if (passwordVerified) {
       this.showData = true;

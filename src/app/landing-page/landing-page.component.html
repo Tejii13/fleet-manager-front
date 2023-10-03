@@ -1,6 +1,6 @@
-<section class="login">
+<section>
   <div *ngIf="!isConnected || !member">
-    <form (ngSubmit)="onSubmit()" class="text-center h-60">
+    <form (ngSubmit)="onSubmit()" class="text-center">
       <h2 class="pt-4">Connexion</h2>
       <input
         class="text-center mt-4"
@@ -16,17 +16,19 @@
         placeholder="Mot de passe"
         [(ngModel)]="password"
       />
-      <button type="submit" class="mt-6">Se connecter</button>
+      <button type="submit" class="mt-6 mb-6 style">Se connecter</button>
     </form>
   </div>
-  <div *ngIf="isConnected && member" class="h-60 text-center">
+  <div *ngIf="isConnected && member" class="text-center">
     <h2 class="pt-6">Bonjour {{ member.username }} !</h2>
     <p class="pt-6 px-4 text-base">
       Vous êtes actuellement sur la page d'accueil, cliquez ci-dessous pour
       accéder à votre espace!
     </p>
     <a href="/mon-espace/{{ member.id }}" class="hover:underline italic text-lg"
-      ><button title="Mon espace" class="mt-2">Accéder à mon espace</button></a
+      ><button title="Mon espace" class="mt-2 style">
+        Accéder à mon espace
+      </button></a
     >
     <br />
     <button class="no-style" (click)="disconnect()">

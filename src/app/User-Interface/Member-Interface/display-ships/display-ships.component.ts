@@ -30,7 +30,6 @@ export class DisplayShipsComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.firstRender) {
-      console.log(this.firstRender);
       this.firstRender = false;
       this.getData();
     }
@@ -42,6 +41,7 @@ export class DisplayShipsComponent implements OnInit {
   }
 
   getData() {
+    console.log(this.userId);
     if (this.userId) {
       this.fetchFleet.getShipInfo(this.userId).subscribe((response) => {
         this.ships = [];
@@ -70,9 +70,26 @@ export class DisplayShipsComponent implements OnInit {
     const modifiedName = this.shipNameChanges[shipId];
     if (modifiedName !== undefined) {
       const shipIndex = this.ships.findIndex((ship) => ship.id === shipId);
-      if (shipIndex !== -1) {
+      const ship = this.ships.find((ship) => ship.id === shipId);
+      if (shipIndex !== -1 && ship) {
+        console.log(ship);
         this.ships[shipIndex].nickname = modifiedName;
-        // TODO send info to the server here
+        let loadouts: string[];
+        if (ship.loadout && ship.loadout.length > 0) {
+          loadouts = ship.loadout;
+        } else {
+          loadouts = [];
+        }
+        this.fetchFleet
+          .updateName(
+            shipId,
+            ship.owner,
+            ship.name,
+            modifiedName,
+            ship.size,
+            loadouts
+          )
+          .subscribe();
       }
     }
   }

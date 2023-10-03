@@ -1,4 +1,10 @@
 <div>
+  <div *ngIf="!showUpdateMembers">
+    <button (click)="updateMembers()">Ajouter un utilisateur</button>
+  </div>
+  <div *ngIf="showUpdateMembers">
+    <app-add-user (cancelClicked)="cancelMemberAdd()"></app-add-user>
+  </div>
   <ul>
     <li *ngFor="let member of members">
       {{ member.username }}

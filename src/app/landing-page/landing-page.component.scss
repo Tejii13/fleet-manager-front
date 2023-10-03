@@ -1,7 +1,7 @@
-.login {
+section {
   background-color: rgba(2,59,92,0.8);
-  width: 30%;
-  margin: 5% auto;
+  width: 570px;
+  margin: 10% auto;
   border: solid black 1px;
 }
 
@@ -25,13 +25,29 @@ input {
   text-align: center;
 }
 
-button {
+.style {
   border: solid #adc8d3 1px;
   width: 200px;
   height: 50px;
   color: #adc8d3;
+  border-radius: 4px;
+}
+
+.style:hover {
+  background-color: rgba(1, 37, 57, 1);
 }
 
 .no-style {
   border: none
+}
+.no-style:hover {
+  border: none;
+  background-color: none;
+}
+
+@media screen and (max-width: 620px) {
+  section {
+    width: 80%;
+    text-align: center;
+  }
 }

@@ -14,6 +14,7 @@
     [(ngModel)]="role"
   />
   <button type="submit">Ajouter</button>
+  <button (click)="abandon()" type="button">Annuler</button>
 </form>
 <div *ngIf="mdpTemp">
   Mot de passe à fournir au nouvel utilisateur:

@@ -14,6 +14,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 import { FetchDataService } from './fetch-data.service';
 import { StarCitizenApiService } from './star-citizen-api.service';
@@ -61,6 +63,8 @@ import { TooltipDirective } from './copy-check.directive';
     MatFormFieldModule,
     MatIconModule,
     MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
   ],
   providers: [
     CookieService,

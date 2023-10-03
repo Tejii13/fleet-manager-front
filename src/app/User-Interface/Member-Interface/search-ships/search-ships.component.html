@@ -1,33 +1,46 @@
-<h2>Recherchez un vaisseau à ajouter</h2>
-
 <div *ngIf="isFetching">
+  <h2>Recherchez un vaisseau à ajouter</h2>
   <p>Récupération de données...</p>
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
+<div *ngIf="!isFetching && !ships">
+  <h2 class="text-red-500 italic">
+    Impossible de récupérer la liste des vaisseaux du jeu, réessayez plus tard.
+  </h2>
+</div>
+
+<!-- Change when adding getData()  -->
 <div *ngIf="ships">
   <form [formGroup]="shipForm">
-    <mat-form-field>
-      <mat-label>Nouveau vaisseau à ajouter:&nbsp;</mat-label>
-      <input
-        type="text"
-        matInput
-        formControlName="shipInput"
-        placeholder="Ex: Aurora MR"
-        [matAutocomplete]="autoGroup"
-        (submit)="handleShipAdd()"
-        (input)="onInput()"
-        #autocompleteOrigin
-      />
-      <mat-autocomplete #autoGroup="matAutocomplete">
-        <mat-optgroup *ngFor="let brand of filteredBrands" [label]="brand.key">
-          <mat-option *ngFor="let name of brand.value" [value]="name">
-            {{ name }}
-          </mat-option>
-        </mat-optgroup>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button type="button" (click)="handleShipAdd()">Ajouter</button>
+    <div class="sm:flex text-center sm:text-left">
+      <mat-form-field [style.width.px]="350">
+        <mat-label>Nouveau vaisseau à ajouter:&nbsp;</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="shipInput"
+          placeholder="Ex: Aurora MR"
+          [matAutocomplete]="autoGroup"
+          (submit)="handleShipAdd()"
+          (input)="onInput()"
+          #autocompleteOrigin
+        />
+        <mat-autocomplete #autoGroup="matAutocomplete">
+          <mat-optgroup
+            *ngFor="let brand of filteredBrands"
+            [label]="brand.key"
+          >
+            <mat-option *ngFor="let name of brand.value" [value]="name">
+              {{ name }}
+            </mat-option>
+          </mat-optgroup>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button class="sm:ml-2" type="button" (click)="handleShipAdd()">
+        Ajouter
+      </button>
+    </div>
   </form>
 </div>
 

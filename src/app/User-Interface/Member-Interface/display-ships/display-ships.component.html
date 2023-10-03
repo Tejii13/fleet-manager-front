@@ -1,31 +1,60 @@
 <div *ngIf="show">
-  <ul>
-    <li *ngFor="let ship of ships">
-      {{ ship.name }}
-      {{ ship.size }}
-
-      <div *ngIf="shipToChange === ship.id">
-        <input
-          [(ngModel)]="shipNameChanges[ship.id]"
-          title="Tellement original!"
-          placeholder="Nommez votre vaisseau!"
-          [readonly]="false"
-        />
-        <button
-          (click)="handleCheck(ship.id)"
-          aria-label="Validate the ships name"
-        >
-          <mat-icon>check</mat-icon>
-        </button>
-      </div>
-      <div *ngIf="shipToChange !== ship.id">
-        {{ ship.nickname || "Nommez votre vaisseau!" }}
-        <button (click)="handleEdit(ship.id)" aria-label="Edit the ships name">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </div>
-
-      <button (click)="handleShipRemove(ship.id)">Supprimer</button>
+  <h2>Ma flotte</h2>
+  <ul class="flex flex-wrap md:flex-no-wrap">
+    <li *ngFor="let ship of ships" class="w-full md:w-1/2 p-4">
+      <mat-card>
+        <mat-card-header class="inline-flex">
+          <mat-card-title>
+            <span class="text-2xl mr-4">{{ ship.name }}</span>
+            <span class="text-gray-500 text-sm manufacturer">{{
+              ship.manufacturer
+            }}</span>
+          </mat-card-title>
+          <mat-card-subtitle>{{ ship.type }}</mat-card-subtitle>
+        </mat-card-header>
+        <div class="flex">
+          <div class="w-1/2">
+            <img
+              mat-card-image
+              src="{{ ship.imageUrl }}"
+              alt="{{ ship.name }}"
+              class="w-full h-auto"
+            />
+          </div>
+          <div class="w-1/2 p-4">
+            <!-- Additional information goes here -->
+            <div *ngIf="shipToChange !== ship.id">
+              <p>
+                {{ ship.nickname || "Nommez votre vaisseau!" }}
+                <button
+                  (click)="handleEdit(ship.id)"
+                  aria-label="Edit the ships name"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </p>
+            </div>
+            <p>{{ ship.description }}</p>
+          </div>
+        </div>
+        <mat-card-actions>
+          <div *ngIf="shipToChange === ship.id">
+            <input
+              [(ngModel)]="shipNameChanges[ship.id]"
+              title="Tellement original!"
+              placeholder="Nommez votre vaisseau!"
+              [readonly]="false"
+            />
+            <button
+              (click)="handleCheck(ship.id)"
+              aria-label="Validate the ships name"
+            >
+              <mat-icon>check</mat-icon>
+            </button>
+          </div>
+          <button (click)="handleShipRemove(ship.id)">Supprimer</button>
+        </mat-card-actions>
+      </mat-card>
     </li>
   </ul>
 </div>

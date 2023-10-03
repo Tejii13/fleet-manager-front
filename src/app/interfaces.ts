@@ -5,14 +5,23 @@ export interface Member {
   roles: Array<string>;
   ships: string[];
   auth: string;
+  leader: string;
 }
 
 export interface Ship {
   id: number;
-  owner_id?: number;
+  owner: string;
   name: string;
   nickname?: string;
-  size: number;
+  size: string;
+  loadout: string[];
+  production_status: string;
+  manufacturer: string;
+  type: string;
+  max_crew: number;
+  url: string;
+  description: string;
+  imageUrl: string;
 }
 
 export interface ConnectionStatus {
@@ -59,6 +68,13 @@ export interface ShipData {
   manufacturer: {
     code: string;
     name: string;
+  };
+  media: {
+    0: {
+      images: {
+        tavern_upload_medium: string;
+      };
+    };
   };
   max_crew: number;
   name: string;

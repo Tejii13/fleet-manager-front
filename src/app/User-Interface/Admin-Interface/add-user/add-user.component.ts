@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FetchDataService } from '../../../fetch-data.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { FetchDataService } from '../../../fetch-data.service';
   styleUrls: ['./add-user.component.scss'],
 })
 export class AddUserComponent {
+  @Output() cancelClicked = new EventEmitter<void>();
+
   public username!: string;
   public role!: Array<string>;
 
@@ -40,5 +42,9 @@ export class AddUserComponent {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+  }
+
+  abandon() {
+    this.cancelClicked.emit();
   }
 }

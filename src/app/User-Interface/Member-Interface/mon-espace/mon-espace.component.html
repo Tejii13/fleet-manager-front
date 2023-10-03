@@ -19,13 +19,16 @@
     </h2>
 
     <!-- Shows admin panel -->
-    <ng-container *ngIf="isAdmin; else elseShowShips">
-      <app-admin-panel [userId]="userId"></app-admin-panel>
+    <ng-container *ngIf="isAdmin">
+      <app-admin-panel
+        [userId]="userId"
+        (showShipsChange)="onShowShipsChange($event)"
+      ></app-admin-panel>
     </ng-container>
 
-    <!-- Show ships as well if not admin -->
-    <ng-template #elseShowShips>
+    <!-- Shows the ships component, ON by default -->
+    <div *ngIf="showShips">
       <app-search-ships [userId]="userId"></app-search-ships>
-    </ng-template>
+    </div>
   </div>
 </ng-template>
