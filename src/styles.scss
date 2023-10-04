@@ -5,3 +5,12 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color: rgb(241, 251, 255);}
+
+div.mat-expansion-panel-body {
+  padding: 0 !important;
+  border-top: solid black 1px;
+}
+
+.mat-icon {
+  vertical-align: bottom;
+}

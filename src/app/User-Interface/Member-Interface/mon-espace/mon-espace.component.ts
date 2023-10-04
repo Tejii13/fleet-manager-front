@@ -39,7 +39,6 @@ export class MonEspaceComponent implements OnInit {
     const idFromRoute = this.route.snapshot.paramMap.get('id');
     if (idFromRoute !== null) {
       this.id = +idFromRoute;
-      console.log('Id: ' + this.id);
 
       // If not null, fetches user info if he is connected
       this.fetch.getUserinfo(this.id).subscribe((data) => {

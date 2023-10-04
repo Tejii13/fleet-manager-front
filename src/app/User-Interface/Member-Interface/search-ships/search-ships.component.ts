@@ -15,6 +15,7 @@ import { Subject } from 'rxjs';
 })
 export class SearchShipsComponent implements OnInit {
   @Input() userId!: number;
+  @Input() isAdmin!: boolean;
 
   public shipForm: FormGroup;
 
@@ -118,19 +119,42 @@ export class SearchShipsComponent implements OnInit {
     this.shipForm.reset();
     for (let ship of this.ships) {
       if (ship.name.toLowerCase() === shipToAdd.toLowerCase()) {
+        // Check if url is complete
+        let bannerUrl = ship.media[0].images.banner;
+        if (!bannerUrl.startsWith('https://media')) {
+          console.log('Not good');
+          bannerUrl = 'https://robertsspaceindustries.com' + bannerUrl;
+          console.log(bannerUrl);
+        }
+
+        let shipSize;
+        if (!ship.size) {
+          shipSize = 'TBD';
+        } else {
+          shipSize = ship.size;
+        }
+        let shipScu;
+        if (!shipScu) {
+          shipScu = 0;
+        } else {
+          shipScu = ship.cargocapacity;
+        }
+        let shipUrl;
+        shipUrl = 'https://robertsspaceindustries.com' + ship.url;
+
         this.handleShips
           .saveShip(
             this.userId,
             ship.name,
-            ship.size,
+            shipSize,
             ship.production_status,
             ship.manufacturer.name,
-            ship.type,
+            ship.focus,
             ship.max_crew,
-            ship.url,
+            shipUrl,
             ship.description,
-            ship.media[0].images.tavern_upload_medium,
-            ship.cargocapacity
+            bannerUrl,
+            shipScu
           )
           .subscribe((response) => {
             if (response) {

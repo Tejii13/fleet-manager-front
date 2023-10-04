@@ -1,5 +1,7 @@
-<button (click)="viewShips()">Voir vaisseaux</button>
-<button (click)="viewMembers()">Voir membres</button>
+<div class="mb-4">
+  <button class="mr-2" (click)="viewShips()">Voir vaisseaux</button>
+  <button (click)="viewMembers()">Voir membres</button>
+</div>
 
 <div *ngIf="showMembers">
   <app-display-members></app-display-members>

@@ -28,7 +28,7 @@
 
     <!-- Shows the ships component, ON by default -->
     <div *ngIf="showShips">
-      <app-search-ships [userId]="userId"></app-search-ships>
+      <app-search-ships [userId]="userId" [isAdmin]="isAdmin"></app-search-ships>
     </div>
   </div>
 </ng-template>

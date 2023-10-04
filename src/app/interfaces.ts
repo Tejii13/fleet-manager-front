@@ -22,6 +22,7 @@ export interface Ship {
   url: string;
   description: string;
   imageUrl: string;
+  cargoCapacity: number;
 }
 
 export interface ConnectionStatus {
@@ -72,7 +73,7 @@ export interface ShipData {
   media: {
     0: {
       images: {
-        tavern_upload_medium: string;
+        banner: string;
       };
     };
   };

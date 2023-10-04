@@ -14,7 +14,7 @@
 <div *ngIf="ships">
   <form [formGroup]="shipForm">
     <div class="sm:flex text-center sm:text-left">
-      <mat-form-field [style.width.px]="350">
+      <mat-form-field [style.width.px]="280">
         <mat-label>Nouveau vaisseau à ajouter:&nbsp;</mat-label>
         <input
           type="text"
@@ -46,5 +46,6 @@
 
 <app-display-ships
   [userId]="userId"
+  [isAdmin]="isAdmin"
   [reloadShipsDisplay]="reloadShipsDisplay"
 ></app-display-ships>

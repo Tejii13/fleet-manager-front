@@ -11,7 +11,7 @@ import { Member, Ship } from 'src/app/interfaces';
 })
 export class DisplayShipsComponent implements OnInit {
   @Input() userId!: number;
-
+  @Input() isAdmin!: boolean;
   @Input() reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -19,11 +19,13 @@ export class DisplayShipsComponent implements OnInit {
     private fetchFleet: FetchFleetService
   ) {}
 
+  public fleetEmpty: boolean = true;
+  public panelOpenState = false;
   public ships: Ship[] = [];
   public firstRender: boolean = true;
 
   public shipNameChanges: { [shipId: number]: string } = {};
-  public shipNameChangeIsReadOnly: boolean = true;
+  // public shipNameChangeIsReadOnly: boolean = true;
 
   public shipToChange!: number | null;
   public show: boolean = true;
@@ -41,11 +43,15 @@ export class DisplayShipsComponent implements OnInit {
   }
 
   getData() {
-    console.log(this.userId);
     if (this.userId) {
       this.fetchFleet.getShipInfo(this.userId).subscribe((response) => {
         this.ships = [];
         this.ships = response;
+        if (this.ships.length > 0) {
+          this.fleetEmpty = false;
+        } else {
+          this.fleetEmpty = true;
+        }
         console.log(this.ships);
       });
     }
@@ -58,28 +64,32 @@ export class DisplayShipsComponent implements OnInit {
     }
   }
 
-  handleEdit(shipId: number) {
+  handleEdit(event: Event, shipId: number) {
+    event.preventDefault();
     this.shipToChange = shipId;
-    this.reload();
+  }
+
+  handleCancel() {
+    this.shipToChange = null;
   }
 
   handleCheck(shipId: number) {
     this.shipToChange = null;
     this.reload();
-    this.shipNameChangeIsReadOnly = true;
-    const modifiedName = this.shipNameChanges[shipId];
+    // this.shipNameChangeIsReadOnly = true;
+    const modifiedName = this.shipNameChanges[shipId].toUpperCase();
     if (modifiedName !== undefined) {
       const shipIndex = this.ships.findIndex((ship) => ship.id === shipId);
       const ship = this.ships.find((ship) => ship.id === shipId);
       if (shipIndex !== -1 && ship) {
         console.log(ship);
         this.ships[shipIndex].nickname = modifiedName;
-        let loadouts: string[];
-        if (ship.loadout && ship.loadout.length > 0) {
-          loadouts = ship.loadout;
-        } else {
-          loadouts = [];
-        }
+        // let loadouts: string[];
+        // if (ship.loadout && ship.loadout.length > 0) {
+        //   loadouts = ship.loadout;
+        // } else {
+        //   loadouts = [];
+        // }
         this.fetchFleet
           .updateName(
             shipId,
@@ -87,7 +97,14 @@ export class DisplayShipsComponent implements OnInit {
             ship.name,
             modifiedName,
             ship.size,
-            loadouts
+            ship.production_status,
+            ship.manufacturer,
+            ship.type,
+            ship.max_crew,
+            ship.url,
+            ship.description,
+            ship.imageUrl,
+            ship.cargoCapacity
           )
           .subscribe();
       }
@@ -95,6 +112,7 @@ export class DisplayShipsComponent implements OnInit {
   }
 
   reload() {
+    console.log('reload');
     this.show = false;
     setTimeout(() => (this.show = true));
   }

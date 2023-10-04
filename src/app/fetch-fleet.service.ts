@@ -19,7 +19,7 @@ export class FetchFleetService {
     size: string,
     production_status: string,
     manufacturer: string,
-    type: string,
+    focus: string,
     max_crew: number,
     url: string,
     description: string,
@@ -39,7 +39,7 @@ export class FetchFleetService {
       size: size,
       productionStatus: production_status,
       manufacturer: manufacturer,
-      type: type,
+      type: focus,
       maxCrew: max_crew,
       url: url,
       description: description,
@@ -73,7 +73,14 @@ export class FetchFleetService {
     name: string,
     nickname: string,
     size: string,
-    loadout: object
+    productionStatus: string,
+    manufacturer: string,
+    focus: string,
+    max_crew: number,
+    url: string,
+    description: string,
+    image_url: string,
+    cargocapacity: number
   ) {
     if (!size) {
       size = 'Non définie';
@@ -83,19 +90,22 @@ export class FetchFleetService {
 
     const requestBody = {
       id: id,
-      owner: `/api/users/${owner}`,
+      owner: owner,
       name: name,
       nickname: nickname,
       size: size,
-      loadouts: loadout,
+      productionStatus: productionStatus,
+      manufacturer: manufacturer,
+      type: focus,
+      maxCrew: max_crew,
+      url: url,
+      description: description,
+      imageUrl: image_url,
+      cargoCapacity: cargocapacity,
     };
 
-    console.log(requestBody);
-
-    return this.http.put(
-      `${this.url}/api/ships/${id}`,
-      { name: name, nickname: nickname },
-      { headers: { accept: 'application/json' } }
-    );
+    return this.http.put(`${this.url}/api/ships/${id}`, requestBody, {
+      headers: { accept: 'application/json' },
+    });
   }
 }

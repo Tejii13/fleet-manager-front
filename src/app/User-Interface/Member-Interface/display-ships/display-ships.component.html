@@ -1,60 +1,122 @@
 <div *ngIf="show">
-  <h2>Ma flotte</h2>
-  <ul class="flex flex-wrap md:flex-no-wrap">
-    <li *ngFor="let ship of ships" class="w-full md:w-1/2 p-4">
-      <mat-card>
-        <mat-card-header class="inline-flex">
-          <mat-card-title>
-            <span class="text-2xl mr-4">{{ ship.name }}</span>
-            <span class="text-gray-500 text-sm manufacturer">{{
-              ship.manufacturer
-            }}</span>
-          </mat-card-title>
-          <mat-card-subtitle>{{ ship.type }}</mat-card-subtitle>
-        </mat-card-header>
-        <div class="flex">
-          <div class="w-1/2">
-            <img
-              mat-card-image
-              src="{{ ship.imageUrl }}"
-              alt="{{ ship.name }}"
-              class="w-full h-auto"
-            />
-          </div>
-          <div class="w-1/2 p-4">
-            <!-- Additional information goes here -->
-            <div *ngIf="shipToChange !== ship.id">
+  <h2 class="flex justify-center sm:justify-start px-4">Ma flotte</h2>
+  <hr class="my-2" />
+  <div
+    *ngIf="!fleetEmpty"
+    class="mt-4 mx-4 flex justify-around sm:justify-start"
+  >
+    <button title="Synthèse" class="normal mr-4">Synthèse</button>
+    <button *ngIf="isAdmin" title="Vue d'ensemble" class="normal">
+      Vue d'ensemble
+    </button>
+  </div>
+  <div *ngIf="fleetEmpty">
+    <p class="text-base text-center sm:text-left px-4">
+      Aucun vaisseau à afficher pour l'instant, utilisez la barre de recherche
+      au dessus pour en ajouter!
+    </p>
+  </div>
+
+  <mat-accordion>
+    <ul class="flex flex-wrap lg:flex-no-wrap">
+      <li *ngFor="let ship of ships" class="w-full lg:w-1/2 p-4">
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header class="relative">
+            <!-- Background image -->
+            <div
+              class="absolute inset-0 bg-cover bg-center bg-black"
+              style="background-image: url('{{ ship.imageUrl }}');"
+            ></div>
+
+            <div class="blurImage flex flex-col justify-end">
+              <h3 class="ml-4 mb-0 mt-4">
+                {{ ship.name }}
+              </h3>
+              <p class="text-teal-200 pl-4 mb-0">
+                {{
+                  ship.nickname && ship.nickname !== "" ? ship.nickname : null
+                }}
+              </p>
               <p>
-                {{ ship.nickname || "Nommez votre vaisseau!" }}
-                <button
-                  (click)="handleEdit(ship.id)"
-                  aria-label="Edit the ships name"
+                <span class="text-teal-200 ml-4">{{ ship.type }}</span>
+                <span
+                  class="text-teal-100 text-sm mb-4 mx-4 pl-2 manufacturer"
+                  >{{ ship.manufacturer }}</span
                 >
-                  <mat-icon>edit</mat-icon>
-                </button>
               </p>
             </div>
-            <p>{{ ship.description }}</p>
+          </mat-expansion-panel-header>
+
+          <!-- Information container -->
+          <p class="text-xs italic p-2">"{{ ship.description }}"</p>
+          <div class="mx-4 mb-4">
+            <p>
+              Ship size: <span class="underline">{{ ship.size }}</span>
+            </p>
+            <p>
+              Ship max crew: <span class="underline">{{ ship.max_crew }}</span>
+            </p>
+            <p>
+              Ship SCU: <span class="underline">{{ ship.cargoCapacity }}</span>
+            </p>
+            <a href="{{ ship.url }}">Voir dans le magasin</a>
           </div>
-        </div>
-        <mat-card-actions>
-          <div *ngIf="shipToChange === ship.id">
-            <input
-              [(ngModel)]="shipNameChanges[ship.id]"
-              title="Tellement original!"
-              placeholder="Nommez votre vaisseau!"
-              [readonly]="false"
-            />
+
+          <!-- Actions container -->
+          <div
+            class="actions flex flex-wrap md:flex-nowrap justify-between items-centr"
+          >
+            <div class="changeName">
+              <div *ngIf="shipToChange !== ship.id">
+                <button
+                  title="Edit"
+                  class="normal"
+                  (click)="handleEdit($event, ship.id)"
+                  aria-label="Edit the ships name"
+                >
+                  Éditer le nom
+                </button>
+              </div>
+              <div *ngIf="shipToChange === ship.id">
+                <input
+                  [(ngModel)]="shipNameChanges[ship.id]"
+                  title="Tellement original!"
+                  placeholder="Nommez votre vaisseau!"
+                  class="pl-2 mr-2"
+                />
+                <button
+                  title="Valider"
+                  class="icon mr-2"
+                  type="submit"
+                  (click)="handleCheck(ship.id)"
+                  aria-label="Validate the ships name change"
+                >
+                  <mat-icon>check</mat-icon>
+                </button>
+                <button
+                  title="Cancel"
+                  class="icon"
+                  type="button"
+                  (click)="handleCancel()"
+                  aria-label="Cancel the ship name change"
+                >
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </div>
+            </div>
             <button
-              (click)="handleCheck(ship.id)"
-              aria-label="Validate the ships name"
+              title="Supprimer"
+              class="normal"
+              (click)="handleShipRemove(ship.id)"
             >
-              <mat-icon>check</mat-icon>
+              Supprimer
             </button>
           </div>
-          <button (click)="handleShipRemove(ship.id)">Supprimer</button>
-        </mat-card-actions>
-      </mat-card>
-    </li>
-  </ul>
+        </mat-expansion-panel>
+      </li>
+    </ul>
+  </mat-accordion>
 </div>
