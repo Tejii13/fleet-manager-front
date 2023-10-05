@@ -23,12 +23,41 @@
       <app-admin-panel
         [userId]="userId"
         (showShipsChange)="onShowShipsChange($event)"
+        [organizationId]="organizationId"
       ></app-admin-panel>
     </ng-container>
 
+    <!-- Information about the ships -->
+    <div *ngIf="isFetchingShipsData || isFetchingShipsFleet">
+      <h2>Recherchez un vaisseau à ajouter</h2>
+      <p>Récupération de données...</p>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+
+    <div *ngIf="!isFetchingShipsData && !ships">
+      <h2 class="text-red-500 italic">
+        Impossible de récupérer la liste des vaisseaux du jeu, réessayez plus
+        tard.
+      </h2>
+    </div>
+
+    <div *ngIf="!isFetchingShipsFleet && !fleet">
+      <h2 class="text-red-500 italic">
+        Impossible de récupérer la liste de vos vaisseaux, réessayez plus tard
+        ou contactez le support si le problème persiste.
+      </h2>
+    </div>
+
     <!-- Shows the ships component, ON by default -->
-    <div *ngIf="showShips">
-      <app-search-ships [userId]="userId" [isAdmin]="isAdmin"></app-search-ships>
+    <div *ngIf="showShips && ships && fleet">
+      <app-search-ships
+        [ships]="ships"
+        [userId]="userId"
+        [isAdmin]="isAdmin"
+        [fleet]="fleet"
+        [fleetEmpty]="fleetEmpty"
+        (getFleetData)="getFleetData()"
+      ></app-search-ships>
     </div>
   </div>
 </ng-template>

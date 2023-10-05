@@ -7,6 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class AdminPanelComponent {
   @Input() userId!: number;
+  @Input() organizationId!: number;
   @Output() showShipsChange: EventEmitter<boolean> =
     new EventEmitter<boolean>();
 
@@ -17,10 +18,10 @@ export class AdminPanelComponent {
     this.showMembers = true;
     this.showShips = false;
     this.showShipsChange.emit(this.showShips);
+    console.log(this.organizationId);
   }
 
   viewShips() {
-    console.log(this.userId);
     this.showShips = true;
     this.showMembers = false;
     this.showShipsChange.emit(this.showShips);

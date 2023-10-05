@@ -41,7 +41,11 @@ export class FetchDataService {
       );
   }
 
-  registerUser(username: string, role: Array<string>): Observable<any> {
+  registerUser(
+    username: string,
+    role: Array<string>,
+    organizationId: number
+  ): Observable<any> {
     const url = `${this.url}/api/register`;
     console.log(url);
     const headers = new HttpHeaders({
@@ -49,15 +53,20 @@ export class FetchDataService {
       'Content-Type': 'application/ld+json',
     });
 
-    console.log('Service: ' + username);
-    console.log('Service: ' + role);
+    if (!organizationId) {
+      return of(null);
+    }
 
     const requestBody = {
       username: username,
       roles: [role],
+      organizationId: [organizationId],
     };
 
+    console.log(requestBody);
+
     return this.http.post(url, requestBody, { headers: headers });
+    // return of(true);
   }
 
   getUserinfo(id: number): Observable<any> {

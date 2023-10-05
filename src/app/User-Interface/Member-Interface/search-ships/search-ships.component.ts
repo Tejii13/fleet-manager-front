@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { ShipData } from 'src/app/interfaces';
+import { Ship, ShipData } from 'src/app/interfaces';
 
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-import { StarCitizenApiService } from 'src/app/star-citizen-api.service';
+// import { StarCitizenApiService } from 'src/app/star-citizen-api.service';
 import { FetchFleetService } from 'src/app/fetch-fleet.service';
 import { Subject } from 'rxjs';
 
@@ -16,11 +16,15 @@ import { Subject } from 'rxjs';
 export class SearchShipsComponent implements OnInit {
   @Input() userId!: number;
   @Input() isAdmin!: boolean;
+  @Input() ships!: ShipData[];
+  @Input() fleet!: Ship[];
+  @Input() fleetEmpty!: boolean;
+  @Output() getFleetData = new EventEmitter<void>();
 
   public shipForm: FormGroup;
 
   constructor(
-    private scApi: StarCitizenApiService,
+    // private scApi: StarCitizenApiService,
     private handleShips: FetchFleetService,
     private formBuilder: FormBuilder
   ) {
@@ -31,35 +35,13 @@ export class SearchShipsComponent implements OnInit {
 
   reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
 
-  public isFetching: boolean = true; // FIXME Change it to true when adding getData
-
-  public ships!: ShipData[];
   public filteredBrands: any[] = [];
   public staticBrands = new Map();
 
   private brandName!: string;
 
   ngOnInit(): void {
-    this.getData(); // FIXME Add it to fetch ships
-  }
-
-  private getData() {
-    this.isFetching = true;
-    this.scApi.fetchAllShips().subscribe(
-      (response: Array<ShipData>) => {
-        this.isFetching = false;
-        if (response && response.length !== 0) {
-          console.log('Received Ship Data:', response);
-          this.ships = response.filter((ship) => ship !== null);
-          this.sortByBrand();
-        } else {
-          console.log('There is no ship to display here');
-        }
-      },
-      (error) => {
-        console.error('Error while fetching ship information:', error);
-      }
-    );
+    this.sortByBrand();
   }
 
   private sortByBrand() {
@@ -164,5 +146,10 @@ export class SearchShipsComponent implements OnInit {
           });
       }
     }
+  }
+
+  emit() {
+    console.log('Emit');
+    this.getFleetData.emit();
   }
 }

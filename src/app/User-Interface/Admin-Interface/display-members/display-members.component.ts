@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { FetchDataService } from 'src/app/fetch-data.service';
 import { Member, UserListResponse } from 'src/app/interfaces';
@@ -10,6 +10,8 @@ import { Member, UserListResponse } from 'src/app/interfaces';
 })
 export class DisplayMembersComponent implements OnInit {
   constructor(private fetchData: FetchDataService) {}
+
+  @Input() organizationId!: number;
 
   public showUpdateMembers: boolean = false;
 
@@ -37,6 +39,7 @@ export class DisplayMembersComponent implements OnInit {
 
   updateMembers() {
     this.showUpdateMembers = true;
+    console.log(this.organizationId);
   }
 
   cancelMemberAdd() {

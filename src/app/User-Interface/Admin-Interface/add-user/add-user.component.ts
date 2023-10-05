@@ -8,6 +8,7 @@ import { FetchDataService } from '../../../fetch-data.service';
 })
 export class AddUserComponent {
   @Output() cancelClicked = new EventEmitter<void>();
+  @Input() organizationId!: number;
 
   public username!: string;
   public role!: Array<string>;
@@ -18,13 +19,13 @@ export class AddUserComponent {
 
   handleMemberAdd() {
     if (this.username && this.role) {
-      console.log(this.username);
-      console.log(this.role);
-      this.fetch.registerUser(this.username, this.role).subscribe((data) => {
-        console.log(data);
-        this.mdpTemp = data.pass;
-        console.log(this.mdpTemp);
-      });
+      console.log(this.organizationId);
+      this.fetch
+        .registerUser(this.username, this.role, this.organizationId)
+        .subscribe((data) => {
+          console.log(data);
+          this.mdpTemp = data.pass;
+        });
     } else {
       console.log('Veuillez remplir tous les champs');
     }

@@ -32,21 +32,23 @@
             ></div>
 
             <div class="blurImage flex flex-col justify-end">
-              <h3 class="ml-4 mb-0 mt-4">
-                {{ ship.name }}
-              </h3>
-              <p class="text-teal-200 pl-4 mb-0">
-                {{
-                  ship.nickname && ship.nickname !== "" ? ship.nickname : null
-                }}
-              </p>
-              <p>
-                <span class="text-teal-200 ml-4">{{ ship.type }}</span>
-                <span
-                  class="text-teal-100 text-sm mb-4 mx-4 pl-2 manufacturer"
-                  >{{ ship.manufacturer }}</span
-                >
-              </p>
+              <div class="header-content">
+                <h3 class="ml-4 mb-0 pt-4">
+                  {{ ship.name }}
+                </h3>
+                <p class="text-teal-200 pl-4 mb-0 nickname">
+                  {{
+                    ship.nickname && ship.nickname !== "" ? ship.nickname : null
+                  }}
+                </p>
+                <p class="flex sm:inline">
+                  <span class="text-teal-200 ml-4 type">{{ ship.type }}</span>
+                  <span
+                    class="text-teal-100 text-sm mb-4 mx-4 pl-2 manufacturer"
+                    >{{ ship.manufacturer }}</span
+                  >
+                </p>
+              </div>
             </div>
           </mat-expansion-panel-header>
 

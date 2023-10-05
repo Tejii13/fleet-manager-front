@@ -62,7 +62,7 @@ export class FetchFleetService {
     const requestBody = {
       userId: userId,
     };
-    return this.http.post<Ship[]>(`${this.url}/api/shipsList`, requestBody, {
+    return this.http.post<Ship[]>(`${this.url}/api/ships/list`, requestBody, {
       headers: { accept: 'application/json' },
     });
   }
@@ -86,7 +86,7 @@ export class FetchFleetService {
       size = 'Non définie';
     }
 
-    console.log(size);
+    size;
 
     const requestBody = {
       id: id,

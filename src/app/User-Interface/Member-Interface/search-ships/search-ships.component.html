@@ -1,15 +1,3 @@
-<div *ngIf="isFetching">
-  <h2>Recherchez un vaisseau à ajouter</h2>
-  <p>Récupération de données...</p>
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
-
-<div *ngIf="!isFetching && !ships">
-  <h2 class="text-red-500 italic">
-    Impossible de récupérer la liste des vaisseaux du jeu, réessayez plus tard.
-  </h2>
-</div>
-
 <!-- Change when adding getData()  -->
 <div *ngIf="ships">
   <form [formGroup]="shipForm">
@@ -48,4 +36,7 @@
   [userId]="userId"
   [isAdmin]="isAdmin"
   [reloadShipsDisplay]="reloadShipsDisplay"
+  [ships]="fleet"
+  [fleetEmpty]="fleetEmpty"
+  (getFleetData)="emit()"
 ></app-display-ships>

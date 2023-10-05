@@ -10,7 +10,7 @@ h2 {
 h3 {
   font-size: 1.6em;
   color: #b1fffb;
-  text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 82px #3ec9e1, 0 0 102px #3ec9e1;
+  text-shadow: 0 0 7px rgba(177, 255, 251, 0.6), 0 0 19px rgba(177, 255, 251, 0.6), 0 0 75px rgba(62, 200, 225, 0.6), 0 0 92px rgba(62, 200, 225, 0.6);
   margin-bottom: 0;
   margin-left: 16px;
   margin-top: auto;
@@ -62,12 +62,21 @@ input {
   // overflow: hidden;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  // backdrop-filter: blur(2px);
+  // -webkit-backdrop-filter: blur(2px);
   z-index: 5;
   padding: 0;
   left: 0;
   top: 0;
+}
+
+.header-content {
+  height: calc(auto + 21px);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+p.nickname {
+  height: 21px;
 }
 
 mat-expansion-panel, mat-expansion-panel-header {
@@ -87,4 +96,14 @@ mat-expansion-panel {
   // border-top: solid #adc8d3 1px;
   // display: inline-block
   padding: 8px;
+}
+
+@media screen and (max-width: 600px) {
+  .header-content {
+    height: 100%;
+  }
+
+  .type {
+    width: 100%;
+  }
 }

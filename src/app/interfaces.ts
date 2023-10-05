@@ -5,7 +5,8 @@ export interface Member {
   roles: Array<string>;
   ships: string[];
   auth: string;
-  leader: string;
+  organizationsLeader: string;
+  organizations: string;
 }
 
 export interface Ship {
