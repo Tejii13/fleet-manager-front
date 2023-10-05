@@ -22,6 +22,8 @@ export class DisplayShipsComponent implements OnInit {
     private fetchFleet: FetchFleetService
   ) {}
 
+  public isLoading: boolean = false;
+
   public panelOpenState = false;
   public firstRender: boolean = true;
 
@@ -45,11 +47,13 @@ export class DisplayShipsComponent implements OnInit {
   }
 
   handleShipRemove(shipId: number) {
+    this.isLoading = true;
     console.log(shipId);
     if (shipId) {
-      this.fetchFleet
-        .deleteShip(shipId)
-        .subscribe(() => this.getFleetData.emit());
+      this.fetchFleet.deleteShip(shipId).subscribe(() => {
+        this.isLoading = false;
+        this.getFleetData.emit();
+      });
     }
   }
 
@@ -59,6 +63,7 @@ export class DisplayShipsComponent implements OnInit {
   }
 
   handleCancel() {
+    this.isLoading = false;
     this.shipToChange = null;
   }
 

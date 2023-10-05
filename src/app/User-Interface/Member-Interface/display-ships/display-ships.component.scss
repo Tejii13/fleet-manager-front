@@ -17,9 +17,18 @@ h3 {
 }
 
 p {
+  // margin-bottom: 0;
+  // margin-top: 0;
+}
+
+p.nickname {
+  height: 21px;
   margin-bottom: 0;
-  margin-top: 0;
-  // height: 21px;
+}
+
+div.focus {
+  margin-bottom: 0;
+  margin-top: auto;
 }
 
 button.normal {
@@ -75,9 +84,7 @@ input {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-p.nickname {
-  height: 21px;
-}
+
 
 mat-expansion-panel, mat-expansion-panel-header {
   // max-height: 500px;
