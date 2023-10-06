@@ -31,6 +31,7 @@ export interface ConnectionStatus {
   message: string;
   code: number;
   auth: string;
+  username?: number;
   id?: number;
 }
 

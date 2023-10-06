@@ -54,7 +54,7 @@ export class LandingPageComponent implements OnInit {
             expirationDate.setMonth(expirationDate.getMonth() + 1);
 
             this.cookieService.set('auth', data.auth, expirationDate, '/');
-            this.router.navigate([`/mon-espace/${data.id}`]);
+            this.router.navigate([`/mon-espace/${data.username}`]);
           }
         });
     } else {

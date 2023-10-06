@@ -1,5 +1,5 @@
 import { FetchFleetService } from 'src/app/fetch-fleet.service';
-import { Ship, ShipData } from 'src/app/interfaces';
+import { CheckConnection, Ship, ShipData } from 'src/app/interfaces';
 import { StarCitizenApiService } from 'src/app/star-citizen-api.service';
 import { FetchDataService } from '../../../fetch-data.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -58,18 +58,24 @@ export class MonEspaceComponent implements OnInit {
       this.id = +id;
 
       // If not null, fetches user info if he is connected
-      this.fetchData.getUserinfo(this.id).subscribe((data) => {
-        console.log(data);
-        // Verifies if the 2 uuids are the same
-        if (!data) {
-          console.log('Pas connecté');
-          this.router.navigate(['/']);
-        } else {
-          this.handleDataFetch(data);
-          this.getShipsData();
-          this.getFleetData();
-        }
-      });
+      this.fetchData
+        .checkConnection()
+        .subscribe((response: CheckConnection) => {
+          if (response && response.id) {
+            this.fetchData.getUserinfo(response.id).subscribe((data) => {
+              console.log(data);
+              // Verifies if the 2 uuids are the same
+              if (!data) {
+                console.log('Pas connecté');
+                this.router.navigate(['/']);
+              } else {
+                this.handleDataFetch(data);
+                this.getShipsData();
+                this.getFleetData();
+              }
+            });
+          }
+        });
     } else {
       this.router.navigate(['/']);
     }
