@@ -39,6 +39,8 @@ export class SearchShipsComponent implements OnInit {
 
   private brandName!: string;
 
+  public type: { type: string; ships: ShipData[] }[] = [];
+
   ngOnInit(): void {
     this.sortByBrand();
   }

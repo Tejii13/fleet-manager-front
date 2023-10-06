@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCard, MatCardModule } from '@angular/material/card';
 
 import { FetchDataService } from './fetch-data.service';
 import { StarCitizenApiService } from './star-citizen-api.service';
@@ -69,6 +70,7 @@ import { MyFleetComponent } from './User-Interface/Member-Interface/my-fleet/my-
     MatToolbarModule,
     MatButtonModule,
     MatExpansionModule,
+    MatCardModule,
   ],
   providers: [
     CookieService,

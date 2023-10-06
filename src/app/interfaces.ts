@@ -24,7 +24,7 @@ export interface Ship {
   url: string;
   description: string;
   imageUrl: string;
-  cargoCapacity: number;
+  cargo_capacity: number;
 }
 
 export interface ConnectionStatus {

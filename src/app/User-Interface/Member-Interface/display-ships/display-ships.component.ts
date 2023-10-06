@@ -88,7 +88,7 @@ export class DisplayShipsComponent implements OnInit {
             ship.url,
             ship.description,
             ship.imageUrl,
-            ship.cargoCapacity,
+            ship.cargo_capacity,
             ship.focus
           )
           .subscribe();

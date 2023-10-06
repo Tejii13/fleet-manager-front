@@ -1,1 +1,54 @@
-<p>ship-synthesis works!</p>
+<table class="w-full">
+  <mat-accordion>
+    <mat-card class="border-black mb-2">
+      <thead class="w-full h-8 flex justify-between items-center text-black">
+        <th class="w-1/5 ml-6 text-left">Type</th>
+        <th class="w-1/5">Quantité</th>
+        <th class="w-1/5">Cargo Max</th>
+        <th class="w-1/5">Crew Max</th>
+        <th class="w-1/5 mr-12">Flight Ready</th>
+      </thead>
+    </mat-card>
+    <mat-expansion-panel class="border-black" *ngFor="let typeItem of types">
+      <mat-expansion-panel-header class="border-black pr-4">
+        <thead class="w-full flex justify-between">
+          <th class="w-1/5 text-left">{{ typeItem.type | titlecase }}</th>
+          <th class="w-1/5">{{ typeItem.ships.length }}</th>
+          <th class="w-1/5">{{ typeItem.cargoMax }}</th>
+          <th class="w-1/5">{{ typeItem.crewMax }}</th>
+          <th class="w-1/5 mr-4">
+            {{ typeItem.flightReady }} / {{ typeItem.ships.length }}
+          </th>
+        </thead>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let ship of typeItem.ships">
+        <tr class="w-full flex justify-between pl-7">
+          <td class="w-1/5 text-left py-2">
+            {{ ship.name }}
+          </td>
+          <td class="w-1/5 text-center py-2">
+            {{ typeItem.shipCount }}
+          </td>
+          <td class="w-1/5 text-center py-2">
+            {{ ship.cargo_capacity }}
+          </td>
+          <td class="w-1/5 text-center py-2">
+            {{ ship.max_crew }}
+          </td>
+          <td
+            *ngIf="ship.production_status === 'flight-ready'"
+            class="text-green-700 w-1/5 mr-12 text-center py-2"
+          >
+            Oui
+          </td>
+          <td
+            *ngIf="ship.production_status !== 'flight-ready'"
+            class="text-red-700 w-1/5 mr-12 text-center py-2"
+          >
+            Non
+          </td>
+        </tr>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-accordion>
+</table>

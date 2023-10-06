@@ -53,4 +53,8 @@
   (getFleetData)="emit()"
 ></app-display-ships>
 
-<app-ship-synthesis *ngIf="currentView === 'synthesis'"></app-ship-synthesis>
+<app-ship-synthesis
+  *ngIf="currentView === 'synthesis'"
+  [ships]="ships"
+  [fleetEmpty]="fleetEmpty"
+></app-ship-synthesis>
