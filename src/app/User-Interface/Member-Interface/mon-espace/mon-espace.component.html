@@ -27,10 +27,7 @@
       ></app-admin-panel>
     </ng-container>
 
-    <!-- Information about the ships -->
-    <div *ngIf="isFetchingShipsData || isFetchingShipsFleet">
-      <!-- <h2>Recherchez un vaisseau à ajouter</h2> -->
-      <!-- <p>Récupération de données...</p> -->
+    <div *ngIf="(isFetchingShipsData || isFetchingUsersFleet) && !ships">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
 
@@ -41,7 +38,7 @@
       </h2>
     </div>
 
-    <div *ngIf="!isFetchingShipsFleet && !fleet">
+    <div *ngIf="!isFetchingUsersFleet && !fleet">
       <h2 class="text-red-500 italic">
         Impossible de récupérer la liste de vos vaisseaux, réessayez plus tard
         ou contactez le support si le problème persiste.

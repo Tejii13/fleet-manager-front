@@ -4,7 +4,6 @@ import { Ship, ShipData } from 'src/app/interfaces';
 
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-// import { StarCitizenApiService } from 'src/app/star-citizen-api.service';
 import { FetchFleetService } from 'src/app/fetch-fleet.service';
 import { Subject } from 'rxjs';
 
@@ -116,7 +115,7 @@ export class SearchShipsComponent implements OnInit {
           shipSize = ship.size;
         }
         let shipScu;
-        if (!shipScu) {
+        if (!ship.cargocapacity) {
           shipScu = 0;
         } else {
           shipScu = ship.cargocapacity;
@@ -136,7 +135,8 @@ export class SearchShipsComponent implements OnInit {
             shipUrl,
             ship.description,
             bannerUrl,
-            shipScu
+            shipScu,
+            ship.type
           )
           .subscribe((response) => {
             if (response) {

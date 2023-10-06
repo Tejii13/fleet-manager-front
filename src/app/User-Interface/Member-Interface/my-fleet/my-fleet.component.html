@@ -1,0 +1,56 @@
+<div *ngIf="show">
+  <h2
+    *ngIf="currentView !== 'overview'"
+    class="flex justify-center sm:justify-start px-4"
+  >
+    Ma flotte
+  </h2>
+  <h2
+    *ngIf="currentView === 'overview'"
+    class="flex justify-center sm:justify-start px-4"
+  >
+    Flotte de l'organisation
+  </h2>
+  <hr class="my-2" />
+  <div
+    *ngIf="!fleetEmpty"
+    class="mt-4 mx-4 flex justify-around sm:justify-start"
+  >
+    <button
+      (click)="navigateToShips()"
+      *ngIf="currentView !== 'ships'"
+      title="Vaisseaux"
+      class="mr-4"
+    >
+      Vaisseaux
+    </button>
+    <button
+      (click)="navigateToSynthesis()"
+      *ngIf="currentView !== 'synthesis'"
+      title="Synthèse"
+      class="mr-4"
+    >
+      Synthèse
+    </button>
+
+    <button
+      (click)="navigateToOverview()"
+      *ngIf="isAdmin && currentView !== 'overview'"
+      title="Vue d'ensemble"
+    >
+      Vue d'ensemble
+    </button>
+  </div>
+</div>
+
+<app-display-ships
+  *ngIf="currentView === 'ships'"
+  [userId]="userId"
+  [isAdmin]="isAdmin"
+  [reloadShipsDisplay]="reloadShipsDisplay"
+  [ships]="ships"
+  [fleetEmpty]="fleetEmpty"
+  (getFleetData)="emit()"
+></app-display-ships>
+
+<app-ship-synthesis *ngIf="currentView === 'synthesis'"></app-ship-synthesis>

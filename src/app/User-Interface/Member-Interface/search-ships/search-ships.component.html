@@ -32,11 +32,11 @@
   </form>
 </div>
 
-<app-display-ships
+<app-my-fleet
   [userId]="userId"
   [isAdmin]="isAdmin"
   [reloadShipsDisplay]="reloadShipsDisplay"
   [ships]="fleet"
   [fleetEmpty]="fleetEmpty"
   (getFleetData)="emit()"
-></app-display-ships>
+></app-my-fleet>

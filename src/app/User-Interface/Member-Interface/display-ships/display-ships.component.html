@@ -1,15 +1,4 @@
 <div *ngIf="show">
-  <h2 class="flex justify-center sm:justify-start px-4">Ma flotte</h2>
-  <hr class="my-2" />
-  <div
-    *ngIf="!fleetEmpty"
-    class="mt-4 mx-4 flex justify-around sm:justify-start"
-  >
-    <button title="Synthèse" class="normal mr-4">Synthèse</button>
-    <button *ngIf="isAdmin" title="Vue d'ensemble" class="normal">
-      Vue d'ensemble
-    </button>
-  </div>
   <div *ngIf="fleetEmpty">
     <p class="text-base text-center sm:text-left px-4">
       Aucun vaisseau à afficher pour l'instant, utilisez la barre de recherche
@@ -47,7 +36,9 @@
                 </div>
                 <div class="focus">
                   <p class="flex flex-wrap sm:inline">
-                    <span class="text-teal-200 ml-4 type">{{ ship.type }}</span>
+                    <span class="text-teal-200 ml-4 type">{{
+                      ship.focus
+                    }}</span>
                     <span
                       class="text-teal-100 text-sm mb-0 mx-4 pl-2 sm:mb-4 manufacturer"
                       >{{ ship.manufacturer }}</span
@@ -62,13 +53,13 @@
           <p class="text-xs italic p-2">"{{ ship.description }}"</p>
           <div class="mx-4 mb-4">
             <p>
-              Ship size: <span class="underline">{{ ship.size }}</span>
+              Size: <span>{{ ship.size }}</span>
             </p>
             <p>
-              Ship max crew: <span class="underline">{{ ship.max_crew }}</span>
+              Max crew: <span>{{ ship.max_crew }}</span>
             </p>
             <p>
-              Ship SCU: <span class="underline">{{ ship.cargoCapacity }}</span>
+              Max SCU: <span>{{ ship.cargoCapacity }}</span>
             </p>
             <a href="{{ ship.url }}">Voir dans le magasin</a>
           </div>
@@ -123,11 +114,11 @@
               Supprimer
             </button>
           </div>
-          <mat-progress-bar
-            *ngIf="isLoading"
-            mode="indeterminate"
-          ></mat-progress-bar>
         </mat-expansion-panel>
+        <mat-progress-bar
+          *ngIf="shipToRemove === ship.id"
+          mode="indeterminate"
+        ></mat-progress-bar>
       </li>
     </ul>
   </mat-accordion>

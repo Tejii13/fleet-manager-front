@@ -19,6 +19,7 @@ export interface Ship {
   production_status: string;
   manufacturer: string;
   type: string;
+  focus: string;
   max_crew: number;
   url: string;
   description: string;

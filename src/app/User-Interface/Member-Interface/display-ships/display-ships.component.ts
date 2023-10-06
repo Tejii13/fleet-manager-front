@@ -1,8 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import { FetchDataService } from 'src/app/fetch-data.service';
 import { FetchFleetService } from 'src/app/fetch-fleet.service';
-import { Member, Ship } from 'src/app/interfaces';
+import { Ship } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-display-ships',
@@ -17,10 +16,7 @@ export class DisplayShipsComponent implements OnInit {
   @Input() fleetEmpty!: boolean;
   @Output() getFleetData = new EventEmitter<void>();
 
-  constructor(
-    private fetchData: FetchDataService,
-    private fetchFleet: FetchFleetService
-  ) {}
+  constructor(private fetchFleet: FetchFleetService) {}
 
   public isLoading: boolean = false;
 
@@ -29,7 +25,9 @@ export class DisplayShipsComponent implements OnInit {
 
   public shipNameChanges: { [shipId: number]: string } = {};
 
+  public shipToRemove!: number | null;
   public shipToChange!: number | null;
+
   public show: boolean = true;
 
   ngOnInit(): void {
@@ -47,11 +45,10 @@ export class DisplayShipsComponent implements OnInit {
   }
 
   handleShipRemove(shipId: number) {
-    this.isLoading = true;
+    this.shipToRemove = shipId;
     console.log(shipId);
     if (shipId) {
       this.fetchFleet.deleteShip(shipId).subscribe(() => {
-        this.isLoading = false;
         this.getFleetData.emit();
       });
     }
@@ -91,7 +88,8 @@ export class DisplayShipsComponent implements OnInit {
             ship.url,
             ship.description,
             ship.imageUrl,
-            ship.cargoCapacity
+            ship.cargoCapacity,
+            ship.focus
           )
           .subscribe();
       }

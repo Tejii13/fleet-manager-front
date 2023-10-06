@@ -24,7 +24,8 @@ export class FetchFleetService {
     url: string,
     description: string,
     image_url: string,
-    cargocapacity: number
+    cargocapacity: number,
+    type: string
   ) {
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
@@ -39,12 +40,13 @@ export class FetchFleetService {
       size: size,
       productionStatus: production_status,
       manufacturer: manufacturer,
-      type: focus,
+      focus: focus,
       maxCrew: max_crew,
       url: url,
       description: description,
       imageUrl: image_url,
       cargoCapacity: cargocapacity,
+      type: type,
     };
 
     console.log(requestBody);
@@ -80,7 +82,8 @@ export class FetchFleetService {
     url: string,
     description: string,
     image_url: string,
-    cargocapacity: number
+    cargocapacity: number,
+    type: string
   ) {
     if (!size) {
       size = 'Non définie';
@@ -96,12 +99,13 @@ export class FetchFleetService {
       size: size,
       productionStatus: productionStatus,
       manufacturer: manufacturer,
-      type: focus,
+      type: type,
       maxCrew: max_crew,
       url: url,
       description: description,
       imageUrl: image_url,
       cargoCapacity: cargocapacity,
+      focus: focus,
     };
 
     return this.http.put(`${this.url}/api/ships/${id}`, requestBody, {

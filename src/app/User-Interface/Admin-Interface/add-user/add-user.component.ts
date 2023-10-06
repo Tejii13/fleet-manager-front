@@ -10,12 +10,12 @@ export class AddUserComponent {
   @Output() cancelClicked = new EventEmitter<void>();
   @Input() organizationId!: number;
 
+  constructor(private fetch: FetchDataService) {}
+
   public username!: string;
   public role!: Array<string>;
 
   public mdpTemp!: string;
-
-  constructor(private fetch: FetchDataService) {}
 
   handleMemberAdd() {
     if (this.username && this.role) {

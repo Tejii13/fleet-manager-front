@@ -34,6 +34,8 @@ import { DisplayMembersComponent } from './User-Interface/Admin-Interface/displa
 import { AdminPanelComponent } from './User-Interface/Admin-Interface/admin-panel/admin-panel.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TooltipDirective } from './copy-check.directive';
+import { ShipSynthesisComponent } from './User-Interface/Member-Interface/ship-synthesis/ship-synthesis.component';
+import { MyFleetComponent } from './User-Interface/Member-Interface/my-fleet/my-fleet.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { TooltipDirective } from './copy-check.directive';
     AdminPanelComponent,
     NavbarComponent,
     TooltipDirective,
+    ShipSynthesisComponent,
+    MyFleetComponent,
   ],
   imports: [
     BrowserModule,
