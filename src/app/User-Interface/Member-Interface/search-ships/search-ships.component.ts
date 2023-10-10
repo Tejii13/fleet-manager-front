@@ -14,10 +14,12 @@ import { Subject } from 'rxjs';
 })
 export class SearchShipsComponent implements OnInit {
   @Input() userId!: number;
+  @Input() username!: string;
   @Input() isAdmin!: boolean;
   @Input() ships!: ShipData[];
   @Input() fleet!: Ship[];
   @Input() fleetEmpty!: boolean;
+  @Input() orgId!: number;
   @Output() getFleetData = new EventEmitter<void>();
 
   public shipForm: FormGroup;
@@ -138,7 +140,8 @@ export class SearchShipsComponent implements OnInit {
             ship.description,
             bannerUrl,
             shipScu,
-            ship.type
+            ship.type,
+            this.username
           )
           .subscribe((response) => {
             if (response) {

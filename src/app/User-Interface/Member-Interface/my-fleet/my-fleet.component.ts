@@ -15,6 +15,7 @@ export class MyFleetComponent implements OnInit {
   @Input() reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
   @Input() ships!: Ship[];
   @Input() fleetEmpty!: boolean;
+  @Input() orgId!: number;
   @Output() getFleetData = new EventEmitter<void>();
 
   constructor(private route: ActivatedRoute, public inApp: InAppService) {}

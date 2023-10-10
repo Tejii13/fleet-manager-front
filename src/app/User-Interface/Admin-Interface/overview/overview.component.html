@@ -1,40 +1,43 @@
-<div *ngIf="fleetEmpty" class="pt-4">
+<div *ngIf="fleetEmpty && data" class="pt-4">
   <p class="text-base text-center sm:text-left px-4">
-    Aucun vaisseau à afficher pour l'instant, utilisez la barre de recherche au
-    dessus pour en ajouter et rechargez la page!
+    Il n'y a aucun vaisseau dans votre organisation à afficher pour l'instant,
+    utilisez la barre de recherche au dessus pour en ajouter et rechargez la
+    page!
   </p>
 </div>
 
-<div *ngIf="!fleetEmpty && show && types.length > 0" class="table-content p-4">
+<div *ngIf="!fleetEmpty && data" class="table-content p-4">
   <table class="w-full">
     <mat-accordion>
       <mat-card class="border-black mb-2">
-        <thead class="w-full h-8 flex justify-between items-center">
-          <th class="thCard w-2/6 ml-6 text-left">Type</th>
+        <thead class="w-full h-8 flex justify-between items-center text-black">
+          <th class="thCard w-1/6 ml-6 text-left">Type</th>
           <th class="thCard w-1/6">Quantité</th>
           <th class="thCard w-1/6">Cargo Max</th>
           <th class="thCard w-1/6">Crew Max</th>
-          <th class="thCard w-1/6 mr-12">Flight Ready</th>
+          <th class="thCard w-1/6">Flight Ready</th>
+          <th class="thCard w-1/6 mr-2">Propriétaire</th>
           <mat-icon class="reload-icon mr-5">
             <button (click)="reloadPage()">autorenew</button>
           </mat-icon>
         </thead>
       </mat-card>
-      <mat-expansion-panel class="" *ngFor="let typeItem of types">
+      <mat-expansion-panel class="border-black" *ngFor="let typeItem of types">
         <mat-expansion-panel-header class="border-black pr-4">
           <thead class="w-full flex justify-between">
-            <th class="w-2/6 text-left">{{ typeItem.type | titlecase }}</th>
+            <th class="w-1/6 text-left">{{ typeItem.type | titlecase }}</th>
             <th class="w-1/6">{{ typeItem.ships.length }}</th>
             <th class="w-1/6">{{ typeItem.cargoMax }}</th>
             <th class="w-1/6">{{ typeItem.crewMax }}</th>
-            <th class="w-1/6 mr-4">
+            <th class="w-1/6">
               {{ typeItem.flightReady }} / {{ typeItem.ships.length }}
             </th>
+            <th class="w-1/6 mr-4">Propriétaire</th>
           </thead>
         </mat-expansion-panel-header>
         <ng-container *ngFor="let ship of typeItem.ships">
           <tr class="w-full flex justify-between pl-7">
-            <td class="w-2/6 text-left py-2">
+            <td class="w-1/6 text-left py-2">
               {{ ship.name }}
             </td>
             <td class="w-1/6 text-center py-2">
@@ -48,21 +51,22 @@
             </td>
             <td
               *ngIf="ship.production_status === 'flight-ready'"
-              class="text-green-300 w-1/6 mr-2 text-center py-2"
+              class="text-green-300 w-1/6 text-center py-2"
             >
               Oui
             </td>
             <td
               *ngIf="ship.production_status !== 'flight-ready'"
-              class="text-red-300 w-1/6 mr-2 text-center py-2"
+              class="text-red-300 w-1/6 text-center py-2"
             >
               Non
             </td>
-            <mat-icon class="mr-5 py-1">
-              <button (click)="deleteShip(ship.id)">delete-forever</button>
-            </mat-icon>
+            <td class="w-1/6 text-center mr-12 py-2">
+              <button (click)="getOwner()" class="underline hover:italic">
+                {{ ship.owner_username }}
+              </button>
+            </td>
           </tr>
-          <mat-divider></mat-divider>
         </ng-container>
       </mat-expansion-panel>
     </mat-accordion>

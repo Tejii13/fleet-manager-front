@@ -25,6 +25,7 @@ export interface Ship {
   description: string;
   imageUrl: string;
   cargo_capacity: number;
+  owner_username: string;
 }
 
 export interface ConnectionStatus {
@@ -41,11 +42,8 @@ export interface CheckConnection {
   code: number;
 }
 export interface UserListResponse {
-  '@context': string;
-  '@id': string;
-  '@type': string;
-  'hydra:member': Member[];
-  'hydra:totalItems': number;
+  username: string;
+  id: number;
 }
 
 export interface ShipListResponse {

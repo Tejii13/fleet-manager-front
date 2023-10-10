@@ -1,22 +1,23 @@
-import { FetchFleetService } from 'src/app/fetch-fleet.service';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Ship } from 'src/app/interfaces';
+import { FetchFleetService } from 'src/app/fetch-fleet.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-ship-synthesis',
-  templateUrl: './ship-synthesis.component.html',
-  styleUrls: ['./ship-synthesis.component.scss'],
+  selector: 'app-overview',
+  templateUrl: './overview.component.html',
+  styleUrls: ['./overview.component.scss'],
 })
-export class ShipSynthesisComponent implements OnInit {
-  @Input() ships!: Ship[];
-  @Input() isAdmin: boolean = false;
-  @Input() fleetEmpty!: boolean;
-  @Output() getFleetData = new EventEmitter<void>();
+export class OverviewComponent implements OnInit {
+  @Input() orgId!: number;
 
   constructor(private fetchFleet: FetchFleetService) {}
 
+  public isAdmin: boolean = true;
+  public fleetEmpty: boolean = true;
+  public data: boolean = false;
+
+  public ships!: Ship[];
   public shipToRemove!: number | null;
-  public show: boolean = true;
 
   public types: {
     type: string;
@@ -28,12 +29,23 @@ export class ShipSynthesisComponent implements OnInit {
   }[] = [];
 
   ngOnInit(): void {
-    this.sortShips();
+    this.getData();
   }
 
-  sortShips() {
+  getData() {
+    this.ships = [];
+    this.types = [];
     console.log(this.ships);
-    for (let ship of this.ships) {
+    this.fetchFleet.getOrgShipsList(this.orgId).subscribe((response) => {
+      if (response.length > 0) this.fleetEmpty = false;
+      this.sortShips(response);
+      this.data = true;
+    });
+  }
+
+  sortShips(ships: Ship[]) {
+    console.log(ships);
+    for (let ship of ships) {
       const typeIndex = this.types.findIndex((t) => t.type === ship.type);
       if (typeIndex === -1) {
         this.types.push({
@@ -64,26 +76,8 @@ export class ShipSynthesisComponent implements OnInit {
   }
 
   reloadPage() {
-    this.getFleetData.emit();
-    this.reload();
+    this.getData();
   }
 
-  deleteShip(shipId: number) {
-    this.shipToRemove = shipId;
-    console.log(shipId);
-    if (shipId) {
-      this.fetchFleet.deleteShip(shipId).subscribe(() => {
-        this.types = [];
-        this.getFleetData.emit();
-        this.sortShips();
-        this.reload();
-      });
-    }
-  }
-
-  reload() {
-    console.log('reload');
-    this.show = false;
-    setTimeout(() => (this.show = true));
-  }
+  getOwner() {}
 }

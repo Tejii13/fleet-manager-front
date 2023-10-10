@@ -93,7 +93,7 @@ export class MonEspaceComponent implements OnInit {
     } else {
       // If it's not the first connection
       for (let role of data.roles) {
-        if (role === 'ROLE_ADMIN') {
+        if (role === 'admin') {
           this.isAdmin = true;
 
           // Isolate organization id from iri

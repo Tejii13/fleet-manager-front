@@ -17,14 +17,6 @@
     class="mt-4 mx-4 flex justify-around sm:justify-start"
   >
     <button
-      (click)="navigateToShips()"
-      *ngIf="currentView !== 'ships'"
-      title="Vaisseaux"
-      class="mr-4"
-    >
-      Vaisseaux
-    </button>
-    <button
       (click)="navigateToSynthesis()"
       *ngIf="currentView !== 'synthesis'"
       title="Synthèse"
@@ -34,11 +26,20 @@
     </button>
 
     <button
+      (click)="navigateToShips()"
+      *ngIf="currentView !== 'ships'"
+      title="Vaisseaux"
+      class="mr-4"
+    >
+      Vaisseaux
+    </button>
+
+    <button
       (click)="navigateToOverview()"
       *ngIf="isAdmin && currentView !== 'overview'"
       title="Vue d'ensemble"
     >
-      Vue d'ensemble
+      Organisation
     </button>
   </div>
 </div>
@@ -57,4 +58,10 @@
   *ngIf="currentView === 'synthesis'"
   [ships]="ships"
   [fleetEmpty]="fleetEmpty"
+  (getFleetData)="emit()"
 ></app-ship-synthesis>
+
+<app-overview
+  [orgId]="orgId"
+  *ngIf="currentView === 'overview' && isAdmin"
+></app-overview>

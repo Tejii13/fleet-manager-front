@@ -25,7 +25,8 @@ export class FetchFleetService {
     description: string,
     image_url: string,
     cargocapacity: number,
-    type: string
+    type: string,
+    owner_username: string
   ) {
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
@@ -47,6 +48,7 @@ export class FetchFleetService {
       imageUrl: image_url,
       cargoCapacity: cargocapacity,
       type: type,
+      ownerUsername: owner_username,
     };
 
     console.log(requestBody);
@@ -109,6 +111,12 @@ export class FetchFleetService {
     };
 
     return this.http.put(`${this.url}/api/ships/${id}`, requestBody, {
+      headers: { accept: 'application/json' },
+    });
+  }
+
+  getOrgShipsList(id: number) {
+    return this.http.get<Ship[]>(`${this.url}/api/organizations/${id}/ships`, {
       headers: { accept: 'application/json' },
     });
   }

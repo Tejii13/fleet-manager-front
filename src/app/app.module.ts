@@ -16,7 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { FetchDataService } from './fetch-data.service';
 import { StarCitizenApiService } from './star-citizen-api.service';
@@ -37,6 +38,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TooltipDirective } from './copy-check.directive';
 import { ShipSynthesisComponent } from './User-Interface/Member-Interface/ship-synthesis/ship-synthesis.component';
 import { MyFleetComponent } from './User-Interface/Member-Interface/my-fleet/my-fleet.component';
+import { OverviewComponent } from './User-Interface/Admin-Interface/overview/overview.component';
+import { MemberHangarDisplayComponent } from './User-Interface/Admin-Interface/member-hangar-display/member-hangar-display.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,8 @@ import { MyFleetComponent } from './User-Interface/Member-Interface/my-fleet/my-
     TooltipDirective,
     ShipSynthesisComponent,
     MyFleetComponent,
+    OverviewComponent,
+    MemberHangarDisplayComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +76,7 @@ import { MyFleetComponent } from './User-Interface/Member-Interface/my-fleet/my-
     MatButtonModule,
     MatExpansionModule,
     MatCardModule,
+    MatDividerModule,
   ],
   providers: [
     CookieService,

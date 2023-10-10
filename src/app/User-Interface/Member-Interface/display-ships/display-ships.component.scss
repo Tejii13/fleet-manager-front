@@ -86,10 +86,8 @@ input {
 
 
 
-mat-expansion-panel, mat-expansion-panel-header {
-  // max-height: 500px;
-  min-height: 160px;
-  // height: auto;
+mat-expansion-panel-header {
+  min-height: 200px;
 }
 
 mat-expansion-panel {
@@ -112,5 +110,9 @@ mat-expansion-panel {
 
   .type {
     width: 100%;
+  }
+
+  mat-expansion-panel, mat-expansion-panel-header {
+    min-height: 130px;
   }
 }

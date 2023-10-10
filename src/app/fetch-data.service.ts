@@ -123,9 +123,13 @@ export class FetchDataService {
       );
   }
 
-  getUsersList(): Observable<UserListResponse> {
-    return this.http.get<UserListResponse>(`${this.url}/api/users`, {
-      headers: { accept: 'application/ld+json' },
-    });
+  getUsersList(id: number): Observable<UserListResponse> {
+    console.log(`${this.url}/api/organizations/${id}/users`);
+    return this.http.get<UserListResponse>(
+      `${this.url}/api/organizations/${id}/users`,
+      {
+        headers: { accept: 'application/json' },
+      }
+    );
   }
 }

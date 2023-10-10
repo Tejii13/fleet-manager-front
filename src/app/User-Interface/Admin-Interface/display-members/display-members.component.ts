@@ -12,20 +12,17 @@ export class DisplayMembersComponent implements OnInit {
   constructor(private fetchData: FetchDataService) {}
 
   @Input() organizationId!: number;
+  @Input() userId!: number;
 
   public showUpdateMembers: boolean = false;
 
   public members!: Member[];
 
   ngOnInit(): void {
-    this.fetchData.getUsersList().subscribe(
-      (response: UserListResponse) => {
-        if (response && response['hydra:member']) {
-          this.members = response['hydra:member'];
-          console.log(this.members);
-        } else {
-          console.error('Réponse API invalide: ', response);
-        }
+    this.fetchData.getUsersList(this.organizationId).subscribe(
+      (response: any) => {
+        this.members = response;
+        console.log(this.members);
       },
       (error) => {
         console.error('Error fetching user list: ', error);

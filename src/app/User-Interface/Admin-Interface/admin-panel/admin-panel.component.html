@@ -4,5 +4,8 @@
 </div>
 
 <div *ngIf="currentView === 'members'">
-  <app-display-members [organizationId]="organizationId"></app-display-members>
+  <app-display-members
+    [organizationId]="organizationId"
+    [userId]="userId"
+  ></app-display-members>
 </div>
