@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { FetchDataService } from 'src/app/fetch-data.service';
 import { Member, UserListResponse } from 'src/app/interfaces';
+import { UpdateAccountService } from 'src/app/update-account.service';
 
 @Component({
   selector: 'app-display-members',
@@ -9,7 +10,10 @@ import { Member, UserListResponse } from 'src/app/interfaces';
   styleUrls: ['./display-members.component.scss'],
 })
 export class DisplayMembersComponent implements OnInit {
-  constructor(private fetchData: FetchDataService) {}
+  constructor(
+    private fetchData: FetchDataService,
+    private updateAccount: UpdateAccountService
+  ) {}
 
   @Input() organizationId!: number;
   @Input() userId!: number;
@@ -17,8 +21,13 @@ export class DisplayMembersComponent implements OnInit {
   public showUpdateMembers: boolean = false;
 
   public members!: Member[];
+  public show: boolean = true;
 
   ngOnInit(): void {
+    this.getData();
+  }
+
+  getData() {
     this.fetchData.getUsersList(this.organizationId).subscribe(
       (response: any) => {
         this.members = response;
@@ -32,6 +41,12 @@ export class DisplayMembersComponent implements OnInit {
 
   handleMemberRemove(userId: number) {
     console.log('Delete user: ' + userId);
+    this.updateAccount.deleteAccount(userId).subscribe(() => {
+      this.members = [];
+      this.getData();
+      this.show = false;
+      setTimeout(() => (this.show = true));
+    });
   }
 
   updateMembers() {
@@ -41,5 +56,11 @@ export class DisplayMembersComponent implements OnInit {
 
   cancelMemberAdd() {
     this.showUpdateMembers = false;
+  }
+
+  reload() {
+    this.showUpdateMembers = false;
+    this.members = [];
+    this.getData();
   }
 }

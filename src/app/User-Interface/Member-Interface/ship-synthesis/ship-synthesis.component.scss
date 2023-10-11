@@ -27,7 +27,11 @@ mat-expansion-panel {
 
 @media screen and (max-width: 770px) {
   .table-content{
-    width: 650px;
-    padding-right: 6px;
+      overflow-x: auto;
+      font-size: 1em;
   }
+
+  th, td {
+    width: 100px;
   }
+}

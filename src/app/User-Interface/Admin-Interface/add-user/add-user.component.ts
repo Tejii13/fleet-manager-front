@@ -7,8 +7,9 @@ import { FetchDataService } from '../../../fetch-data.service';
   styleUrls: ['./add-user.component.scss'],
 })
 export class AddUserComponent {
-  @Output() cancelClicked = new EventEmitter<void>();
   @Input() organizationId!: number;
+  @Output() cancelClicked = new EventEmitter<void>();
+  @Output() reloadDisplay = new EventEmitter<void>();
 
   constructor(private fetch: FetchDataService) {}
 
@@ -43,6 +44,10 @@ export class AddUserComponent {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+  }
+
+  reload() {
+    this.reloadDisplay.emit();
   }
 
   abandon() {

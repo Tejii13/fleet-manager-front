@@ -7,7 +7,7 @@
   </div>
 
   <mat-accordion>
-    <ul class="flex flex-wrap lg:flex-no-wrap">
+    <ul class="flex flex-wrap lg:flex-no-wrap scroll-smooth focus:scroll-auto">
       <li *ngFor="let ship of ships" class="w-full lg:w-1/2 p-4">
         <mat-expansion-panel
           (opened)="panelOpenState = true"
@@ -61,7 +61,16 @@
             <p>
               Max SCU: <span>{{ ship.cargo_capacity }}</span>
             </p>
-            <a href="{{ ship.url }}">Voir dans le magasin</a>
+            <a class="hover:underline" href="{{ ship.url }}"
+              >Voir dans le magasin</a
+            >
+            <br />
+            <a
+              class="hover:underline"
+              href="https://starcitizen.tools/{{ ship.name }}"
+            >
+              Visiter le wiki
+            </a>
           </div>
 
           <!-- Actions container -->

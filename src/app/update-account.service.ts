@@ -22,7 +22,7 @@ export class UpdateAccountService {
     );
   }
 
-  deleteAccount(userId: string) {
+  deleteAccount(userId: number) {
     return this.http.delete(`${this.url}/api/users/${userId}`);
   }
 }

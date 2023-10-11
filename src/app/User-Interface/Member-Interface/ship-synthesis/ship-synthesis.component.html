@@ -5,7 +5,10 @@
   </p>
 </div>
 
-<div *ngIf="!fleetEmpty && show && types.length > 0" class="table-content p-4">
+<div
+  *ngIf="!fleetEmpty && show && types.length > 0"
+  class="table-content p-0 pt-4 md:p-4"
+>
   <table class="w-full">
     <mat-accordion>
       <mat-card class="border-black mb-2">
@@ -14,7 +17,7 @@
           <th class="thCard w-1/6">Quantité</th>
           <th class="thCard w-1/6">Cargo Max</th>
           <th class="thCard w-1/6">Crew Max</th>
-          <th class="thCard w-1/6 mr-12">Flight Ready</th>
+          <th class="thCard w-1/6 mr-2">Flight Ready</th>
           <mat-icon class="reload-icon mr-5">
             <button (click)="reloadPage()">autorenew</button>
           </mat-icon>

@@ -1,9 +1,20 @@
 
 .tooltip {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
+  background-color: rgba(1, 80,126,0.5);
+  border: solid black 1px;
+  color: #adc8d3;
   padding: 5px;
   border-radius: 5px;
   pointer-events: none; /* Prevent the tooltip from interfering with mouse events */
+  z-index: 5;
+}
+
+input {
+  width: 250px;
+  height: 35px;
+  background-color: rgba(1, 80,126,0.5);
+  border: solid #cceefc 1px;
+  border-radius: 2px;
+  padding-left: 8px;
 }

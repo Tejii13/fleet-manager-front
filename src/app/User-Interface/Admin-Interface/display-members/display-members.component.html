@@ -1,11 +1,14 @@
-<div>
+<mat-progress-bar *ngIf="!members" mode="indeterminate"></mat-progress-bar>
+
+<div *ngIf="members">
   <div *ngIf="!showUpdateMembers">
     <button (click)="updateMembers()">Ajouter un utilisateur</button>
   </div>
   <div *ngIf="showUpdateMembers">
     <app-add-user
-      (cancelClicked)="cancelMemberAdd()"
       [organizationId]="organizationId"
+      (cancelClicked)="cancelMemberAdd()"
+      (reloadDisplay)="reload()"
     ></app-add-user>
   </div>
   <ul>

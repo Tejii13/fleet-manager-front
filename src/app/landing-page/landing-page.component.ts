@@ -54,6 +54,12 @@ export class LandingPageComponent implements OnInit {
             expirationDate.setMonth(expirationDate.getMonth() + 1);
 
             this.cookieService.set('auth', data.auth, expirationDate, '/');
+            this.cookieService.set(
+              'username',
+              this.username,
+              expirationDate,
+              '/'
+            );
             this.router.navigate([`/mon-espace/${data.username}`]);
           }
         });
@@ -64,6 +70,7 @@ export class LandingPageComponent implements OnInit {
 
   disconnect() {
     this.cookieService.delete('auth', '/');
+    this.cookieService.delete('name', '/');
     this.isConnected = false;
   }
 }

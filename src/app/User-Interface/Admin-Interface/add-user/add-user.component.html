@@ -20,11 +20,12 @@
   Mot de passe à fournir au nouvel utilisateur:
   <button
     type="submit"
-    [appTooltip]="'Password copié!'"
+    [appTooltip]="'Mot de passe copié!'"
     class="hover:underline hover:italic"
     (click)="copyToClipboard(mdpTemp)"
     title="Cliquez ici pour copier"
   >
     {{ mdpTemp }}
   </button>
+  <button (click)="reload()">Terminé!</button>
 </div>
