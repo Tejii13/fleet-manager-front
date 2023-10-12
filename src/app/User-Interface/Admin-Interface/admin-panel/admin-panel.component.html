@@ -1,10 +1,26 @@
-<div *ngIf="show" class="mb-4 flex justify-center sm:justify-start">
-  <button class="mr-2" (click)="navigateToShips()">Voir vaisseaux</button>
-  <button class="mr-2" (click)="navigateToMembers()">Voir membres</button>
+<h2 class="px-4 flex justify-center sm:justify-start">
+  Panneau d'Administration
+</h2>
+<hr class="my-2" />
+<div *ngIf="show" class="my-4 px-4 flex justify-center sm:justify-start">
   <button
+    *ngIf="currentView !== 'ships'"
+    class="mr-2"
+    (click)="navigateToShips()"
+  >
+    Vaisseaux
+  </button>
+  <button
+    *ngIf="currentView !== 'members'"
+    class="mr-2"
+    (click)="navigateToMembers()"
+  >
+    Membres
+  </button>
+  <button
+    *ngIf="currentView === 'members' && !showUpdateMembers"
     class="bigButton"
     (click)="updateMembers()"
-    *ngIf="currentView === 'members' && !showUpdateMembers"
   >
     Ajouter un utilisateur
   </button>

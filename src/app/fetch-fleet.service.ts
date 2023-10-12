@@ -63,10 +63,7 @@ export class FetchFleetService {
   }
 
   getShipInfo(userId: number): Observable<Ship[]> {
-    const requestBody = {
-      userId: userId,
-    };
-    return this.http.post<Ship[]>(`${this.url}/api/ships/list`, requestBody, {
+    return this.http.get<Ship[]>(`${this.url}/api/users/${userId}/ships`, {
       headers: { accept: 'application/json' },
     });
   }

@@ -12,3 +12,9 @@ mat-toolbar {
   background-color: rgba(0, 0, 0, 0.2);
   height: 3.5em;
 }
+
+@media screen and (max-width: 640px) {
+  .title {
+    font-size: 1.6em;
+  }
+}

@@ -1,21 +1,30 @@
+<app-add-user
+  *ngIf="showUpdateMembers"
+  [organizationId]="organizationId"
+  (reloadDisplay)="reload()"
+></app-add-user>
+<p class="px-4">Liste de joueurs dans l'organisation</p>
 <mat-progress-bar *ngIf="!members" mode="indeterminate"></mat-progress-bar>
-
 <div *ngIf="members">
-  <div *ngIf="showUpdateMembers">
-    <app-add-user
-      [organizationId]="organizationId"
-      (reloadDisplay)="reload()"
-    ></app-add-user>
-  </div>
-  <ul>
-    <li *ngFor="let member of members">
-      <div class="inline-flex">
-        {{ member.username }}
-        <div *ngIf="userId !== member.id">
-          <button class="underline hover:italic">Flotte</button>
-          <button (click)="handleMemberRemove(member.id)">Supprimer</button>
-        </div>
-      </div>
-    </li>
-  </ul>
+  <table class="w-auto mx-4">
+    <thead class="w-full">
+      <th class="w-1/4 text-center py-2">Pseudo</th>
+      <th class="w-1/4 text-center py-2">Role</th>
+      <th class="w-1/4 text-center py-2">Flotte</th>
+      <th class="w-1/4 text-center py-2">Supprimer</th>
+    </thead>
+    <tr *ngFor="let member of members" class="w-full">
+      <td class="w-1/4 text-center py-2">{{ member.username }}</td>
+      <td class="w-1/4 text-center py-2">
+        <button class="hover:underline">Ouvrir</button>
+      </td>
+      <td class="w-1/4 text-center py-2">{{ member.roles[0] | titlecase }}</td>
+      <td class="w-1/4 text-center py-2">
+        <button class="hover:underline" (click)="handleMemberRemove(member.id)">
+          Supprimer
+        </button>
+      </td>
+      <mat-divider></mat-divider>
+    </tr>
+  </table>
 </div>

@@ -1,10 +1,9 @@
 h2 {
-  margin-top: 20px;
-  font-size: 2.5em;
+  margin-top: 14px;
+  font-size: 2em;
   color: #b1fffb;
   text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 82px #3ec9e1, 0 0 102px #3ec9e1;
   margin-bottom: 0;
-  // border-bottom: solid #b1fffb 2px;
 }
 
 button {
@@ -17,4 +16,10 @@ button {
 
 button:hover {
   background-color: rgba(1, 37, 57, 1);
+}
+
+@media screen and (max-width: 640px) {
+  h2 {
+    font-size: 1.4em;
+  }
 }

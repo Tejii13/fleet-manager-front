@@ -1,0 +1,50 @@
+button {
+  border: solid #adc8d3 1px;
+  width: 80px;
+  height: 25px;
+  color: #adc8d3;
+  border-radius: 4px;
+}
+
+thead{
+  color: #b1fffb;
+  text-shadow: 0 0 7px rgba(177, 255, 251, 0.5), 0 0 21px rgba(177, 255, 251, 0.5), 0 0 82px rgba(62, 200, 225, 0.5), 0 0 102px rgba(62, 200, 225, 0.5);
+  border: solid black 1px;
+}
+
+td {
+  color: #b1fffb;
+  // border: solid black 1px;
+}
+
+table {
+  background-color: rgba(2,59,92,0.8);
+  border-radius: 6px;
+  border: solid black 1px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div {
+  width: 100%;
+}
+
+p {
+  color: #adc8d3;
+}
+
+@media screen and (max-width: 500px) {
+  div{
+      overflow-x: auto;
+      font-size: 1em;
+  }
+
+  th, td {
+    width: 100px;
+  }
+
+  table {
+    // width: auto;
+    width: 400px;
+  }
+}

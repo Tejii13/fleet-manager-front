@@ -4,8 +4,34 @@ button {
   height: 56px;
   color: #adc8d3;
   border-radius: 4px;
+  margin-top: 0px;
 }
 
 button:hover {
   background-color: rgba(1, 37, 57, 1);
+}
+
+form {
+  margin-top: 16px;
+}
+
+h2 {
+  margin-top: 36px;
+  font-size: 2em;
+  color: #b1fffb;
+  text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 82px #3ec9e1, 0 0 102px #3ec9e1;
+  margin-bottom: 0;
+}
+
+// ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+//   background-color: rgba(2,59,92,0.8) !important;
+// }
+// mat-label {
+//   color: #b1fffb;
+// }
+
+@media screen and (max-width: 640px) {
+  h2 {
+    font-size: 1.4em;
+  }
 }

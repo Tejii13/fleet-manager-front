@@ -9,3 +9,17 @@ button {
 button.bigButton {
   width: 150px;
 }
+
+h2 {
+  margin-top: 20px;
+  font-size: 2em;
+  color: #b1fffb;
+  text-shadow: 0 0 7px rgba(177, 255, 251, 0.7), 0 0 21px rgba(177, 255, 251, 0.7), 0 0 82px rgba(62, 200, 225, 0.7), 0 0 102px rgba(62, 200, 225, 0.7);
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 640px) {
+  h2 {
+    font-size: 1.4em;
+  }
+}
