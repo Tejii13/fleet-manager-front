@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { FetchDataService } from 'src/app/fetch-data.service';
 import { Member, UserListResponse } from 'src/app/interfaces';
@@ -17,8 +17,9 @@ export class DisplayMembersComponent implements OnInit {
 
   @Input() organizationId!: number;
   @Input() userId!: number;
-
-  public showUpdateMembers: boolean = false;
+  @Input() showUpdateMembers!: boolean;
+  @Output() updateMembersAfterAdd: EventEmitter<void> =
+    new EventEmitter<void>();
 
   public members!: Member[];
   public show: boolean = true;
@@ -59,7 +60,7 @@ export class DisplayMembersComponent implements OnInit {
   }
 
   reload() {
-    this.showUpdateMembers = false;
+    this.updateMembersAfterAdd.emit();
     this.members = [];
     this.getData();
   }

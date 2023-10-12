@@ -112,6 +112,13 @@ export class SearchShipsComponent implements OnInit {
           console.log(bannerUrl);
         }
 
+        let shipName;
+        if (ship.name.includes('Best In Show Edition')) {
+          shipName = ship.name.replace('Best In Show Edition', 'BIS');
+        } else {
+          shipName = ship.name;
+        }
+
         let shipSize;
         if (!ship.size) {
           shipSize = 'TBD';
@@ -130,7 +137,7 @@ export class SearchShipsComponent implements OnInit {
         this.handleShips
           .saveShip(
             this.userId,
-            ship.name,
+            shipName,
             shipSize,
             ship.production_status,
             ship.manufacturer.name,

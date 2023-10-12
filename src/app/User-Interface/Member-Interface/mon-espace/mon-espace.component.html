@@ -1,9 +1,6 @@
-<div *ngIf="verifyPassword">
-  <button (click)="disconnect()">Déconnexion</button>
-</div>
-
 <!-- Shows password change form if it's the first connection -->
 <ng-container *ngIf="verifyPassword; else elseShowData">
+  <button (click)="disconnect()">Déconnexion</button>
   <app-change-password
     [userId]="userId"
     (passwordVerifiedEvent)="handlePasswordVerified($event)"
@@ -13,12 +10,10 @@
 <!-- Shows data if it isn't the first connection -->
 <ng-template #elseShowData>
   <div *ngIf="showData">
-    <h2>
-      Bienvenue dans votre espace personnel {{ username }} sinon se déconnecter:
-      <button (click)="disconnect()">Déconnexion</button>
-    </h2>
-
-    <!-- Shows admin panel -->
+    <div class="flex justify-between">
+      <h2>Bienvenue dans votre espace personnel {{ username }} !</h2>
+      <h2><button (click)="disconnect()">Déconnexion</button></h2>
+    </div>
     <ng-container *ngIf="isAdmin">
       <app-admin-panel
         [userId]="userId"
@@ -27,36 +22,41 @@
       ></app-admin-panel>
     </ng-container>
 
-    <div *ngIf="(isFetchingShipsData || isFetchingUsersFleet) && !ships">
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
-
-    <div *ngIf="!isFetchingShipsData && !ships">
-      <h2 class="text-red-500 italic">
-        Impossible de récupérer la liste des vaisseaux du jeu, réessayez plus
-        tard.
-      </h2>
-    </div>
-
-    <div *ngIf="!isFetchingUsersFleet && !fleet">
-      <h2 class="text-red-500 italic">
-        Impossible de récupérer la liste de vos vaisseaux, réessayez plus tard
-        ou contactez le support si le problème persiste.
-      </h2>
-    </div>
-
-    <!-- Shows the ships component, ON by default -->
-    <div *ngIf="showShips && ships && fleet">
-      <app-search-ships
-        [ships]="ships"
-        [userId]="userId"
-        [username]="username"
-        [isAdmin]="isAdmin"
-        [fleet]="fleet"
-        [fleetEmpty]="fleetEmpty"
-        [orgId]="organizationId"
-        (getFleetData)="getFleetData()"
-      ></app-search-ships>
+    <div *ngIf="showShips">
+      <div
+        *ngIf="
+          (isFetchingShipsData || isFetchingUsersFleet) &&
+          !ships &&
+          currentView === 'ships'
+        "
+      >
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <div *ngIf="!isFetchingShipsData && !ships">
+        <h2 class="text-red-500 italic">
+          Impossible de récupérer la liste des vaisseaux du jeu, réessayez plus
+          tard.
+        </h2>
+      </div>
+      <div *ngIf="!isFetchingUsersFleet && !fleet">
+        <h2 class="text-red-500 italic">
+          Impossible de récupérer la liste de vos vaisseaux, réessayez plus tard
+          ou contactez le support si le problème persiste.
+        </h2>
+      </div>
+      <!-- Shows the ships component, ON by default -->
+      <div *ngIf="showShips && ships && fleet">
+        <app-search-ships
+          [ships]="ships"
+          [userId]="userId"
+          [username]="username"
+          [isAdmin]="isAdmin"
+          [fleet]="fleet"
+          [fleetEmpty]="fleetEmpty"
+          [orgId]="organizationId"
+          (getFleetData)="getFleetData()"
+        ></app-search-ships>
+      </div>
     </div>
   </div>
 </ng-template>

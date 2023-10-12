@@ -40,6 +40,7 @@ import { ShipSynthesisComponent } from './User-Interface/Member-Interface/ship-s
 import { MyFleetComponent } from './User-Interface/Member-Interface/my-fleet/my-fleet.component';
 import { OverviewComponent } from './User-Interface/Admin-Interface/overview/overview.component';
 import { MemberHangarDisplayComponent } from './User-Interface/Admin-Interface/member-hangar-display/member-hangar-display.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { MemberHangarDisplayComponent } from './User-Interface/Admin-Interface/m
     MyFleetComponent,
     OverviewComponent,
     MemberHangarDisplayComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

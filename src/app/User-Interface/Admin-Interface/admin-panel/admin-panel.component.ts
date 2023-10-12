@@ -14,6 +14,8 @@ export class AdminPanelComponent implements OnInit {
     new EventEmitter<boolean>();
   constructor(private route: ActivatedRoute, private inApp: InAppService) {}
 
+  public showUpdateMembers: boolean = false;
+
   public showMembers: boolean = false;
   public showShips: boolean = true;
   public show: boolean = true;
@@ -56,5 +58,9 @@ export class AdminPanelComponent implements OnInit {
     console.log(this.currentView);
     this.show = false;
     setTimeout(() => (this.show = true));
+  }
+
+  updateMembers() {
+    this.showUpdateMembers = !this.showUpdateMembers;
   }
 }

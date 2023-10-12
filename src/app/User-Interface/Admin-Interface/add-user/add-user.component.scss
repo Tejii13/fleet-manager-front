@@ -10,11 +10,36 @@
   z-index: 5;
 }
 
+button.styleIt {
+  border: solid #adc8d3 1px;
+  width: 100px;
+  height: 30px;
+  color: #adc8d3;
+  border-radius: 4px;
+}
+
 input {
   width: 250px;
-  height: 35px;
+  height: 25px;
   background-color: rgba(1, 80,126,0.5);
-  border: solid #cceefc 1px;
+  border: solid #adc8d3 1px;
   border-radius: 2px;
   padding-left: 8px;
+}
+select {
+  width: 250px;
+  height: 25px;
+  background-color: rgba(1, 80,126,0.5);
+  border: solid #adc8d3 1px;
+  border-radius: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+form {
+  width: 450px;
+}
+
+div.formFields {
+  margin-bottom: 8px;
 }

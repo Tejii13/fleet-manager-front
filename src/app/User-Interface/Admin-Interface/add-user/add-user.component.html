@@ -1,20 +1,28 @@
-<form (ngSubmit)="handleMemberAdd()">
-  <label for="id_input">Nom de l'utilisateur à ajouter:&nbsp;</label>
-  <input
-    type="text"
-    name="username"
-    placeholder="Nom d'utilisateur"
-    [(ngModel)]="username"
-  />
-  <label for="id_input">Le rôle à attribuer:&nbsp;</label>
-  <input
-    type="text"
-    name="role"
-    placeholder="ROLE_CITIZEN par défaut"
-    [(ngModel)]="role"
-  />
-  <button type="submit">Ajouter</button>
-  <button (click)="abandon()" type="button">Annuler</button>
+<form class="flex flex-wrap" (ngSubmit)="handleMemberAdd()">
+  <div class="formFields w-full flex justify-between">
+    <label class="items-center" for="username_input"
+      >Nom de l'utilisateur à ajouter:&nbsp;</label
+    >
+    <input
+      id="username_input"
+      type="text"
+      name="username"
+      placeholder="Nom d'utilisateur"
+      [(ngModel)]="username"
+    />
+  </div>
+  <div class="formFields w-full flex justify-between">
+    <label class="items-center" for="role_select"
+      >Le rôle à attribuer:&nbsp;</label
+    >
+    <select name="role" id="role_select" [(ngModel)]="role">
+      <option value="admin">Admin</option>
+      <option value="membre">Membre</option>
+    </select>
+  </div>
+  <div class="w-full">
+    <button class="styleIt justify-end" type="submit">Ajouter</button>
+  </div>
 </form>
 <div *ngIf="mdpTemp">
   Mot de passe à fournir au nouvel utilisateur:
@@ -27,5 +35,5 @@
   >
     {{ mdpTemp }}
   </button>
-  <button (click)="reload()">Terminé!</button>
+  <button class="styleIt" (click)="reload()">Terminé!</button>
 </div>

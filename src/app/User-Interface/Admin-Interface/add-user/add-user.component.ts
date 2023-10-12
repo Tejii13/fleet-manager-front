@@ -8,7 +8,6 @@ import { FetchDataService } from '../../../fetch-data.service';
 })
 export class AddUserComponent {
   @Input() organizationId!: number;
-  @Output() cancelClicked = new EventEmitter<void>();
   @Output() reloadDisplay = new EventEmitter<void>();
 
   constructor(private fetch: FetchDataService) {}
@@ -19,7 +18,7 @@ export class AddUserComponent {
   public mdpTemp!: string;
 
   handleMemberAdd() {
-    if (this.username && this.role) {
+    if (this.username && !this.role.includes('role')) {
       console.log(this.organizationId);
       this.fetch
         .registerUser(this.username, this.role, this.organizationId)
@@ -48,9 +47,5 @@ export class AddUserComponent {
 
   reload() {
     this.reloadDisplay.emit();
-  }
-
-  abandon() {
-    this.cancelClicked.emit();
   }
 }

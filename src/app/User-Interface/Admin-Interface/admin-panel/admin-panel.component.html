@@ -1,11 +1,27 @@
-<div *ngIf="show" class="mb-4">
+<div *ngIf="show" class="mb-4 flex justify-center sm:justify-start">
   <button class="mr-2" (click)="navigateToShips()">Voir vaisseaux</button>
-  <button (click)="navigateToMembers()">Voir membres</button>
+  <button class="mr-2" (click)="navigateToMembers()">Voir membres</button>
+  <button
+    class="bigButton"
+    (click)="updateMembers()"
+    *ngIf="currentView === 'members' && !showUpdateMembers"
+  >
+    Ajouter un utilisateur
+  </button>
+  <button
+    class="bigButton"
+    (click)="updateMembers()"
+    *ngIf="currentView === 'members' && showUpdateMembers"
+  >
+    Annuler
+  </button>
 </div>
 
 <div *ngIf="currentView === 'members'">
   <app-display-members
+    [showUpdateMembers]="showUpdateMembers"
     [organizationId]="organizationId"
     [userId]="userId"
+    (updateMembersAfterAdd)="updateMembers()"
   ></app-display-members>
 </div>
