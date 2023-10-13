@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { FetchDataService } from 'src/app/fetch-data.service';
-import { Member, UserListResponse } from 'src/app/interfaces';
+import { Member } from 'src/app/interfaces';
 import { UpdateAccountService } from 'src/app/update-account.service';
 
 @Component({
@@ -23,6 +23,11 @@ export class DisplayMembersComponent implements OnInit {
 
   public members!: Member[];
   public show: boolean = true;
+  public showHangar: boolean = false;
+
+  public memberId!: number;
+
+  private scrollLocked: boolean = false;
 
   ngOnInit(): void {
     this.getData();
@@ -63,5 +68,21 @@ export class DisplayMembersComponent implements OnInit {
     this.updateMembersAfterAdd.emit();
     this.members = [];
     this.getData();
+  }
+
+  toggleHangarOnClick(value?: number) {
+    if (value) {
+      this.memberId = value;
+    }
+
+    this.scrollLocked = !this.scrollLocked;
+
+    if (this.scrollLocked) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    this.showHangar = !this.showHangar;
   }
 }

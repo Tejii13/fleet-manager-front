@@ -11,6 +11,7 @@ export class ShipSynthesisComponent implements OnInit {
   @Input() ships!: Ship[];
   @Input() isAdmin: boolean = false;
   @Input() fleetEmpty!: boolean;
+  @Input() fromAdmin: boolean = false;
   @Output() getFleetData = new EventEmitter<void>();
 
   constructor(private fetchFleet: FetchFleetService) {}
@@ -32,7 +33,6 @@ export class ShipSynthesisComponent implements OnInit {
   }
 
   sortShips() {
-    console.log(this.ships);
     for (let ship of this.ships) {
       const typeIndex = this.types.findIndex((t) => t.type === ship.type);
       if (typeIndex === -1) {
@@ -65,6 +65,9 @@ export class ShipSynthesisComponent implements OnInit {
 
   reloadPage() {
     this.getFleetData.emit();
+    this.types = [];
+    this.ships = [];
+    console.log(this.types);
     this.reload();
   }
 
@@ -84,6 +87,7 @@ export class ShipSynthesisComponent implements OnInit {
   reload() {
     console.log('reload');
     this.show = false;
-    setTimeout(() => (this.show = true));
+    setTimeout(() => (this.show = true), 50);
+    console.log(this.types.length);
   }
 }

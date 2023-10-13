@@ -62,7 +62,10 @@
               Non
             </td>
             <td class="w-1/6 text-center mr-12 py-2">
-              <button (click)="getOwner()" class="underline hover:italic">
+              <button
+                (click)="toggleHangarOnClick(ship.owner)"
+                class="underline hover:italic"
+              >
                 {{ ship.owner_username }}
               </button>
             </td>
@@ -72,4 +75,9 @@
       </mat-expansion-panel>
     </mat-accordion>
   </table>
+  <app-member-hangar-display
+    *ngIf="showHangar"
+    [userId]="memberId"
+    (toggleHangarDisplay)="toggleHangarOnClick()"
+  ></app-member-hangar-display>
 </div>

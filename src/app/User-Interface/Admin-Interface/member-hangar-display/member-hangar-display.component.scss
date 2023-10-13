@@ -1,0 +1,43 @@
+div.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.6);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+button {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
+
+div.content {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  overflow-y: auto;
+}
+
+
+
+app-ship-synthesis {
+  // position: fixed;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+}
+
+mat-progress-bar {
+  position: fixed;
+  top: 40%;
+  left: 10%;
+  width: 80%;
+  height: 10px;
+}

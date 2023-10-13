@@ -119,12 +119,20 @@ export class SearchShipsComponent implements OnInit {
           shipName = ship.name;
         }
 
+        let maxCrew;
+        if (!maxCrew) {
+          maxCrew = 0;
+        } else {
+          maxCrew = ship.max_crew;
+        }
+
         let shipSize;
         if (!ship.size) {
           shipSize = 'TBD';
         } else {
           shipSize = ship.size;
         }
+
         let shipScu;
         if (!ship.cargocapacity) {
           shipScu = 0;
@@ -142,7 +150,7 @@ export class SearchShipsComponent implements OnInit {
             ship.production_status,
             ship.manufacturer.name,
             ship.focus,
-            ship.max_crew,
+            maxCrew,
             shipUrl,
             ship.description,
             bannerUrl,

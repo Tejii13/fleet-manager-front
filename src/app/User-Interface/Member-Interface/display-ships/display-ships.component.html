@@ -70,15 +70,10 @@
           <!-- Information container -->
           <p class="text-xs italic p-2">"{{ ship.description }}"</p>
           <div class="mx-4 mb-4">
-            <p>
-              Size: <span>{{ ship.size }}</span>
-            </p>
-            <p>
-              Max crew: <span>{{ ship.max_crew }}</span>
-            </p>
-            <p>
-              Max SCU: <span>{{ ship.cargo_capacity }}</span>
-            </p>
+            <p>Role: {{ ship.type | titlecase }}</p>
+            <p>Size: {{ ship.size | titlecase }}</p>
+            <p>Max crew: {{ ship.max_crew }}</p>
+            <p>Max SCU: {{ ship.cargo_capacity }}</p>
             <a
               class="hover:underline"
               href="{{ ship.url }}"

@@ -61,9 +61,10 @@
             >
               Non
             </td>
-            <mat-icon class="mr-5 py-1">
+            <mat-icon class="mr-5 py-1" *ngIf="!fromAdmin">
               <button (click)="deleteShip(ship.id)">delete-forever</button>
             </mat-icon>
+            <span *ngIf="fromAdmin" class="mr-10"></span>
           </tr>
           <mat-divider></mat-divider>
         </ng-container>

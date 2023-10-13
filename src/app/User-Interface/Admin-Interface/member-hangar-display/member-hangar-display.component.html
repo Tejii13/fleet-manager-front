@@ -1,1 +1,10 @@
-<p>member-hangar-display works!</p>
+<div class="background"></div>
+<button (click)="exitHangarView()">Leave</button>
+<mat-progress-bar *ngIf="!responseReceived"></mat-progress-bar>
+<div class="content">
+  <app-ship-synthesis
+    *ngIf="ships.length > 0"
+    [ships]="ships"
+    [fromAdmin]="responseReceived"
+  ></app-ship-synthesis>
+</div>

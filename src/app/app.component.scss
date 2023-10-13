@@ -18,8 +18,8 @@
   // overflow: hidden;
   position: fixed;
   background-color: rgba(3, 0, 22, 0.5);
-  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   z-index: 2;
 }
 

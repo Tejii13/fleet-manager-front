@@ -16,8 +16,14 @@ export class OverviewComponent implements OnInit {
   public fleetEmpty: boolean = true;
   public data: boolean = false;
 
+  public showHangar: boolean = false;
+
   public ships!: Ship[];
   public shipToRemove!: number | null;
+
+  public memberId!: number;
+
+  public scrollLocked: boolean = false;
 
   public types: {
     type: string;
@@ -79,5 +85,21 @@ export class OverviewComponent implements OnInit {
     this.getData();
   }
 
-  getOwner() {}
+  toggleHangarOnClick(value?: string) {
+    if (value) {
+      const valueParts = value.split('/');
+      this.memberId = +valueParts[valueParts.length - 1];
+      console.log(this.memberId);
+    }
+
+    this.scrollLocked = !this.scrollLocked;
+
+    if (this.scrollLocked) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    this.showHangar = !this.showHangar;
+  }
 }

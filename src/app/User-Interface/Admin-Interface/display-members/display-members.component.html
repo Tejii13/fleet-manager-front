@@ -9,14 +9,19 @@
   <table class="w-auto mx-4">
     <thead class="w-full">
       <th class="w-1/4 text-center py-2">Pseudo</th>
+      <th class="w-1/4 text-center py-2">Hangar</th>
       <th class="w-1/4 text-center py-2">Role</th>
-      <th class="w-1/4 text-center py-2">Flotte</th>
       <th class="w-1/4 text-center py-2">Supprimer</th>
     </thead>
     <tr *ngFor="let member of members" class="w-full">
       <td class="w-1/4 text-center py-2">{{ member.username }}</td>
       <td class="w-1/4 text-center py-2">
-        <button class="hover:underline">Ouvrir</button>
+        <button
+          class="hover:underline"
+          (click)="toggleHangarOnClick(member.id)"
+        >
+          Ouvrir
+        </button>
       </td>
       <td class="w-1/4 text-center py-2">{{ member.roles[0] | titlecase }}</td>
       <td class="w-1/4 text-center py-2">
@@ -27,4 +32,9 @@
       <mat-divider></mat-divider>
     </tr>
   </table>
+  <app-member-hangar-display
+    *ngIf="showHangar"
+    [userId]="memberId"
+    (toggleHangarDisplay)="toggleHangarOnClick()"
+  ></app-member-hangar-display>
 </div>
