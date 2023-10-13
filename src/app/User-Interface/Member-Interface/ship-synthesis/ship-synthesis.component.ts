@@ -1,5 +1,13 @@
 import { FetchFleetService } from 'src/app/fetch-fleet.service';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Ship } from 'src/app/interfaces';
 
 @Component({
@@ -7,7 +15,7 @@ import { Ship } from 'src/app/interfaces';
   templateUrl: './ship-synthesis.component.html',
   styleUrls: ['./ship-synthesis.component.scss'],
 })
-export class ShipSynthesisComponent implements OnInit {
+export class ShipSynthesisComponent implements OnInit, OnChanges {
   @Input() ships!: Ship[];
   @Input() isAdmin: boolean = false;
   @Input() fleetEmpty!: boolean;
@@ -30,6 +38,13 @@ export class ShipSynthesisComponent implements OnInit {
 
   ngOnInit(): void {
     this.sortShips();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['ships'] && !changes['ships'].firstChange) {
+      this.types = [];
+      this.sortShips();
+    }
   }
 
   sortShips() {
@@ -60,15 +75,11 @@ export class ShipSynthesisComponent implements OnInit {
       type.ships.sort((a, b) => a.name.localeCompare(b.name));
     });
 
-    console.log(this.types);
+    this.reload();
   }
 
   reloadPage() {
     this.getFleetData.emit();
-    this.types = [];
-    this.ships = [];
-    console.log(this.types);
-    this.reload();
   }
 
   deleteShip(shipId: number) {
@@ -76,18 +87,13 @@ export class ShipSynthesisComponent implements OnInit {
     console.log(shipId);
     if (shipId) {
       this.fetchFleet.deleteShip(shipId).subscribe(() => {
-        this.types = [];
         this.getFleetData.emit();
-        this.sortShips();
-        this.reload();
       });
     }
   }
 
   reload() {
-    console.log('reload');
     this.show = false;
-    setTimeout(() => (this.show = true), 50);
-    console.log(this.types.length);
+    setTimeout(() => (this.show = true));
   }
 }
