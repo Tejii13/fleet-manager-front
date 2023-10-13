@@ -1,5 +1,5 @@
 <section>
-  <div *ngIf="!isConnected || !member">
+  <div *ngIf="!isConnected">
     <form (ngSubmit)="onSubmit()" class="text-center">
       <h2 class="pt-4">Connexion</h2>
       <input
@@ -19,21 +19,19 @@
       <button type="submit" class="mt-6 mb-6 style">Se connecter</button>
     </form>
   </div>
-  <div *ngIf="isConnected && member" class="text-center">
-    <h2 class="pt-6">Bonjour {{ member.username }} !</h2>
+  <div *ngIf="isConnected" class="text-center">
+    <h2 class="pt-6">Bonjour {{ username }} !</h2>
     <p class="pt-6 px-4 text-base">
       Vous êtes actuellement sur la page d'accueil, cliquez ci-dessous pour
       accéder à votre espace!
     </p>
-    <a
-      href="/mon-espace/{{ member.username }}"
-      class="hover:underline italic text-lg"
+    <a href="/mon-espace/{{ username }}" class="hover:underline italic text-lg"
       ><button title="Mon espace" class="mt-2 style">
         Accéder à mon espace
       </button></a
     >
     <br />
-    <button class="no-style" (click)="disconnect()">
+    <button class="no-style mb-3" (click)="disconnect()">
       <p class="text-xs hover:underline">
         Ou cliquez ici pour vous déconnecter.
       </p>

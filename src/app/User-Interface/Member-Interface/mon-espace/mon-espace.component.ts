@@ -24,8 +24,6 @@ export class MonEspaceComponent implements OnInit {
     private router: Router
   ) {}
 
-  private id!: number;
-
   public showData: boolean = false;
   public isAdmin: boolean = false;
   public verifyPassword: boolean = false;
@@ -48,36 +46,39 @@ export class MonEspaceComponent implements OnInit {
   inputRole!: Array<string>;
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id'); // Get the 'id' parameter from the current URL
-    this.router.navigate(['/mon-espace', id], {
+    const urlUsername = this.route.snapshot.paramMap.get('id'); // Get the 'id' parameter from the current URL
+    this.router.navigate(['/mon-espace', urlUsername], {
       queryParams: { view: 'ships' },
     });
 
     // Verifies if the id in the route is not null
-    if (id !== null) {
-      this.id = +id;
+    if (urlUsername !== null) {
+      console.log(urlUsername);
 
       // If not null, fetches user info if he is connected
       this.fetchData
         .checkConnection()
         .subscribe((response: CheckConnection) => {
+          console.log(response);
           if (response && response.id) {
             this.fetchData.getUserinfo(response.id).subscribe((data) => {
               console.log(data);
               // Verifies if the 2 uuids are the same
               if (!data) {
                 console.log('Pas connecté');
-                this.router.navigate(['/']);
+                this.disconnect();
               } else {
                 this.handleDataFetch(data);
                 this.getShipsData();
                 this.getFleetData();
               }
             });
+          } else {
+            this.disconnect();
           }
         });
     } else {
-      this.router.navigate(['/']);
+      this.disconnect();
     }
   }
 
@@ -159,6 +160,7 @@ export class MonEspaceComponent implements OnInit {
 
   disconnect() {
     this.cookieService.delete('auth', '/');
+    this.cookieService.delete('username', '/');
     this.router.navigate(['/']);
   }
 }

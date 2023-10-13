@@ -27,18 +27,34 @@ export class LandingPageComponent implements OnInit {
   public member!: Member;
 
   ngOnInit(): void {
-    this.fetch.checkConnection().subscribe((response: CheckConnection) => {
-      console.log(response);
-      if (response) {
-        this.isConnected = true;
-        if (response.id) {
-          this.fetch.getUserinfo(response.id).subscribe((response: Member) => {
-            this.member = response;
-            console.log(this.member);
-          });
-        }
-      }
-    });
+    // this.fetch.checkConnection().subscribe((response: CheckConnection) => {
+    //   console.log(response);
+    //   if (response) {
+    //     this.isConnected = true;
+    //     if (response.id) {
+    //       this.fetch.getUserinfo(response.id).subscribe((response: Member) => {
+    //         this.member = response;
+    //         console.log(this.member);
+    //       });
+    //     }
+    //   }
+    // });
+    this.username = this.cookieService.get('username');
+    const authCookie = this.cookieService.get('auth');
+
+    if (
+      this.username &&
+      authCookie &&
+      this.username !== '' &&
+      authCookie !== ''
+    ) {
+      // Code here
+      console.log('Ok');
+      this.isConnected = true;
+    } else {
+      console.log('Not Ok');
+      this.disconnect();
+    }
   }
 
   onSubmit() {
@@ -70,7 +86,7 @@ export class LandingPageComponent implements OnInit {
 
   disconnect() {
     this.cookieService.delete('auth', '/');
-    this.cookieService.delete('name', '/');
+    this.cookieService.delete('username', '/');
     this.isConnected = false;
   }
 }
