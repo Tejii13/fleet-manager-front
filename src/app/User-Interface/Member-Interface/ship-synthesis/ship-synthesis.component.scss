@@ -8,11 +8,6 @@ th {
   text-shadow: none;
 }
 
-mat-card {
-  background-color: rgba(2,59,92,0.8);
-  border: solid black 1px;
-}
-
 mat-expansion-panel {
   color: #b1fffb;
   border: solid black 1px;
@@ -23,6 +18,14 @@ mat-expansion-panel {
   color: #b1fffb;
   text-shadow: 0 0 7px rgba(177, 255, 251, 0.2), 0 0 21px rgba(177, 255, 251, 0.2);
   border-radius: 2px;
+}
+
+.sticky-thead {
+  background-color: rgb(2,59,92);
+  border: solid black 1px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 @media screen and (max-width: 770px) {

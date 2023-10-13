@@ -25,6 +25,14 @@ mat-expansion-panel {
   border-radius: 2px;
 }
 
+.sticky-thead {
+  background-color: rgb(2,59,92);
+  border: solid black 1px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 @media screen and (max-width: 770px) {
   .table-content{
     overflow-x: auto;
