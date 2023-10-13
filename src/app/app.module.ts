@@ -41,6 +41,7 @@ import { MyFleetComponent } from './User-Interface/Member-Interface/my-fleet/my-
 import { OverviewComponent } from './User-Interface/Admin-Interface/overview/overview.component';
 import { MemberHangarDisplayComponent } from './User-Interface/Admin-Interface/member-hangar-display/member-hangar-display.component';
 import { FooterComponent } from './footer/footer.component';
+import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { FooterComponent } from './footer/footer.component';
     OverviewComponent,
     MemberHangarDisplayComponent,
     FooterComponent,
+    ConfirmDeleteComponent,
   ],
   imports: [
     BrowserModule,

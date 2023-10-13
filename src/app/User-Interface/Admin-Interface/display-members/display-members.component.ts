@@ -27,7 +27,12 @@ export class DisplayMembersComponent implements OnInit {
 
   public memberId!: number;
 
+  public username!: string;
+
   private scrollLocked: boolean = false;
+
+  public showConfirmRemove: boolean = false;
+  public elementToRemove!: number;
 
   ngOnInit(): void {
     this.getData();
@@ -45,14 +50,25 @@ export class DisplayMembersComponent implements OnInit {
     );
   }
 
-  handleMemberRemove(userId: number) {
-    console.log('Delete user: ' + userId);
-    this.updateAccount.deleteAccount(userId).subscribe(() => {
-      this.members = [];
-      this.getData();
-      this.show = false;
-      setTimeout(() => (this.show = true));
-    });
+  handleMemberRemove(removingConfirmed: boolean) {
+    this.handleScrollLock();
+    this.showConfirmRemove = false;
+    if (removingConfirmed) {
+      console.log('Delete user: ' + this.elementToRemove);
+      this.updateAccount.deleteAccount(this.elementToRemove).subscribe(() => {
+        this.members = [];
+        this.getData();
+        this.show = false;
+        setTimeout(() => (this.show = true));
+      });
+    }
+  }
+
+  handleConfirmRemove(elementToRemove: number, username: string) {
+    this.handleScrollLock();
+    this.username = username;
+    this.elementToRemove = elementToRemove;
+    this.showConfirmRemove = true;
   }
 
   updateMembers() {
@@ -75,6 +91,12 @@ export class DisplayMembersComponent implements OnInit {
       this.memberId = value;
     }
 
+    this.handleScrollLock();
+
+    this.showHangar = !this.showHangar;
+  }
+
+  handleScrollLock() {
     this.scrollLocked = !this.scrollLocked;
 
     if (this.scrollLocked) {
@@ -82,7 +104,5 @@ export class DisplayMembersComponent implements OnInit {
     } else {
       document.body.style.overflow = 'auto';
     }
-
-    this.showHangar = !this.showHangar;
   }
 }

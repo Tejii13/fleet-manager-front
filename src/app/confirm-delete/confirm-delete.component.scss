@@ -1,0 +1,40 @@
+div.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.6);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+div.popup {
+  background-color: rgba(2,59,92,0.8);
+  border: solid black 1px;
+  border-radius: 4px;
+  position: fixed;
+  top: 40%;
+  // bottom: 40%;
+  left: calc(50% - 200px);
+  right: calc(50% - 200px);
+  width: 400px;
+  height: 150px;
+}
+
+button {
+  border: solid #adc8d3 1px;
+  width: 80px;
+  height: 25px;
+  color: #adc8d3;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 640px) {
+  div.popup {
+    width: 250px;
+    height: 94px;
+    left: calc(50% - 125px);
+    right: calc(50% - 125px);
+  }
+}

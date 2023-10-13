@@ -1,0 +1,20 @@
+<div class="background"></div>
+<div class="popup">
+  <p class="text-center text-sm sm:text-lg text-teal-100 pt-2 sm:pt-7 px-2">
+    {{ message }}
+  </p>
+  <div class="buttons flex justify-around pb-2 sm:pb-7">
+    <button
+      class="text-sm sm:text-lg text-green-300"
+      (click)="handleClick(true)"
+    >
+      Oui
+    </button>
+    <button
+      class="text-sm sm:text-lg text-red-300"
+      (click)="handleClick(false)"
+    >
+      Non
+    </button>
+  </div>
+</div>
