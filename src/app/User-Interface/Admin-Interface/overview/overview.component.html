@@ -75,9 +75,11 @@
       </mat-expansion-panel>
     </mat-accordion>
   </table>
-  <app-member-hangar-display
-    *ngIf="showHangar"
-    [userId]="memberId"
-    (toggleHangarDisplay)="toggleHangarOnClick()"
-  ></app-member-hangar-display>
+  <div class="relative z-10">
+    <app-member-hangar-display
+      *ngIf="showHangar"
+      [userId]="memberId"
+      (toggleHangarDisplay)="toggleHangarOnClick()"
+    ></app-member-hangar-display>
+  </div>
 </div>

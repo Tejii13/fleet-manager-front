@@ -3,18 +3,34 @@
 .title {
   font-size: 2em;
   color: #b1fffb;
-  margin: 0.5em auto;
+  margin: 0.5em;
   text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 60px #3ec9e1, 0 0 80px #3ec9e1;
   font-family: 'Angkor', cursive;
+  margin-left: 5%;
+}
+
+button {
+  font-size: 1.6em;
+  padding: 20px;
+  color: #b1fffb;
+  text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 60px #3ec9e1, 0 0 80px #3ec9e1;
+  margin-right: 5%;
 }
 
 mat-toolbar {
   background-color: rgba(0, 0, 0, 0.2);
   height: 3.5em;
+  // max-width: 1140px;
 }
 
 @media screen and (max-width: 640px) {
   .title {
-    font-size: 1.6em;
+    font-size: 1.2em;
+    margin-left: 20px;
+  }
+
+  button {
+    font-size: 1.2em;
+    margin-right: 20px;
   }
 }
