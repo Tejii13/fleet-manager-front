@@ -1,0 +1,86 @@
+<div class="background"></div>
+<div class="popup">
+  <img src="{{ bannerUrl }}" alt="{{ shipToHandle.name }}" width="100%" />
+  <div>
+    <img
+      class="production-status"
+      *ngIf="shipToHandle.production_status === 'flight-ready'"
+      src="../../../../assets/images/flyready.png"
+      alt="Flight Ready"
+      width="40"
+    />
+    <img
+      class="production-status"
+      *ngIf="shipToHandle.production_status !== 'flight-ready'"
+      src="../../../../assets/images/flyreadynot.png"
+      alt="Not Flight Ready"
+      width="40"
+    />
+  </div>
+  <div
+    class="text-sm sm:text-lg w-full text-teal-100 pt-2 sm:pt-4 px-2 md:px-16"
+  >
+    <p>{{ shipToHandle.name }}</p>
+    <div class="flex flex-wrap w-full">
+      <p class="w-full md:w-1/2 xl:w-1/3">
+        <label for="obtentionSelect">Moyen d'obtention*:&nbsp;</label>
+        <br />
+        <select
+          name="obt"
+          id="obtentionSelect"
+          title="Obtention"
+          [(ngModel)]="obtentionMethod"
+          (change)="getObtention()"
+        >
+          <option value="null">- - -</option>
+          <option value="pledge">Pledge</option>
+          <option value="achat_ig">Achat Ig</option>
+          <option value="loaner">Loaner</option>
+          <option value="subscription">Subscription</option>
+          <option value="location">Location</option>
+          <option value="referral">Referral</option>
+        </select>
+      </p>
+      <p class="w-full md:w-1/2 lg:w-1/3">
+        <label for="nicknameInput">Nom du vaisseau:&nbsp;</label>
+        <br />
+        <input
+          type="text"
+          id="nicknameInput"
+          placeholder="Ex: Rocinante"
+          [(ngModel)]="nickname"
+        />
+      </p>
+    </div>
+  </div>
+  <div class="buttons py-2 px-2 md:px-16">
+    <p *ngIf="isLoaner" class="text-xs sm:text-lg text-teal-100">
+      <label for="loanerSelect">
+        Vaisseau qui donne accès à ce loaner*:&nbsp;
+      </label>
+      <br />
+      <select
+        name="loanerSelect"
+        id="loanerSelect"
+        title="Sélection loaner"
+        class="text-sm sm:text-lg"
+        [(ngModel)]="loanerFor"
+      >
+        <option value="broken_ship">Vaisseau non disponible</option>
+        <option *ngFor="let ship of canBeLoanerFor">{{ ship.name }}</option>
+      </select>
+    </p>
+    <div class="mt-6 md:mt-12 ml-0">
+      <button
+        class="text-sm sm:text-lg text-green-300 mr-2"
+        (click)="handleShipAdd()"
+      >
+        Ajouter
+      </button>
+      <button class="text-sm sm:text-lg text-red-300" (click)="cancel()">
+        Annuler
+      </button>
+    </div>
+  </div>
+  <p class="text-xs italic px-2 sm:px-16 pb-0 md:pb-6">*Obligatoire</p>
+</div>

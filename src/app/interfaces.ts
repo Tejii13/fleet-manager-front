@@ -26,6 +26,8 @@ export interface Ship {
   imageUrl: string;
   cargo_capacity: number;
   owner_username: string;
+  obtention_method: string;
+  loaner_for: string;
 }
 
 export interface ConnectionStatus {

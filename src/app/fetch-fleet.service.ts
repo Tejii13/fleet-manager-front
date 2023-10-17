@@ -26,14 +26,16 @@ export class FetchFleetService {
     image_url: string,
     cargocapacity: number,
     type: string,
-    owner_username: string
+    owner_username: string,
+    obtention_method: string,
+    loaner_for: string
   ) {
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
       'Content-type': 'application/ld+json',
     });
 
-    console.log(production_status);
+    console.log(obtention_method);
 
     const requestBody = {
       owner: `api/users/${id}`,
@@ -49,6 +51,8 @@ export class FetchFleetService {
       cargoCapacity: cargocapacity,
       type: type,
       ownerUsername: owner_username,
+      obtentionMethod: obtention_method,
+      loaner_for: loaner_for,
     };
 
     console.log(requestBody);
@@ -87,8 +91,6 @@ export class FetchFleetService {
     if (!size) {
       size = 'Non définie';
     }
-
-    size;
 
     const requestBody = {
       id: id,

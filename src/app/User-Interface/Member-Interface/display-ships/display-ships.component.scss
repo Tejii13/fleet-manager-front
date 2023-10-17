@@ -22,8 +22,6 @@ p.nickname {
 }
 
 div.focus {
-  // margin-bottom: 0;
-  // margin-top: auto;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -33,7 +31,6 @@ img {
   position: absolute;
   right: 16px;
   bottom: 16px;
-  z-index: 20;
 }
 
 button.normal {
@@ -73,12 +70,9 @@ input {
 .blurImage {
   height: 100%;
   width: 100%;
-  // overflow: hidden;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.3);
-  // backdrop-filter: blur(2px);
-  // -webkit-backdrop-filter: blur(2px);
-  z-index: 5;
+  // z-index: 5;
   padding: 0;
   left: 0;
   top: 0;

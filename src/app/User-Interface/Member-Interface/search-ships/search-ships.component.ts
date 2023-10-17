@@ -4,7 +4,6 @@ import { Ship, ShipData } from 'src/app/interfaces';
 
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-import { FetchFleetService } from 'src/app/fetch-fleet.service';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -24,11 +23,7 @@ export class SearchShipsComponent implements OnInit {
 
   public shipForm: FormGroup;
 
-  constructor(
-    // private scApi: StarCitizenApiService,
-    private handleShips: FetchFleetService,
-    private formBuilder: FormBuilder
-  ) {
+  constructor(private formBuilder: FormBuilder) {
     this.shipForm = this.formBuilder.group({
       shipInput: '',
     });
@@ -39,7 +34,11 @@ export class SearchShipsComponent implements OnInit {
   public filteredBrands: any[] = [];
   public staticBrands = new Map();
 
+  public showShipAddPopup: boolean = false;
+
   private brandName!: string;
+
+  public shipToPass!: ShipData;
 
   public type: { type: string; ships: ShipData[] }[] = [];
 
@@ -99,73 +98,28 @@ export class SearchShipsComponent implements OnInit {
     );
   }
 
-  handleShipAdd() {
+  toggleShipAddPopup() {
+    this.showShipAddPopup = true;
+
     const shipToAdd = this.shipForm.get('shipInput')?.value;
     this.shipForm.reset();
     for (let ship of this.ships) {
       if (ship.name.toLowerCase() === shipToAdd.toLowerCase()) {
-        // Check if url is complete
-        let bannerUrl = ship.media[0].images.banner;
-        if (!bannerUrl.startsWith('https://media')) {
-          console.log('Not good');
-          bannerUrl = 'https://robertsspaceindustries.com' + bannerUrl;
-          console.log(bannerUrl);
-        }
-
-        let shipName;
-        if (ship.name.includes('Best In Show Edition')) {
-          shipName = ship.name.replace('Best In Show Edition', 'BIS');
-        } else {
-          shipName = ship.name;
-        }
-
-        let maxCrew;
-        if (!maxCrew) {
-          maxCrew = 0;
-        } else {
-          maxCrew = ship.max_crew;
-        }
-
-        let shipSize;
-        if (!ship.size) {
-          shipSize = 'TBD';
-        } else {
-          shipSize = ship.size;
-        }
-
-        let shipScu;
-        if (!ship.cargocapacity) {
-          shipScu = 0;
-        } else {
-          shipScu = ship.cargocapacity;
-        }
-        let shipUrl;
-        shipUrl = 'https://robertsspaceindustries.com' + ship.url;
-
-        this.handleShips
-          .saveShip(
-            this.userId,
-            shipName,
-            shipSize,
-            ship.production_status,
-            ship.manufacturer.name,
-            ship.focus,
-            maxCrew,
-            shipUrl,
-            ship.description,
-            bannerUrl,
-            shipScu,
-            ship.type,
-            this.username
-          )
-          .subscribe((response) => {
-            if (response) {
-              console.log(response);
-              this.reloadShipsDisplay.next(true);
-            }
-          });
+        this.shipToPass = ship;
+        console.log(this.shipToPass);
       }
     }
+
+    document.body.style.overflow = 'hidden';
+  }
+
+  cancelAdd() {
+    this.showShipAddPopup = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  nextReloadShipList() {
+    this.reloadShipsDisplay.next(true);
   }
 
   emit() {

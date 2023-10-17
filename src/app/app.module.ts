@@ -42,6 +42,7 @@ import { OverviewComponent } from './User-Interface/Admin-Interface/overview/ove
 import { MemberHangarDisplayComponent } from './User-Interface/Admin-Interface/member-hangar-display/member-hangar-display.component';
 import { FooterComponent } from './footer/footer.component';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+import { ShipAddPopupComponent } from './User-Interface/Member-Interface/ship-add-popup/ship-add-popup.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.componen
     MemberHangarDisplayComponent,
     FooterComponent,
     ConfirmDeleteComponent,
+    ShipAddPopupComponent,
   ],
   imports: [
     BrowserModule,

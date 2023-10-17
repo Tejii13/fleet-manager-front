@@ -7,14 +7,14 @@
   <form [formGroup]="shipForm">
     <div class="sm:flex text-center sm:text-left">
       <mat-form-field [style.width.px]="260">
-        <mat-label>Nouveau vaisseau à ajouter:&nbsp;</mat-label>
+        <mat-label>Nouveau vaisseau à ajouter</mat-label>
         <input
           type="text"
           matInput
           formControlName="shipInput"
           placeholder="Ex: Aurora MR"
           [matAutocomplete]="autoGroup"
-          (submit)="handleShipAdd()"
+          (submit)="toggleShipAddPopup()"
           (input)="onInput()"
           #autocompleteOrigin
         />
@@ -29,7 +29,7 @@
           </mat-optgroup>
         </mat-autocomplete>
       </mat-form-field>
-      <button class="sm:ml-2 mt-2" type="button" (click)="handleShipAdd()">
+      <button class="sm:ml-2 mt-2" type="button" (click)="toggleShipAddPopup()">
         Ajouter
       </button>
     </div>
@@ -45,3 +45,14 @@
   [orgId]="orgId"
   (getFleetData)="emit()"
 ></app-my-fleet>
+
+<app-ship-add-popup
+  class="z-30 relative"
+  *ngIf="showShipAddPopup && shipToPass && fleet"
+  [shipToHandle]="shipToPass"
+  [fleet]="fleet"
+  [username]="username"
+  [userId]="userId"
+  (cancelShipAdd)="cancelAdd()"
+  (reloadShipDisplay)="nextReloadShipList()"
+></app-ship-add-popup>
