@@ -30,6 +30,9 @@ export class AdminPanelComponent implements OnInit {
         case 'members':
           this.currentView = 'members';
           break;
+        case 'overview':
+          this.currentView = 'overview';
+          break;
       }
     });
   }
@@ -42,6 +45,15 @@ export class AdminPanelComponent implements OnInit {
     }
 
     this.showShipsChange.emit(false);
+  }
+
+  // Function to navigate to 'overview' view
+  navigateToOverview() {
+    const id = this.route.snapshot.paramMap.get('id'); // Get the 'id' parameter from the current URL
+    if (id) {
+      this.inApp.navigateToOverview(id);
+      this.reload();
+    }
   }
 
   navigateToShips() {

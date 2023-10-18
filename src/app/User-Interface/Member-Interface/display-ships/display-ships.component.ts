@@ -83,13 +83,8 @@ export class DisplayShipsComponent implements OnInit {
             ship.size,
             ship.production_status,
             ship.manufacturer,
-            ship.type,
-            ship.max_crew,
-            ship.url,
-            ship.description,
-            ship.imageUrl,
-            ship.cargo_capacity,
-            ship.focus
+            ship.owner_username,
+            ship.obtention_method
           )
           .subscribe();
       }

@@ -23,7 +23,7 @@
     <p>{{ shipToHandle.name }}</p>
     <div class="flex flex-wrap w-full">
       <p class="w-full md:w-1/2 xl:w-1/3">
-        <label for="obtentionSelect">Moyen d'obtention*:&nbsp;</label>
+        <label for="obtentionSelect">Mode d'acquisition*:&nbsp;</label>
         <br />
         <select
           name="obt"
@@ -55,9 +55,7 @@
   </div>
   <div class="buttons py-2 px-2 md:px-16">
     <p *ngIf="isLoaner" class="text-xs sm:text-lg text-teal-100">
-      <label for="loanerSelect">
-        Vaisseau qui donne accès à ce loaner*:&nbsp;
-      </label>
+      <label for="loanerSelect"> Accordé par le vaisseau*:&nbsp; </label>
       <br />
       <select
         name="loanerSelect"
@@ -65,15 +63,22 @@
         title="Sélection loaner"
         class="text-sm sm:text-lg"
         [(ngModel)]="loanerFor"
+        (change)="onLoanerSelectChange()"
       >
         <option value="broken_ship">Vaisseau non disponible</option>
         <option *ngFor="let ship of canBeLoanerFor">{{ ship.name }}</option>
       </select>
     </p>
-    <div class="mt-6 md:mt-12 ml-0">
+    <p class="text-xs italic text-teal-100">
+      Tu dois ajouter à ton hangar le vaisseau qui t'accorde ce loaner avant.
+    </p>
+    <p *ngIf="!fieldsAreValid" class="italic text-red-300 mt-6 md:mt-12">
+      Veuillez remplir tous les champs obligatoires
+    </p>
+    <div class="mt-2 md:mt-4">
       <button
         class="text-sm sm:text-lg text-green-300 mr-2"
-        (click)="handleShipAdd()"
+        (click)="handleAddButton()"
       >
         Ajouter
       </button>

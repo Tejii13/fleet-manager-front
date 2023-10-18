@@ -1,33 +1,42 @@
-<h2 class="px-4 flex justify-center sm:justify-start">
-  Panneau d'Administration
-</h2>
-<hr class="my-2" />
-<div *ngIf="show" class="my-4 px-4 flex justify-center sm:justify-start">
+<h2 class="px-4 w-full">Panneau d'Administration</h2>
+<!-- <hr class="my-2" /> -->
+<div *ngIf="show" class="my-2 px-4 flex flex-wrap">
   <button
     *ngIf="currentView !== 'ships'"
-    class="mr-2"
+    class="mr-2 my-2"
     (click)="navigateToShips()"
   >
     Vaisseaux
   </button>
+
   <button
     *ngIf="currentView !== 'members'"
-    class="mr-2"
+    class="mr-2 my-2"
     (click)="navigateToMembers()"
   >
     Membres
   </button>
+
+  <button
+    *ngIf="currentView !== 'overview' && currentView !== 'members'"
+    class="bigButton my-2 mr-2"
+    (click)="navigateToOverview()"
+  >
+    Flotte de l'organisation
+  </button>
+
   <button
     *ngIf="currentView === 'members' && !showUpdateMembers"
-    class="bigButton"
+    class="bigButton mr-2 my-2"
     (click)="updateMembers()"
   >
     Ajouter un utilisateur
   </button>
+
   <button
-    class="bigButton"
-    (click)="updateMembers()"
     *ngIf="currentView === 'members' && showUpdateMembers"
+    class="bigButton mr-2 my-2"
+    (click)="updateMembers()"
   >
     Annuler
   </button>

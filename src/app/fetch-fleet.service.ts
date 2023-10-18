@@ -16,6 +16,7 @@ export class FetchFleetService {
   saveShip(
     id: number,
     shipName: string,
+    nickname: string,
     size: string,
     production_status: string,
     manufacturer: string,
@@ -40,6 +41,7 @@ export class FetchFleetService {
     const requestBody = {
       owner: `api/users/${id}`,
       name: shipName,
+      nickname: nickname,
       size: size,
       productionStatus: production_status,
       manufacturer: manufacturer,
@@ -52,7 +54,7 @@ export class FetchFleetService {
       type: type,
       ownerUsername: owner_username,
       obtentionMethod: obtention_method,
-      loaner_for: loaner_for,
+      loanerFor: loaner_for,
     };
 
     console.log(requestBody);
@@ -80,33 +82,21 @@ export class FetchFleetService {
     size: string,
     productionStatus: string,
     manufacturer: string,
-    focus: string,
-    max_crew: number,
-    url: string,
-    description: string,
-    image_url: string,
-    cargocapacity: number,
-    type: string
+    ownerUsername: string,
+    obtentionMethod: string
   ) {
     if (!size) {
       size = 'Non définie';
     }
 
     const requestBody = {
-      id: id,
       owner: owner,
       name: name,
       nickname: nickname,
-      size: size,
       productionStatus: productionStatus,
       manufacturer: manufacturer,
-      type: type,
-      maxCrew: max_crew,
-      url: url,
-      description: description,
-      imageUrl: image_url,
-      cargoCapacity: cargocapacity,
-      focus: focus,
+      ownerUsername: ownerUsername,
+      obtentionMethod: obtentionMethod,
     };
 
     return this.http.put(`${this.url}/api/ships/${id}`, requestBody, {

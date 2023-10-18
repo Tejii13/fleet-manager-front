@@ -21,10 +21,16 @@ h2 {
   color: #b1fffb;
   text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 82px #3ec9e1, 0 0 102px #3ec9e1;
   margin-bottom: 0;
+  border-bottom: 1px solid #b1fffb;
+  padding-bottom: 2px;
 }
 
 @media screen and (max-width: 640px) {
   h2 {
     font-size: 1.4em;
+  }
+
+  button {
+    width: 260px;
   }
 }

@@ -27,12 +27,15 @@ export class ShipAddPopupComponent implements OnInit {
   public bannerUrl!: string;
   public obtentionMethod: string = 'null';
   public nickname!: string;
-  public loanerFor!: string;
+  public loanerFor: string = '';
+  public fieldsAreValid: boolean = true;
 
   ngOnInit(): void {
-    this.bannerUrl = this.shipToHandle.media[0].images.banner;
-    if (!this.bannerUrl.startsWith('https://media')) {
-      this.bannerUrl = 'https://robertsspaceindustries.com' + this.bannerUrl;
+    if (this.shipToHandle) {
+      this.bannerUrl = this.shipToHandle.media[0].images.banner;
+      if (!this.bannerUrl.startsWith('https://media')) {
+        this.bannerUrl = 'https://robertsspaceindustries.com' + this.bannerUrl;
+      }
     }
   }
 
@@ -43,6 +46,10 @@ export class ShipAddPopupComponent implements OnInit {
     } else {
       this.isLoaner = false;
     }
+  }
+
+  onLoanerSelectChange() {
+    console.log(this.loanerFor);
   }
 
   getPledgeShipList() {
@@ -60,10 +67,20 @@ export class ShipAddPopupComponent implements OnInit {
     this.cancelShipAdd.emit();
   }
 
-  handleShipAdd() {
-    // console.log(this.obtentionMethod);
-    console.log(this.loanerFor);
-    // Check if url is complete
+  handleAddButton() {
+    if (
+      this.obtentionMethod !== 'null' &&
+      ((this.obtentionMethod === 'loaner' && this.loanerFor) ||
+        this.obtentionMethod !== 'loaner')
+    ) {
+      this.fieldsAreValid = true;
+      this.handleNullValues();
+    } else {
+      this.fieldsAreValid = false;
+    }
+  }
+
+  handleNullValues() {
     let shipName;
     if (this.shipToHandle.name.includes('Best In Show Edition')) {
       shipName = this.shipToHandle.name.replace('Best In Show Edition', 'BIS');
@@ -72,7 +89,7 @@ export class ShipAddPopupComponent implements OnInit {
     }
 
     let maxCrew;
-    if (!maxCrew) {
+    if (!this.shipToHandle.max_crew) {
       maxCrew = 0;
     } else {
       maxCrew = this.shipToHandle.max_crew;
@@ -94,10 +111,21 @@ export class ShipAddPopupComponent implements OnInit {
     let shipUrl;
     shipUrl = 'https://robertsspaceindustries.com' + this.shipToHandle.url;
 
+    this.handleShipAdd(shipName, maxCrew, shipSize, shipScu, shipUrl);
+  }
+
+  handleShipAdd(
+    shipName: string,
+    maxCrew: number,
+    shipSize: string,
+    shipScu: number,
+    shipUrl: string
+  ) {
     this.handleShips
       .saveShip(
         this.userId,
         shipName,
+        this.nickname,
         shipSize,
         this.shipToHandle.production_status,
         this.shipToHandle.manufacturer.name,

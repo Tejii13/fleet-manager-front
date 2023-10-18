@@ -70,10 +70,31 @@
           <!-- Information container -->
           <p class="text-xs italic p-2">"{{ ship.description }}"</p>
           <div class="mx-4 mb-4">
-            <p>Role: {{ ship.type | titlecase }}</p>
-            <p>Size: {{ ship.size | titlecase }}</p>
-            <p>Max crew: {{ ship.max_crew }}</p>
-            <p>Max SCU: {{ ship.cargo_capacity }}</p>
+            <p>
+              Role:
+              <span class="text-teal-100">{{ ship.type | titlecase }}</span>
+            </p>
+            <p>
+              Size:
+              <span class="text-teal-100">{{ ship.size | titlecase }}</span>
+            </p>
+            <p>
+              Max crew: <span class="text-teal-100">{{ ship.max_crew }}</span>
+            </p>
+            <p>
+              Max SCU:
+              <span class="text-teal-100">{{ ship.cargo_capacity }}</span>
+            </p>
+            <p>
+              Mode d'acquisition:
+              <span class="text-teal-100">{{
+                ship.obtention_method | titlecase
+              }}</span>
+            </p>
+            <p *ngIf="ship.loaner_for">
+              Accordé par le vaisseau:
+              <span class="text-teal-100">{{ ship.loaner_for }}</span>
+            </p>
             <a
               class="hover:underline"
               href="{{ ship.url }}"

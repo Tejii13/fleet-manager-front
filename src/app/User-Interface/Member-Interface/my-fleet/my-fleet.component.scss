@@ -1,16 +1,21 @@
 h2 {
-  margin-top: 14px;
   font-size: 2em;
   color: #b1fffb;
   text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 82px #3ec9e1, 0 0 102px #3ec9e1;
   margin-bottom: 0;
 }
 
+div.withBorder {
+  border-bottom: 2px solid #b1fffb;
+  padding-bottom: 1px;
+}
+
 button {
-  border: solid #adc8d3 1px;
-  width: 105px;
+  font-size: 1em;
+  width: 90px;
   height: 30px;
   color: #adc8d3;
+  border: solid #adc8d3 1px;
   border-radius: 4px;
 }
 
@@ -21,5 +26,11 @@ button:hover {
 @media screen and (max-width: 640px) {
   h2 {
     font-size: 1.4em;
+  }
+
+  button {
+    font-size: 0.9em;
+    height: 25px;
+    width: 75px;
   }
 }

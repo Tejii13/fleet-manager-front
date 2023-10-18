@@ -15,6 +15,7 @@ export class SearchShipsComponent implements OnInit {
   @Input() userId!: number;
   @Input() username!: string;
   @Input() isAdmin!: boolean;
+  @Input() currentView!: string;
   @Input() ships!: ShipData[];
   @Input() fleet!: Ship[];
   @Input() fleetEmpty!: boolean;
@@ -38,7 +39,7 @@ export class SearchShipsComponent implements OnInit {
 
   private brandName!: string;
 
-  public shipToPass!: ShipData;
+  public shipToPass!: ShipData | null;
 
   public type: { type: string; ships: ShipData[] }[] = [];
 
@@ -99,21 +100,27 @@ export class SearchShipsComponent implements OnInit {
   }
 
   toggleShipAddPopup() {
-    this.showShipAddPopup = true;
-
-    const shipToAdd = this.shipForm.get('shipInput')?.value;
+    let shipToAdd = this.shipForm.get('shipInput')?.value;
     this.shipForm.reset();
-    for (let ship of this.ships) {
-      if (ship.name.toLowerCase() === shipToAdd.toLowerCase()) {
-        this.shipToPass = ship;
-        console.log(this.shipToPass);
+    if (shipToAdd) {
+      for (let ship of this.ships) {
+        if (ship.name.toLowerCase() === shipToAdd.toLowerCase()) {
+          this.shipToPass = ship;
+          if (this.shipToPass !== undefined) {
+            this.showShipAddPopup = true;
+          }
+        }
       }
+      console.log('Popup: ' + this.showShipAddPopup);
+      console.log('Ship: ' + this.shipToPass);
+      document.body.style.overflow = 'hidden';
+    } else {
+      this.cancelAdd();
     }
-
-    document.body.style.overflow = 'hidden';
   }
 
   cancelAdd() {
+    this.shipToPass = null;
     this.showShipAddPopup = false;
     document.body.style.overflow = 'auto';
   }

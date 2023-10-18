@@ -58,15 +58,6 @@ export class MyFleetComponent implements OnInit {
     }
   }
 
-  // Function to navigate to 'overview' view
-  navigateToOverview() {
-    const id = this.route.snapshot.paramMap.get('id'); // Get the 'id' parameter from the current URL
-    if (id) {
-      this.inApp.navigateToOverview(id);
-      this.reload();
-    }
-  }
-
   emit() {
     this.getFleetData.emit();
   }

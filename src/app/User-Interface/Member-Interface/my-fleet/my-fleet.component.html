@@ -1,47 +1,33 @@
 <div *ngIf="show">
-  <h2
-    *ngIf="currentView !== 'overview'"
-    class="flex justify-center sm:justify-start px-4"
-  >
-    Ma flotte
-  </h2>
-  <h2
-    *ngIf="currentView === 'overview'"
-    class="flex justify-center sm:justify-start px-4"
-  >
-    Flotte de l'organisation
-  </h2>
-  <hr class="my-2" />
+  <div class="withBorder flex flex-wrap mt-6 sm:mt-3.5 items-center">
+    <h2 *ngIf="currentView !== 'overview'" class="pl-4">Ma flotte</h2>
+    <h2 *ngIf="currentView === 'overview'" class="pl-4">
+      Flotte de l'organisation
+    </h2>
+    <div class="flex justify-around sm:justify-start pl-4">
+      <button
+        (click)="navigateToShips()"
+        *ngIf="currentView !== 'ships'"
+        title="Vaisseaux"
+        class="mr-2"
+      >
+        Vaisseaux
+      </button>
+      <button
+        (click)="navigateToSynthesis()"
+        *ngIf="currentView !== 'synthesis'"
+        title="Synthèse"
+      >
+        Synthèse
+      </button>
+    </div>
+  </div>
+
+  <!-- <hr class="my-2" /> -->
   <div
     *ngIf="!fleetEmpty"
     class="mt-4 mx-4 flex justify-center sm:justify-start"
-  >
-    <button
-      (click)="navigateToSynthesis()"
-      *ngIf="currentView !== 'synthesis'"
-      title="Synthèse"
-      class="mr-4"
-    >
-      Synthèse
-    </button>
-
-    <button
-      (click)="navigateToShips()"
-      *ngIf="currentView !== 'ships'"
-      title="Vaisseaux"
-      class="mr-4"
-    >
-      Vaisseaux
-    </button>
-
-    <button
-      (click)="navigateToOverview()"
-      *ngIf="isAdmin && currentView !== 'overview'"
-      title="Vue d'ensemble"
-    >
-      Organisation
-    </button>
-  </div>
+  ></div>
 </div>
 
 <app-display-ships

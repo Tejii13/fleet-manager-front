@@ -13,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./mon-espace.component.scss'],
 })
 export class MonEspaceComponent implements OnInit {
-  @Input() currentView: string = 'ships';
+  // @Input() currentView: string = 'ships';
 
   constructor(
     private scApi: StarCitizenApiService,
@@ -45,27 +45,25 @@ export class MonEspaceComponent implements OnInit {
   inputUsername!: string;
   inputRole!: Array<string>;
 
+  public currentView!: string;
+
   ngOnInit(): void {
     const urlUsername = this.route.snapshot.paramMap.get('id'); // Get the 'id' parameter from the current URL
     this.router.navigate(['/mon-espace', urlUsername], {
       queryParams: { view: 'ships' },
     });
+    this.currentView = 'ships';
 
     // Verifies if the id in the route is not null
     if (urlUsername !== null) {
-      console.log(urlUsername);
-
       // If not null, fetches user info if he is connected
       this.fetchData
         .checkConnection()
         .subscribe((response: CheckConnection) => {
-          console.log(response);
           if (response && response.id) {
             this.fetchData.getUserinfo(response.id).subscribe((data) => {
-              console.log(data);
               // Verifies if the 2 uuids are the same
               if (!data) {
-                console.log('Pas connecté');
                 this.disconnect();
               } else {
                 this.handleDataFetch(data);
@@ -102,7 +100,6 @@ export class MonEspaceComponent implements OnInit {
             const organizationArray = data.organizations[0].split('/');
             this.organizationId =
               organizationArray[organizationArray.length - 1];
-            console.log(this.organizationId);
             return true;
           }
         }
@@ -117,7 +114,6 @@ export class MonEspaceComponent implements OnInit {
       (response: Array<ShipData>) => {
         this.isFetchingShipsData = false;
         if (response && response.length !== 0) {
-          console.log('Received Ship Data:', response);
           this.ships = response.filter((ship) => ship !== null);
         } else {
           console.log('There is no ship to display here');
@@ -130,6 +126,20 @@ export class MonEspaceComponent implements OnInit {
   }
 
   getFleetData() {
+    this.route.queryParams.subscribe((params) => {
+      switch (params['view']) {
+        case 'ships':
+          this.currentView = 'ships';
+          break;
+        case 'members':
+          this.currentView = 'members';
+          break;
+        case 'overview':
+          this.currentView = 'overview';
+          break;
+      }
+    });
+
     this.isFetchingUsersFleet = true;
     if (this.userId) {
       this.fetchFleet.getShipInfo(this.userId).subscribe((response) => {
@@ -141,7 +151,6 @@ export class MonEspaceComponent implements OnInit {
         } else {
           this.fleetEmpty = true;
         }
-        console.log(this.fleet);
       });
     }
   }

@@ -1,42 +1,47 @@
 <!-- Change when adding getData()  -->
-<h2 class="px-4 flex justify-center sm:justify-start">
-  Recherche de vaisseaux
-</h2>
-<hr class="my-2" />
-<div *ngIf="ships" class="sm:px-4">
-  <form [formGroup]="shipForm">
-    <div class="sm:flex text-center sm:text-left">
-      <mat-form-field [style.width.px]="260">
-        <mat-label>Nouveau vaisseau à ajouter</mat-label>
-        <input
-          type="text"
-          matInput
-          formControlName="shipInput"
-          placeholder="Ex: Aurora MR"
-          [matAutocomplete]="autoGroup"
-          (submit)="toggleShipAddPopup()"
-          (input)="onInput()"
-          #autocompleteOrigin
-        />
-        <mat-autocomplete #autoGroup="matAutocomplete">
-          <mat-optgroup
-            *ngFor="let brand of filteredBrands"
-            [label]="brand.key"
-          >
-            <mat-option *ngFor="let name of brand.value" [value]="name">
-              {{ name }}
-            </mat-option>
-          </mat-optgroup>
-        </mat-autocomplete>
-      </mat-form-field>
-      <button class="sm:ml-2 mt-2" type="button" (click)="toggleShipAddPopup()">
-        Ajouter
-      </button>
-    </div>
-  </form>
+<div *ngIf="currentView === 'ships' || currentView === 'synthesis'">
+  <h2 class="px-4">Recherche de vaisseaux</h2>
+  <!-- <hr class="my-2" /> -->
+  <div *ngIf="ships" class="px:0 sm:px-4">
+    <form [formGroup]="shipForm">
+      <div class="flex text-center flex-wrap">
+        <mat-form-field [style.width.px]="260" class="sm:mr-2">
+          <mat-label>Nouveau vaisseau à ajouter</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="shipInput"
+            placeholder="Ex: Aurora MR"
+            [matAutocomplete]="autoGroup"
+            (submit)="toggleShipAddPopup()"
+            (input)="onInput()"
+            #autocompleteOrigin
+          />
+          <mat-autocomplete #autoGroup="matAutocomplete">
+            <mat-optgroup
+              *ngFor="let brand of filteredBrands"
+              [label]="brand.key"
+            >
+              <mat-option *ngFor="let name of brand.value" [value]="name">
+                {{ name }}
+              </mat-option>
+            </mat-optgroup>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button
+          class="sm:ml-2 mt-2"
+          type="button"
+          (click)="toggleShipAddPopup()"
+        >
+          Ajouter
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <app-my-fleet
+  *ngIf="!showShipAddPopup"
   [userId]="userId"
   [isAdmin]="isAdmin"
   [reloadShipsDisplay]="reloadShipsDisplay"
@@ -48,7 +53,7 @@
 
 <app-ship-add-popup
   class="z-30 relative"
-  *ngIf="showShipAddPopup && shipToPass && fleet"
+  *ngIf="showShipAddPopup && shipToPass"
   [shipToHandle]="shipToPass"
   [fleet]="fleet"
   [username]="username"
