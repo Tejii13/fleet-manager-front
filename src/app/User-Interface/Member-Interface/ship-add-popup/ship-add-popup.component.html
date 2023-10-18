@@ -69,7 +69,7 @@
         <option *ngFor="let ship of canBeLoanerFor">{{ ship.name }}</option>
       </select>
     </p>
-    <p class="text-xs italic text-teal-100">
+    <p *ngIf="isLoaner" class="text-xs italic text-teal-100">
       Tu dois ajouter à ton hangar le vaisseau qui t'accorde ce loaner avant.
     </p>
     <p *ngIf="!fieldsAreValid" class="italic text-red-300 mt-6 md:mt-12">

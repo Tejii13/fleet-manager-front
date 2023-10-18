@@ -68,50 +68,56 @@
           </mat-expansion-panel-header>
 
           <!-- Information container -->
-          <p class="text-xs italic p-2">"{{ ship.description }}"</p>
-          <div class="mx-4 mb-4">
-            <p>
-              Role:
-              <span class="text-teal-100">{{ ship.type | titlecase }}</span>
-            </p>
-            <p>
-              Size:
-              <span class="text-teal-100">{{ ship.size | titlecase }}</span>
-            </p>
-            <p>
-              Max crew: <span class="text-teal-100">{{ ship.max_crew }}</span>
-            </p>
-            <p>
-              Max SCU:
-              <span class="text-teal-100">{{ ship.cargo_capacity }}</span>
-            </p>
-            <p class="noMargin">
-              Mode d'acquisition:
-              <span class="text-teal-100">{{
-                ship.obtention_method | titlecase
-              }}</span>
-            </p>
-            <p class="noMargin" *ngIf="ship.loaner_for">
-              Accordé par le vaisseau:
-              <span class="text-teal-100">{{ ship.loaner_for }}</span>
-            </p>
-            <div class="mt-3">
-              <a
-                class="hover:underline"
-                href="{{ ship.url }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Voir dans le magasin</a
-              >
-              <br />
-              <a
-                class="hover:underline"
-                href="https://starcitizen.tools/{{ ship.name }}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Visiter le wiki
-              </a>
+          <p lang="en" class="text-xs italic p-2">"{{ ship.description }}"</p>
+          <div class="flex flex-wrap w-full mx-4 mb-4">
+            <!-- General informations -->
+            <div class="w-full sm:w-2/5">
+              <p>
+                Role:
+                <span class="text-teal-100">{{ ship.type | titlecase }}</span>
+              </p>
+              <p>
+                Size:
+                <span class="text-teal-100">{{ ship.size | titlecase }}</span>
+              </p>
+              <p>
+                Max crew: <span class="text-teal-100">{{ ship.max_crew }}</span>
+              </p>
+              <p>
+                Max SCU:
+                <span class="text-teal-100">{{ ship.cargo_capacity }}</span>
+              </p>
+            </div>
+            <!-- Buy/loaners and links information -->
+            <div class="w-full sm:w-3/5">
+              <p class="noMargin">
+                Mode d'acquisition:
+                <span class="text-teal-100">{{
+                  ship.obtention_method | titlecase
+                }}</span>
+              </p>
+              <p class="noMargin" *ngIf="ship.loaner_for">
+                Accordé par le vaisseau:
+                <span class="text-teal-100">{{ ship.loaner_for }}</span>
+              </p>
+              <div class="mt-3">
+                <a
+                  class="hover:underline"
+                  href="{{ ship.url }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Voir dans le magasin</a
+                >
+                <br />
+                <a
+                  class="hover:underline"
+                  href="https://starcitizen.tools/{{ ship.name }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visiter le wiki
+                </a>
+              </div>
             </div>
           </div>
 
