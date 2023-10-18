@@ -83,7 +83,9 @@ input {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-
+.noMargin {
+  margin-bottom: 0;
+}
 
 mat-expansion-panel-header {
   min-height: 200px;

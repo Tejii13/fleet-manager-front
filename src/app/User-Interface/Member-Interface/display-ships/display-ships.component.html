@@ -85,32 +85,34 @@
               Max SCU:
               <span class="text-teal-100">{{ ship.cargo_capacity }}</span>
             </p>
-            <p>
+            <p class="noMargin">
               Mode d'acquisition:
               <span class="text-teal-100">{{
                 ship.obtention_method | titlecase
               }}</span>
             </p>
-            <p *ngIf="ship.loaner_for">
+            <p class="noMargin" *ngIf="ship.loaner_for">
               Accordé par le vaisseau:
               <span class="text-teal-100">{{ ship.loaner_for }}</span>
             </p>
-            <a
-              class="hover:underline"
-              href="{{ ship.url }}"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Voir dans le magasin</a
-            >
-            <br />
-            <a
-              class="hover:underline"
-              href="https://starcitizen.tools/{{ ship.name }}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visiter le wiki
-            </a>
+            <div class="mt-3">
+              <a
+                class="hover:underline"
+                href="{{ ship.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Voir dans le magasin</a
+              >
+              <br />
+              <a
+                class="hover:underline"
+                href="https://starcitizen.tools/{{ ship.name }}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visiter le wiki
+              </a>
+            </div>
           </div>
 
           <!-- Actions container -->
