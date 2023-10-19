@@ -32,11 +32,11 @@
           [(ngModel)]="obtentionMethod"
           (change)="getObtention()"
         >
-          <option value="null">- - -</option>
+          <option value="default">- - -</option>
           <option value="pledge">Pledge</option>
           <option
             *ngIf="shipToHandle.production_status === 'flight-ready'"
-            value="achat_ig"
+            value="igBuy"
           >
             Achat Ig
           </option>
@@ -50,11 +50,11 @@
             *ngIf="shipToHandle.production_status === 'flight-ready'"
             value="subscription"
           >
-            Subscription
+            Abonnement
           </option>
           <option
             *ngIf="shipToHandle.production_status === 'flight-ready'"
-            value="location"
+            value="rental"
           >
             Location
           </option>

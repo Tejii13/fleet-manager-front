@@ -28,7 +28,7 @@ export class ShipAddPopupComponent implements OnInit {
   public canBeLoanerFor: Ship[] = [];
 
   public bannerUrl!: string;
-  public obtentionMethod: string = 'null';
+  public obtentionMethod: string = 'default';
   public nickname!: string;
   public loanerFor: string = '';
 

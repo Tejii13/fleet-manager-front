@@ -20,7 +20,6 @@ export class DisplayShipsComponent implements OnInit {
 
   public isLoading: boolean = false;
 
-  public panelOpenState = false;
   public firstRender: boolean = true;
 
   public shipNameChanges: { [shipId: number]: string } = {};
@@ -32,6 +31,13 @@ export class DisplayShipsComponent implements OnInit {
   public show: boolean = true;
   public showConfirmRemove: boolean = false;
   private scrollLocked: boolean = false;
+
+  public sortedShips: Ship[] = [];
+  public sortedShipsByObtMethod: Ship[] = [];
+  public sortedShipsByName: Ship[] = [];
+
+  public shipToSortName: string = '';
+  public sortBySelectValue: string = 'default';
 
   ngOnInit(): void {
     if (this.firstRender) {
@@ -45,6 +51,11 @@ export class DisplayShipsComponent implements OnInit {
         this.getFleetData.emit();
       }
     });
+
+    this.sortShipsByObtentionMethod(
+      this.sortBySelectValue,
+      this.shipToSortName
+    );
   }
 
   toggleShipRemovePopup(shipId: number, shipName: string) {
@@ -108,6 +119,103 @@ export class DisplayShipsComponent implements OnInit {
         };
 
         this.fetchFleet.updateName(shipId, requestBody).subscribe();
+      }
+    }
+  }
+
+  sortShipsByObtentionMethod(obtMethod: string, shipName: string) {
+    this.sortedShipsByObtMethod = [];
+
+    switch (obtMethod) {
+      case 'default':
+        console.log('default');
+        this.sortedShipsByObtMethod = this.ships;
+        break;
+      case 'pledge':
+        console.log('pledge');
+        for (let shipToSort of this.ships) {
+          if (shipToSort.obtention_method === 'pledge') {
+            this.sortedShipsByObtMethod.push(shipToSort);
+          }
+        }
+        break;
+      case 'igBuy':
+        console.log('igBuy');
+        for (let shipToSort of this.ships) {
+          if (shipToSort.obtention_method === 'igBuy') {
+            this.sortedShipsByObtMethod.push(shipToSort);
+          }
+        }
+        break;
+      case 'loaners':
+        console.log('loaners');
+        for (let shipToSort of this.ships) {
+          if (shipToSort.obtention_method === 'loaner') {
+            this.sortedShipsByObtMethod.push(shipToSort);
+          }
+        }
+        break;
+      case 'rentals':
+        console.log('rentals');
+        for (let shipToSort of this.ships) {
+          if (shipToSort.obtention_method === 'rental') {
+            this.sortedShipsByObtMethod.push(shipToSort);
+          }
+        }
+        break;
+      case 'subscription':
+        console.log('subscription');
+        for (let shipToSort of this.ships) {
+          if (shipToSort.obtention_method === 'subscription') {
+            this.sortedShipsByObtMethod.push(shipToSort);
+          }
+        }
+        break;
+      case 'referral':
+        console.log('referral');
+        for (let shipToSort of this.ships) {
+          if (shipToSort.obtention_method === 'referral') {
+            this.sortedShipsByObtMethod.push(shipToSort);
+          }
+        }
+        break;
+    }
+
+    this.sortShipsByName(shipName);
+    this.fuseSortedShipTables();
+  }
+
+  sortShipsByName(shipName: string) {
+    this.sortedShipsByName = [];
+
+    for (let shipToSort of this.ships) {
+      if (
+        shipToSort.name.toLowerCase().includes(shipName.toLowerCase()) ||
+        shipToSort.nickname
+          ?.toLocaleLowerCase()
+          .includes(shipName.toLowerCase())
+      ) {
+        this.sortedShipsByName.push(shipToSort);
+      }
+    }
+  }
+
+  fuseSortedShipTables() {
+    this.sortedShips = [];
+
+    if (this.shipToSortName !== '') {
+      for (let ship of this.sortedShipsByName) {
+        if (this.sortedShipsByObtMethod.includes(ship)) {
+          this.sortedShips.push(ship);
+        }
+      }
+    }
+    for (let ship of this.sortedShipsByObtMethod) {
+      if (
+        (this.sortedShipsByName.includes(ship) || this.shipToSortName === '') &&
+        !this.sortedShips.includes(ship)
+      ) {
+        this.sortedShips.push(ship);
       }
     }
   }

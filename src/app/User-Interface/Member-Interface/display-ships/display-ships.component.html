@@ -6,13 +6,43 @@
     </p>
   </div>
 
+  <div class="flex px-4">
+    <div class="input-container mr-2">
+      <input
+        [(ngModel)]="shipToSortName"
+        class="search px-2"
+        type="text"
+        placeholder="Rechercher un vaisseau"
+      />
+      <button
+        class="search"
+        (click)="sortShipsByObtentionMethod(sortBySelectValue, shipToSortName)"
+      >
+        <mat-icon class="search">search</mat-icon>
+      </button>
+    </div>
+    <select
+      [(ngModel)]="sortBySelectValue"
+      class="search mt-0.5 px-2"
+      title="Trier"
+      name="sortBy"
+      id="sortbBySelect"
+      (change)="sortShipsByObtentionMethod(sortBySelectValue, shipToSortName)"
+    >
+      <option value="default">Tout afficher</option>
+      <option value="pledge">Pledge</option>
+      <option value="igBuy">Achat in game</option>
+      <option value="loaners">Loaners</option>
+      <option value="rentals">Location</option>
+      <option value="subscription">Abonnement</option>
+      <option value="referral">Referral</option>
+    </select>
+  </div>
+
   <mat-accordion>
     <ul class="flex flex-wrap lg:flex-no-wrap scroll-smooth focus:scroll-auto">
-      <li *ngFor="let ship of ships" class="w-full lg:w-1/2 p-4">
-        <mat-expansion-panel
-          (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
-        >
+      <li *ngFor="let ship of sortedShips" class="w-full lg:w-1/2 p-4">
+        <mat-expansion-panel>
           <mat-expansion-panel-header class="relative">
             <!-- Background image -->
             <div
@@ -48,18 +78,22 @@
                   </div>
                   <div class="images w-1/12 justify-end">
                     <img
-                      class="justify-end"
+                      class="justify-end z-50"
                       *ngIf="ship.production_status === 'flight-ready'"
                       src="../../../../assets/images/flyready.png"
                       alt="Flight Ready"
                       width="30"
+                      matTooltip="Ce vaisseau est disponible en jeu!"
+                      matTooltipPosition="left"
                     />
                     <img
-                      class="justify-end"
+                      class="justify-end z-50"
                       *ngIf="ship.production_status !== 'flight-ready'"
                       src="../../../../assets/images/flyreadynot.png"
                       alt="Not Flight Ready"
                       width="30"
+                      matTooltip="Ce vaisseau n'est pas disponible en jeu pour le moment."
+                      matTooltipPosition="left"
                     />
                   </div>
                 </div>

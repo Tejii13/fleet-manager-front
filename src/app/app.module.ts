@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FetchDataService } from './fetch-data.service';
 import { StarCitizenApiService } from './star-citizen-api.service';
@@ -83,6 +84,7 @@ import { ShipAddPopupComponent } from './User-Interface/Member-Interface/ship-ad
     MatExpansionModule,
     MatCardModule,
     MatDividerModule,
+    MatTooltipModule,
   ],
   providers: [
     CookieService,
