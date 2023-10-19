@@ -34,10 +34,30 @@
         >
           <option value="null">- - -</option>
           <option value="pledge">Pledge</option>
-          <option value="achat_ig">Achat Ig</option>
-          <option value="loaner">Loaner</option>
-          <option value="subscription">Subscription</option>
-          <option value="location">Location</option>
+          <option
+            *ngIf="shipToHandle.production_status === 'flight-ready'"
+            value="achat_ig"
+          >
+            Achat Ig
+          </option>
+          <option
+            *ngIf="shipToHandle.production_status === 'flight-ready'"
+            value="loaner"
+          >
+            Loaner
+          </option>
+          <option
+            *ngIf="shipToHandle.production_status === 'flight-ready'"
+            value="subscription"
+          >
+            Subscription
+          </option>
+          <option
+            *ngIf="shipToHandle.production_status === 'flight-ready'"
+            value="location"
+          >
+            Location
+          </option>
           <option value="referral">Referral</option>
         </select>
       </p>

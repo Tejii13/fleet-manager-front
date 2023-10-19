@@ -25,10 +25,13 @@ export class DisplayShipsComponent implements OnInit {
 
   public shipNameChanges: { [shipId: number]: string } = {};
 
-  public shipToRemove!: number | null;
+  public shipToRemove!: number;
+  public shipToRemoveName!: string;
   public shipToChange!: number | null;
 
   public show: boolean = true;
+  public showConfirmRemove: boolean = false;
+  private scrollLocked: boolean = false;
 
   ngOnInit(): void {
     if (this.firstRender) {
@@ -44,13 +47,22 @@ export class DisplayShipsComponent implements OnInit {
     });
   }
 
-  handleShipRemove(shipId: number) {
+  toggleShipRemovePopup(shipId: number, shipName: string) {
+    this.handleScrollLock();
     this.shipToRemove = shipId;
-    console.log(shipId);
-    if (shipId) {
-      this.fetchFleet.deleteShip(shipId).subscribe(() => {
+    this.shipToRemoveName = shipName;
+    this.showConfirmRemove = true;
+  }
+
+  handleShipRemove(removingConfirmed: boolean) {
+    this.handleScrollLock();
+    this.showConfirmRemove = false;
+    if (removingConfirmed) {
+      this.fetchFleet.deleteShip(this.shipToRemove).subscribe(() => {
         this.getFleetData.emit();
       });
+    } else {
+      this.shipToRemove = -1;
     }
   }
 
@@ -95,5 +107,15 @@ export class DisplayShipsComponent implements OnInit {
     console.log('reload');
     this.show = false;
     setTimeout(() => (this.show = true));
+  }
+
+  handleScrollLock() {
+    this.scrollLocked = !this.scrollLocked;
+
+    if (this.scrollLocked) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   }
 }

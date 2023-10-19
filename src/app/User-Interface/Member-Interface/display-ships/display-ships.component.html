@@ -166,7 +166,7 @@
             <button
               title="Supprimer"
               class="normal"
-              (click)="handleShipRemove(ship.id)"
+              (click)="toggleShipRemovePopup(ship.id, ship.name)"
             >
               Supprimer
             </button>
@@ -180,3 +180,9 @@
     </ul>
   </mat-accordion>
 </div>
+
+<app-confirm-delete
+  *ngIf="showConfirmRemove"
+  [shipName]="shipToRemoveName"
+  (removingValidated)="handleShipRemove($event)"
+></app-confirm-delete>

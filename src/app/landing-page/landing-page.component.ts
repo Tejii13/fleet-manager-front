@@ -26,19 +26,10 @@ export class LandingPageComponent implements OnInit {
   public isConnected: boolean = false;
   public member!: Member;
 
+  public isConnecting: boolean = false;
+  public fieldsAreValid: boolean = true;
+
   ngOnInit(): void {
-    // this.fetch.checkConnection().subscribe((response: CheckConnection) => {
-    //   console.log(response);
-    //   if (response) {
-    //     this.isConnected = true;
-    //     if (response.id) {
-    //       this.fetch.getUserinfo(response.id).subscribe((response: Member) => {
-    //         this.member = response;
-    //         console.log(this.member);
-    //       });
-    //     }
-    //   }
-    // });
     this.username = this.cookieService.get('username');
     const authCookie = this.cookieService.get('auth');
 
@@ -48,17 +39,16 @@ export class LandingPageComponent implements OnInit {
       this.username !== '' &&
       authCookie !== ''
     ) {
-      // Code here
-      console.log('Ok');
       this.isConnected = true;
     } else {
-      console.log('Not Ok');
       this.disconnect();
     }
   }
 
   onSubmit() {
     if (this.username && this.password) {
+      this.fieldsAreValid = true;
+      this.isConnecting = true;
       console.log(this.username);
       console.log(this.password);
       this.fetch
@@ -77,10 +67,16 @@ export class LandingPageComponent implements OnInit {
               '/'
             );
             this.router.navigate([`/mon-espace/${data.username}`]);
+          } else {
+            this.fieldsAreValid = false;
+            setTimeout(
+              () => (this.isConnecting = false),
+              Math.floor(Math.random() * (6000 - 2000 + 1)) + 2000
+            );
           }
         });
     } else {
-      console.log('Veuillez remplir tous les champs');
+      this.fieldsAreValid = false;
     }
   }
 

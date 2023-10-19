@@ -62,7 +62,9 @@
               Non
             </td>
             <mat-icon class="mr-5 py-1" *ngIf="!fromAdmin">
-              <button (click)="deleteShip(ship.id)">delete-forever</button>
+              <button (click)="toggleShipRemovePopup(ship.id, ship.name)">
+                delete-forever
+              </button>
             </mat-icon>
             <span *ngIf="fromAdmin" class="mr-10"></span>
           </tr>
@@ -72,3 +74,10 @@
     </mat-accordion>
   </table>
 </div>
+
+<app-confirm-delete
+  class="relative z-30"
+  *ngIf="showConfirmRemove"
+  [shipName]="shipToRemoveName"
+  (removingValidated)="handleShipRemove($event)"
+></app-confirm-delete>

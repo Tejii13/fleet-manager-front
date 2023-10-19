@@ -24,8 +24,13 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
 
   constructor(private fetchFleet: FetchFleetService) {}
 
-  public shipToRemove!: number | null;
   public show: boolean = true;
+
+  public shipToRemove!: number;
+  public shipToRemoveName!: string;
+  public showConfirmRemove: boolean = false;
+
+  private scrollLocked: boolean = false;
 
   public types: {
     type: string;
@@ -82,18 +87,37 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
     this.getFleetData.emit();
   }
 
-  deleteShip(shipId: number) {
+  toggleShipRemovePopup(shipId: number, shipName: string) {
+    this.handleScrollLock();
     this.shipToRemove = shipId;
-    console.log(shipId);
-    if (shipId) {
-      this.fetchFleet.deleteShip(shipId).subscribe(() => {
+    this.shipToRemoveName = shipName;
+    this.showConfirmRemove = true;
+  }
+
+  handleShipRemove(removingConfirmed: boolean) {
+    this.handleScrollLock();
+    this.showConfirmRemove = false;
+    if (removingConfirmed) {
+      this.fetchFleet.deleteShip(this.shipToRemove).subscribe(() => {
         this.getFleetData.emit();
       });
+    } else {
+      this.shipToRemove = -1;
     }
   }
 
   reload() {
     this.show = false;
     setTimeout(() => (this.show = true));
+  }
+
+  handleScrollLock() {
+    this.scrollLocked = !this.scrollLocked;
+
+    if (this.scrollLocked) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   }
 }

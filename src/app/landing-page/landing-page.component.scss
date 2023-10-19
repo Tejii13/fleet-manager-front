@@ -45,6 +45,26 @@ input {
   background-color: none;
 }
 
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid transparent;
+  border-top: 5px solid #adc8d3;
+  border-bottom: 5px solid #adc8d3;
+  animation: spin 1s linear infinite, pulse 1s linear infinite
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
 @media screen and (max-width: 620px) {
   section {
     width: 80%;
