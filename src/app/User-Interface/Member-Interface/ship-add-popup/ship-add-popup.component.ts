@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs';
 import { FetchFleetService } from 'src/app/fetch-fleet.service';
 import { Ship } from 'src/app/interfaces';
 import { ShipData } from './../../../interfaces';
@@ -21,6 +22,8 @@ export class ShipAddPopupComponent implements OnInit {
   constructor(private handleShips: FetchFleetService) {}
 
   public isLoaner: boolean = false;
+  public fieldsAreValid: boolean = true;
+  public isFetching: boolean = false;
 
   public canBeLoanerFor: Ship[] = [];
 
@@ -28,7 +31,8 @@ export class ShipAddPopupComponent implements OnInit {
   public obtentionMethod: string = 'null';
   public nickname!: string;
   public loanerFor: string = '';
-  public fieldsAreValid: boolean = true;
+
+  public serverErrorOcurred: boolean = false;
 
   ngOnInit(): void {
     if (this.shipToHandle) {
@@ -121,31 +125,53 @@ export class ShipAddPopupComponent implements OnInit {
     shipScu: number,
     shipUrl: string
   ) {
-    this.handleShips
-      .saveShip(
-        this.userId,
-        shipName,
-        this.nickname,
-        shipSize,
-        this.shipToHandle.production_status,
-        this.shipToHandle.manufacturer.name,
-        this.shipToHandle.focus,
-        maxCrew,
-        shipUrl,
-        this.shipToHandle.description,
-        this.bannerUrl,
-        shipScu,
-        this.shipToHandle.type,
-        this.username,
-        this.obtentionMethod,
-        this.loanerFor
-      )
-      .subscribe((response) => {
-        if (response) {
-          console.log(response);
-          this.reloadShipsDisplay.emit(true);
-          this.cancelShipAdd.emit();
+    this.isFetching = true;
+    let newNickname = this.nickname;
+    if (this.nickname) {
+      newNickname = this.nickname.toUpperCase();
+    }
+
+    const requestBody = {
+      owner: `api/users/${this.userId}`,
+      name: shipName,
+      nickname: newNickname,
+      size: shipSize,
+      productionStatus: this.shipToHandle.production_status,
+      manufacturer: this.shipToHandle.manufacturer.name,
+      focus: this.shipToHandle.focus,
+      maxCrew: maxCrew,
+      url: shipUrl,
+      description: this.shipToHandle.description,
+      imageUrl: this.bannerUrl,
+      cargoCapacity: shipScu,
+      type: this.shipToHandle.type,
+      ownerUsername: this.username,
+      obtentionMethod: this.obtentionMethod,
+      loanerFor: this.loanerFor,
+    };
+
+    try {
+      this.handleShips.saveShip(requestBody).subscribe(
+        (response) => {
+          if (response) {
+            console.log(response);
+            this.isFetching = false;
+            this.reloadShipsDisplay.emit(true);
+            this.cancelShipAdd.emit();
+          } else {
+            this.serverErrorOcurred = true;
+            this.isFetching = false;
+          }
+        },
+        (error) => {
+          console.error('Erreur: ' + error);
+          this.serverErrorOcurred = true;
+          this.isFetching = false;
         }
-      });
+      );
+    } catch {
+      this.serverErrorOcurred = true;
+      this.isFetching = false;
+    }
   }
 }

@@ -34,10 +34,10 @@ div.shipImage {
 }
 
 button {
-  border: solid #adc8d3 1px;
   width: 80px;
   height: 30px;
   color: #adc8d3;
+  border: solid #adc8d3 1px;
   border-radius: 4px;
 }
 
@@ -54,14 +54,33 @@ input, select {
   padding-left: 8px;
 }
 
-// select {
-//   width: 250px;
-//   height: 25px;
-//   background-color: rgba(1, 80,126,0.5);
-//   border: solid #adc8d3 1px;
-//   border-radius: 2px;
-//   padding-left: 8px;
-// }
+.spinner-container {
+  width: 80px;
+  height: 30px;
+  color: #adc8d3;
+  border: solid #adc8d3 1px;
+  border-radius: 4px;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top: 2px solid #adc8d3;
+  border-bottom: 2px solid #adc8d3;
+  animation: spin 1s linear infinite, pulse 1s linear infinite
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 
 @media screen and (max-width: 640px) {
   input, select {

@@ -66,7 +66,6 @@ export class FetchDataService {
     console.log(requestBody);
 
     return this.http.post(url, requestBody, { headers: headers });
-    // return of(true);
   }
 
   getUserinfo(id: number): Observable<any> {

@@ -68,11 +68,10 @@ export class LandingPageComponent implements OnInit {
             );
             this.router.navigate([`/mon-espace/${data.username}`]);
           } else {
-            this.fieldsAreValid = false;
-            setTimeout(
-              () => (this.isConnecting = false),
-              Math.floor(Math.random() * (6000 - 2000 + 1)) + 2000
-            );
+            setTimeout(() => {
+              this.isConnecting = false;
+              this.fieldsAreValid = false;
+            }, Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000);
           }
         });
     } else {

@@ -13,51 +13,11 @@ export class FetchFleetService {
 
   private url = APP_API_URL;
 
-  saveShip(
-    id: number,
-    shipName: string,
-    nickname: string,
-    size: string,
-    production_status: string,
-    manufacturer: string,
-    focus: string,
-    max_crew: number,
-    url: string,
-    description: string,
-    image_url: string,
-    cargocapacity: number,
-    type: string,
-    owner_username: string,
-    obtention_method: string,
-    loaner_for: string
-  ) {
+  saveShip(requestBody: object) {
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
       'Content-type': 'application/ld+json',
     });
-
-    console.log(obtention_method);
-
-    const requestBody = {
-      owner: `api/users/${id}`,
-      name: shipName,
-      nickname: nickname,
-      size: size,
-      productionStatus: production_status,
-      manufacturer: manufacturer,
-      focus: focus,
-      maxCrew: max_crew,
-      url: url,
-      description: description,
-      imageUrl: image_url,
-      cargoCapacity: cargocapacity,
-      type: type,
-      ownerUsername: owner_username,
-      obtentionMethod: obtention_method,
-      loanerFor: loaner_for,
-    };
-
-    console.log(requestBody);
 
     return this.http.post<Ship>(`${this.url}/api/ships`, requestBody, {
       headers: headers,
@@ -74,31 +34,7 @@ export class FetchFleetService {
     });
   }
 
-  updateName(
-    id: number,
-    owner: string,
-    name: string,
-    nickname: string,
-    size: string,
-    productionStatus: string,
-    manufacturer: string,
-    ownerUsername: string,
-    obtentionMethod: string
-  ) {
-    if (!size) {
-      size = 'Non définie';
-    }
-
-    const requestBody = {
-      owner: owner,
-      name: name,
-      nickname: nickname,
-      productionStatus: productionStatus,
-      manufacturer: manufacturer,
-      ownerUsername: ownerUsername,
-      obtentionMethod: obtentionMethod,
-    };
-
+  updateName(id: number, requestBody: object) {
     return this.http.put(`${this.url}/api/ships/${id}`, requestBody, {
       headers: { accept: 'application/json' },
     });

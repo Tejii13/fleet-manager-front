@@ -86,19 +86,28 @@ export class DisplayShipsComponent implements OnInit {
       if (shipIndex !== -1 && ship) {
         console.log(ship);
         this.ships[shipIndex].nickname = modifiedName;
-        this.fetchFleet
-          .updateName(
-            shipId,
-            ship.owner,
-            ship.name,
-            modifiedName,
-            ship.size,
-            ship.production_status,
-            ship.manufacturer,
-            ship.owner_username,
-            ship.obtention_method
-          )
-          .subscribe();
+
+        const requestBody = {
+          owner: ship.owner,
+          name: ship.name,
+          nickname: modifiedName,
+          size: ship.size,
+          productionStatus: ship.production_status,
+          manufacturer: ship.manufacturer,
+          type: ship.type,
+          loadout: ship.loadout,
+          focus: ship.focus,
+          maxCrew: ship.max_crew,
+          url: ship.url,
+          description: ship.description,
+          imageUrl: ship.imageUrl,
+          cargoCapacity: ship.cargo_capacity,
+          ownerUsername: ship.owner_username,
+          obtentionMethod: ship.obtention_method,
+          loanerFor: ship.loaner_for,
+        };
+
+        this.fetchFleet.updateName(shipId, requestBody).subscribe();
       }
     }
   }

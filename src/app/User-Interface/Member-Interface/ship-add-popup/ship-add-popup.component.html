@@ -86,17 +86,35 @@
         (change)="onLoanerSelectChange()"
       >
         <option value="broken_ship">Vaisseau non disponible</option>
-        <option *ngFor="let ship of canBeLoanerFor">{{ ship.name }}</option>
+        <option *ngFor="let ship of canBeLoanerFor">
+          {{ ship.name }}
+          {{ (ship.nickname ? " - " + ship.nickname : null) | titlecase }}
+        </option>
       </select>
     </p>
     <p *ngIf="isLoaner" class="text-xs italic text-teal-100">
       Tu dois ajouter à ton hangar le vaisseau qui t'accorde ce loaner avant.
     </p>
-    <p *ngIf="!fieldsAreValid" class="italic text-red-300 mt-6 md:mt-12">
+    <p
+      *ngIf="!fieldsAreValid && !serverErrorOcurred"
+      class="italic text-red-300 mt-6 md:mt-12"
+    >
       Veuillez remplir tous les champs obligatoires
     </p>
-    <div class="mt-2 md:mt-4">
+    <p *ngIf="serverErrorOcurred" class="italic text-red-300 mt-6 md:mt-12">
+      Une erreur côté serveur est survenue, veillez réessayez plus tard ou
+      contactez l'assistance si le problème persiste.
+    </p>
+
+    <div class="flex mt-2 md:mt-4">
+      <div
+        *ngIf="isFetching"
+        class="spinner-container flex justify-center items-center mr-2"
+      >
+        <div class="loading-spinner"></div>
+      </div>
       <button
+        *ngIf="!isFetching"
         class="text-sm sm:text-lg text-green-300 mr-2"
         (click)="handleAddButton()"
       >
