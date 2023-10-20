@@ -78,7 +78,7 @@
                   </div>
                   <div class="images w-1/12 justify-end">
                     <img
-                      class="justify-end z-50"
+                      class="justify-end z-20"
                       *ngIf="ship.production_status === 'flight-ready'"
                       src="../../../../assets/images/flyready.png"
                       alt="Flight Ready"
@@ -87,7 +87,7 @@
                       matTooltipPosition="left"
                     />
                     <img
-                      class="justify-end z-50"
+                      class="justify-end z-20"
                       *ngIf="ship.production_status !== 'flight-ready'"
                       src="../../../../assets/images/flyreadynot.png"
                       alt="Not Flight Ready"
@@ -216,6 +216,7 @@
 </div>
 
 <app-confirm-delete
+  class="relative z-30"
   *ngIf="showConfirmRemove"
   [shipName]="shipToRemoveName"
   (removingValidated)="handleShipRemove($event)"

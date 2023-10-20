@@ -42,6 +42,13 @@
   </button>
 </div>
 
+<div
+  *ngIf="(!ships || !fleet) && currentView === 'overview'"
+  class="w-full flex items-center justify-center mt-4 md:mt-8"
+>
+  <div class="loading-spinner"></div>
+</div>
+
 <div *ngIf="currentView === 'members'">
   <app-display-members
     [showUpdateMembers]="showUpdateMembers"

@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { InAppService } from 'src/app/in-app.service';
+import { Ship, ShipData } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-admin-panel',
@@ -9,6 +10,8 @@ import { InAppService } from 'src/app/in-app.service';
 })
 export class AdminPanelComponent implements OnInit {
   @Input() userId!: number;
+  @Input() ships!: ShipData[];
+  @Input() fleet!: Ship[];
   @Input() organizationId!: number;
   @Output() showShipsChange: EventEmitter<boolean> =
     new EventEmitter<boolean>();
