@@ -3,7 +3,7 @@
 <div *ngIf="show" class="my-2 px-4 flex flex-wrap">
   <button
     *ngIf="currentView !== 'ships'"
-    class="mr-2 my-2"
+    class="mr-2 mt-2"
     (click)="navigateToShips()"
   >
     Vaisseaux
@@ -11,7 +11,7 @@
 
   <button
     *ngIf="currentView !== 'members'"
-    class="mr-2 my-2"
+    class="mr-2 mt-2"
     (click)="navigateToMembers()"
   >
     Membres
@@ -19,7 +19,7 @@
 
   <button
     *ngIf="currentView !== 'overview' && currentView !== 'members'"
-    class="bigButton my-2"
+    class="bigButton mt-2"
     (click)="navigateToOverview()"
   >
     Flotte de l'organisation
@@ -27,7 +27,7 @@
 
   <button
     *ngIf="currentView === 'members' && !showUpdateMembers"
-    class="bigButton mr-2 my-2"
+    class="bigButton mr-2 mt-2"
     (click)="updateMembers()"
   >
     Ajouter un utilisateur
@@ -35,7 +35,7 @@
 
   <button
     *ngIf="currentView === 'members' && showUpdateMembers"
-    class="bigButton mr-2 my-2"
+    class="bigButton mr-2 mt-2"
     (click)="updateMembers()"
   >
     Annuler

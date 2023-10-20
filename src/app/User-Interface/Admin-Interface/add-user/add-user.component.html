@@ -1,40 +1,58 @@
-<p>Ajouter un nouveau membre</p>
-<form class="flex flex-wrap px-4" (ngSubmit)="handleMemberAdd()">
-  <div class="formFields w-full flex justify-between">
-    <label class="items-center" for="username_input"
-      >Nom de l'utilisateur à ajouter:&nbsp;</label
+<div class="my-4 md:my-8 px-4">
+  <h3 class="text-sm sm:text-base md:text-lg text-teal-100">
+    Ajouter un nouveau membre
+  </h3>
+  <form class="flex flex-wrap px-2" (ngSubmit)="handleMemberAdd()">
+    <div class="formFields w-full flex flex-wrap md:justify-between">
+      <label class="items-center" for="username_input"
+        >Nom de l'utilisateur à ajouter:&nbsp;</label
+      >
+      <input
+        id="username_input"
+        type="text"
+        name="username"
+        placeholder="Nom d'utilisateur"
+        [(ngModel)]="username"
+      />
+    </div>
+    <div class="formFields w-full flex flex-wrap md:justify-between">
+      <label class="items-center" for="role_select"
+        >Le rôle à attribuer:&nbsp;</label
+      >
+      <select name="role" id="role_select" [(ngModel)]="role">
+        <option value="admin">Admin</option>
+        <option value="membre">Membre</option>
+      </select>
+    </div>
+    <div class="w-full">
+      <p *ngIf="!fieldsAreValid" class="text-sm text-red-300">
+        Veuillez remplir tous les champs
+      </p>
+      <div
+        *ngIf="fetching"
+        class="spinner-container flex justify-center items-center mr-2"
+      >
+        <div class="loading-spinner"></div>
+      </div>
+      <button
+        *ngIf="!fetching && !mdpTemp"
+        class="styleIt justify-end"
+        type="submit"
+      >
+        Ajouter
+      </button>
+    </div>
+  </form>
+  <div class="text-base mt-2" *ngIf="mdpTemp">
+    Utilisateur crée avec succès, voici le mot de passe à lui fournir:
+    <button
+      type="submit"
+      class="hover:underline hover:italic"
+      (click)="copyToClipboard(mdpTemp)"
+      matTooltip="Cliquez ici pour copier le mot de passe"
+      matTooltipPosition="above"
     >
-    <input
-      id="username_input"
-      type="text"
-      name="username"
-      placeholder="Nom d'utilisateur"
-      [(ngModel)]="username"
-    />
+      {{ mdpTemp }}
+    </button>
   </div>
-  <div class="formFields w-full flex justify-between">
-    <label class="items-center" for="role_select"
-      >Le rôle à attribuer:&nbsp;</label
-    >
-    <select name="role" id="role_select" [(ngModel)]="role">
-      <option value="admin">Admin</option>
-      <option value="membre">Membre</option>
-    </select>
-  </div>
-  <div class="w-full">
-    <button class="styleIt justify-end" type="submit">Ajouter</button>
-  </div>
-</form>
-<div *ngIf="mdpTemp">
-  Mot de passe à fournir au nouvel utilisateur:
-  <button
-    type="submit"
-    [appTooltip]="'Mot de passe copié!'"
-    class="hover:underline hover:italic"
-    (click)="copyToClipboard(mdpTemp)"
-    title="Cliquez ici pour copier"
-  >
-    {{ mdpTemp }}
-  </button>
-  <button class="styleIt" (click)="reload()">Terminé!</button>
 </div>

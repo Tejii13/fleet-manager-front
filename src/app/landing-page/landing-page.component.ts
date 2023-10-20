@@ -1,5 +1,5 @@
+import { InAppService } from 'src/app/in-app.service';
 import { Member } from 'src/app/interfaces';
-import { CheckConnection } from './../interfaces';
 import { Component, OnInit } from '@angular/core';
 import { FetchDataService } from '../fetch-data.service';
 
@@ -17,7 +17,8 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private fetch: FetchDataService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private inAppService: InAppService
   ) {}
 
   public username!: string;

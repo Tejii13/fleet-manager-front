@@ -22,8 +22,10 @@ export class DisplayMembersComponent implements OnInit {
     new EventEmitter<void>();
 
   public members!: Member[];
+
   public show: boolean = true;
   public showHangar: boolean = false;
+  public showPasswordPopup: boolean = false;
 
   public memberId!: number;
 
@@ -84,6 +86,11 @@ export class DisplayMembersComponent implements OnInit {
     this.updateMembersAfterAdd.emit();
     this.members = [];
     this.getData();
+  }
+
+  setShowPasswordPopup(value: boolean) {
+    this.showPasswordPopup = value;
+    setTimeout(() => (this.showPasswordPopup = false), 3500);
   }
 
   toggleHangarOnClick(value?: number) {

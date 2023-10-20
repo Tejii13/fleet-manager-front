@@ -6,7 +6,7 @@
     </p>
   </div>
 
-  <div class="flex px-4">
+  <div *ngIf="!fleetEmpty" class="flex px-4">
     <div class="input-container mr-2">
       <input
         [(ngModel)]="shipToSortName"

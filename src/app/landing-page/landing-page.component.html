@@ -16,12 +16,12 @@
         placeholder="Mot de passe"
         [(ngModel)]="password"
       />
-      <div class="mb-2 mt-1 h-10 sm:h-6">
+      <div class="mt-2">
         <p *ngIf="!fieldsAreValid" class="text-xs text-red-300 italic">
           Remplissez tous les champs et vérifiez les informations fournies!
         </p>
       </div>
-      <div class="mt-1 mb-6">
+      <div class="mt-4 mb-6">
         <button *ngIf="!isConnecting" type="submit" class="style">
           Se connecter
         </button>

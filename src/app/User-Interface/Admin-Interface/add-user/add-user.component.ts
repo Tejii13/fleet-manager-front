@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { FetchDataService } from '../../../fetch-data.service';
 
 @Component({
@@ -8,44 +9,47 @@ import { FetchDataService } from '../../../fetch-data.service';
 })
 export class AddUserComponent {
   @Input() organizationId!: number;
-  @Output() reloadDisplay = new EventEmitter<void>();
+  @Output() reloadDisplay: EventEmitter<void> = new EventEmitter<void>();
+  @Output() showPasswordPopup: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
-  constructor(private fetch: FetchDataService) {}
+  constructor(private fetch: FetchDataService, private clipboard: Clipboard) {}
 
   public username!: string;
   public role!: Array<string>;
 
   public mdpTemp!: string;
 
+  public fieldsAreValid: boolean = true;
+  public fetching: boolean = false;
+
   handleMemberAdd() {
-    if (this.username && !this.role.includes('role')) {
-      console.log(this.organizationId);
+    console.log(this.fieldsAreValid);
+    console.log(this.username);
+    console.log(this.role);
+    this.fetching = true;
+    if (
+      this.username &&
+      this.role &&
+      this.username !== '' &&
+      (this.role.includes('membre') || this.role.includes('admin'))
+    ) {
+      this.fieldsAreValid = true;
       this.fetch
         .registerUser(this.username, this.role, this.organizationId)
         .subscribe((data) => {
-          console.log(data);
           this.mdpTemp = data.pass;
+          this.fetching = false;
         });
     } else {
-      console.log('Veuillez remplir tous les champs');
+      this.fieldsAreValid = false;
+      // console.log('Veuillez remplir tous les champs');
     }
   }
 
   copyToClipboard(text: string) {
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = text;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
-  }
-
-  reload() {
+    this.clipboard.copy(text);
     this.reloadDisplay.emit();
+    this.showPasswordPopup.emit(true);
   }
 }

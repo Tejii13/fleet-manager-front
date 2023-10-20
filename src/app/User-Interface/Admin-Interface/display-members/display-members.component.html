@@ -2,9 +2,17 @@
   *ngIf="showUpdateMembers"
   [organizationId]="organizationId"
   (reloadDisplay)="reload()"
+  (showPasswordPopup)="setShowPasswordPopup($event)"
 ></app-add-user>
-<p class="px-4">Liste de joueurs dans l'organisation</p>
-<mat-progress-bar *ngIf="!members" mode="indeterminate"></mat-progress-bar>
+<h3 class="text-sm sm:text-base md:text-lg text-teal-100 px-4">
+  Liste de joueurs dans l'organisation
+</h3>
+<div
+  *ngIf="!members"
+  class="w-full flex items-center justify-center mt-4 md:mt-8"
+>
+  <div class="loading-spinner"></div>
+</div>
 <div *ngIf="members">
   <table class="w-full mx-4">
     <thead class="w-full">
@@ -45,3 +53,10 @@
     (removingValidated)="handleMemberRemove($event)"
   ></app-confirm-delete>
 </div>
+
+<p
+  *ngIf="showPasswordPopup"
+  class="password-popup text-base text-green-300 z-50"
+>
+  Mot de passe copié!
+</p>

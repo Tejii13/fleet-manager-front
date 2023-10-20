@@ -1,6 +1,5 @@
 <!-- Shows password change form if it's the first connection -->
 <ng-container *ngIf="verifyPassword; else elseShowData">
-  <button (click)="disconnect()">Déconnexion</button>
   <app-change-password
     [userId]="userId"
     (passwordVerifiedEvent)="handlePasswordVerified($event)"
@@ -45,7 +44,7 @@
         </h2>
       </div>
       <!-- Shows the ships component, ON by default -->
-      <div *ngIf="showShips && ships && fleet">
+      <div *ngIf="showShips && ships && fleet && currentView !== 'members'">
         <app-search-ships
           [ships]="ships"
           [userId]="userId"

@@ -1,10 +1,13 @@
 <div class="background"></div>
 <button (click)="exitHangarView()">Leave</button>
-<mat-progress-bar *ngIf="!responseReceived"></mat-progress-bar>
+<div *ngIf="!responseReceived" class="w-full flex justify-center mt-4 md:mt-8">
+  <div class="loading-spinner"></div>
+</div>
 <div class="content">
   <app-ship-synthesis
-    *ngIf="ships.length > 0"
+    *ngIf="responseReceived"
     [ships]="ships"
+    [fleetEmpty]="fleetEmpty"
     [fromAdmin]="responseReceived"
   ></app-ship-synthesis>
 </div>

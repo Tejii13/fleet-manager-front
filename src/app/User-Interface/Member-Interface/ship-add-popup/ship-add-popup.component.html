@@ -85,7 +85,7 @@
         [(ngModel)]="loanerFor"
         (change)="onLoanerSelectChange()"
       >
-        <option value="broken_ship">Vaisseau non disponible</option>
+        <option value="broken_ship">Autre vaisseau</option>
         <option *ngFor="let ship of canBeLoanerFor">
           {{ ship.name }}
           {{ (ship.nickname ? " - " + ship.nickname : null) | titlecase }}

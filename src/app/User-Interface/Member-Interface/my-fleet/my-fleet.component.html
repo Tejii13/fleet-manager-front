@@ -1,7 +1,9 @@
 <div *ngIf="show">
   <div class="withBorder flex flex-wrap mt-6 sm:mt-3.5 items-center">
-    <h2 *ngIf="currentView !== 'overview'" class="pl-4">Ma flotte</h2>
-    <h2 *ngIf="currentView === 'overview'" class="pl-4">
+    <h2 *ngIf="currentView !== 'overview' || !isAdmin" class="pl-4">
+      Ma flotte
+    </h2>
+    <h2 *ngIf="currentView === 'overview' && isAdmin" class="pl-4">
       Flotte de l'organisation
     </h2>
     <div class="flex justify-around sm:justify-start pl-4">

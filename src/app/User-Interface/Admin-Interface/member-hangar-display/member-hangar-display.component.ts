@@ -16,9 +16,15 @@ export class MemberHangarDisplayComponent implements OnInit {
   public ships: Ship[] = [];
   public responseReceived: boolean = false;
 
+  public fleetEmpty: boolean = false;
+
   ngOnInit(): void {
-    console.log(this.userId);
     this.fetchFleet.getShipInfo(this.userId).subscribe((response) => {
+      if (response.length === 0) {
+        this.fleetEmpty = true;
+      }
+      console.log(response.length);
+      console.log(this.fleetEmpty);
       this.ships = response;
       this.responseReceived = true;
     });

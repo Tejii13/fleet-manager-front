@@ -36,7 +36,6 @@ import { ChangePasswordComponent } from './User-Interface/Member-Interface/chang
 import { DisplayMembersComponent } from './User-Interface/Admin-Interface/display-members/display-members.component';
 import { AdminPanelComponent } from './User-Interface/Admin-Interface/admin-panel/admin-panel.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { TooltipDirective } from './copy-check.directive';
 import { ShipSynthesisComponent } from './User-Interface/Member-Interface/ship-synthesis/ship-synthesis.component';
 import { MyFleetComponent } from './User-Interface/Member-Interface/my-fleet/my-fleet.component';
 import { OverviewComponent } from './User-Interface/Admin-Interface/overview/overview.component';
@@ -58,7 +57,6 @@ import { ShipAddPopupComponent } from './User-Interface/Member-Interface/ship-ad
     DisplayMembersComponent,
     AdminPanelComponent,
     NavbarComponent,
-    TooltipDirective,
     ShipSynthesisComponent,
     MyFleetComponent,
     OverviewComponent,

@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie-service';
+import { InAppService } from 'src/app/in-app.service';
 
 @Component({
   selector: 'app-mon-espace',
@@ -21,7 +22,8 @@ export class MonEspaceComponent implements OnInit {
     private fetchData: FetchDataService,
     private fetchFleet: FetchFleetService,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private inAppService: InAppService
   ) {}
 
   public showData: boolean = false;
@@ -42,8 +44,8 @@ export class MonEspaceComponent implements OnInit {
   public isFetchingShipsData: boolean = true;
   public isFetchingUsersFleet: boolean = true;
 
-  inputUsername!: string;
-  inputRole!: Array<string>;
+  public inputUsername!: string;
+  public inputRole!: Array<string>;
 
   public currentView!: string;
 
@@ -60,7 +62,6 @@ export class MonEspaceComponent implements OnInit {
         .subscribe((response: CheckConnection) => {
           if (response && response.id) {
             this.fetchData.getUserinfo(response.id).subscribe((data) => {
-              // Verifies if the 2 uuids are the same
               if (!data) {
                 this.disconnect();
               } else {
@@ -161,10 +162,18 @@ export class MonEspaceComponent implements OnInit {
           this.currentView = 'ships';
           break;
         case 'members':
-          this.currentView = 'members';
+          if (this.isAdmin) {
+            this.currentView = 'members';
+          } else {
+            this.currentView = 'ships';
+          }
           break;
         case 'overview':
-          this.currentView = 'overview';
+          if (this.isAdmin) {
+            this.currentView = 'overview';
+          } else {
+            this.currentView = 'ships';
+          }
           break;
         case 'synthesis':
           this.currentView = 'synthesis';

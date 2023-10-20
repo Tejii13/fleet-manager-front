@@ -1,6 +1,6 @@
 section {
   background-color: rgba(2,59,92,0.8);
-  width: 570px;
+  max-width: 570px;
   margin: 10% auto;
   border: solid black 1px;
 }
@@ -69,5 +69,15 @@ input {
   section {
     width: 80%;
     text-align: center;
+  }
+
+  input {
+  min-width: 150px;
+  }
+
+  .style {
+    width: calc(100% - 80px);
+    min-width: 150px;
+    height: 35px;
   }
 }

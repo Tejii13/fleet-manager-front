@@ -34,7 +34,11 @@ export class MyFleetComponent implements OnInit {
           this.currentView = 'ships';
           break;
         case 'overview':
-          this.currentView = 'overview';
+          if (this.isAdmin) {
+            this.currentView = 'overview';
+          } else {
+            this.currentView = 'ships';
+          }
           break;
       }
     });

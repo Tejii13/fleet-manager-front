@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, Form } from '@angular/forms';
 
 import { UpdateAccountService } from 'src/app/update-account.service';
 
@@ -8,7 +9,17 @@ import { UpdateAccountService } from 'src/app/update-account.service';
   styleUrls: ['./change-password.component.scss'],
 })
 export class ChangePasswordComponent {
-  constructor(private updateAccount: UpdateAccountService) {}
+  public newPasswordForm!: FormGroup;
+
+  constructor(
+    private updateAccount: UpdateAccountService,
+    private formBuilder: FormBuilder
+  ) {
+    this.newPasswordForm = this.formBuilder.group({
+      newPassword: '',
+      confirmPassword: '',
+    });
+  }
 
   @Input() userId!: number;
 
@@ -16,27 +27,39 @@ export class ChangePasswordComponent {
 
   public message!: string;
 
-  public newPassword!: string;
-  public confirmPassword!: string;
-
-  public passwordVerified: boolean = false;
+  public changingPassword: boolean = false;
 
   handlePasswordChange() {
+    const newPassword: string = this.newPasswordForm.get('newPassword')?.value;
+    const confirmPassword: string =
+      this.newPasswordForm.get('confirmPassword')?.value;
+    console.log(newPassword);
+    console.log(confirmPassword);
     if (
-      this.newPassword &&
-      this.confirmPassword &&
-      this.newPassword !== '' &&
-      this.newPassword === this.confirmPassword
+      newPassword &&
+      newPassword.length >= 8 &&
+      confirmPassword &&
+      newPassword !== '' &&
+      newPassword === confirmPassword
     ) {
+      console.log('Ok');
+      this.changingPassword = true;
+      this.message = '';
       this.updateAccount
-        .updatePassword(this.userId, this.confirmPassword)
+        .updatePassword(this.userId, confirmPassword)
         .subscribe((data) => {
-          this.passwordVerified = true;
+          this.changingPassword = false;
           this.passwordVerifiedEvent.emit(true);
           console.log(data);
         });
     } else {
-      this.message = 'Vérifiez le mot de passe et réessayez.';
+      if (newPassword && newPassword.length < 8) {
+        console.log('size not ok');
+        this.message = 'Le mot de passe doit comporter au minimum 8 caractères';
+      } else {
+        console.log('equal not ok');
+        this.message = 'Vérifiez le mot de passe saisi et réessayez.';
+      }
     }
   }
 }
