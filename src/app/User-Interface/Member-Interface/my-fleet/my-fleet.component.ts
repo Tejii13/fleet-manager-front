@@ -59,6 +59,7 @@ export class MyFleetComponent implements OnInit {
   }
 
   emit() {
+    console.log('Emit in myFleet');
     this.getFleetData.emit();
   }
 

@@ -49,10 +49,8 @@ export class MonEspaceComponent implements OnInit {
 
   ngOnInit(): void {
     const urlUsername = this.route.snapshot.paramMap.get('id'); // Get the 'id' parameter from the current URL
-    this.router.navigate(['/mon-espace', urlUsername], {
-      queryParams: { view: 'ships' },
-    });
-    this.currentView = 'ships';
+
+    this.getRoute();
 
     // Verifies if the id in the route is not null
     if (urlUsername !== null) {
@@ -126,20 +124,9 @@ export class MonEspaceComponent implements OnInit {
   }
 
   getFleetData() {
-    this.route.queryParams.subscribe((params) => {
-      switch (params['view']) {
-        case 'ships':
-          this.currentView = 'ships';
-          break;
-        case 'members':
-          this.currentView = 'members';
-          break;
-        case 'overview':
-          this.currentView = 'overview';
-          break;
-      }
-    });
+    this.getRoute();
 
+    console.log('Getting fleet data');
     this.isFetchingUsersFleet = true;
     if (this.userId) {
       this.fetchFleet.getShipInfo(this.userId).subscribe((response) => {
@@ -165,6 +152,27 @@ export class MonEspaceComponent implements OnInit {
       this.showData = true;
       this.verifyPassword = false;
     }
+  }
+
+  getRoute() {
+    this.route.queryParams.subscribe((params) => {
+      switch (params['view']) {
+        case 'ships':
+          this.currentView = 'ships';
+          break;
+        case 'members':
+          this.currentView = 'members';
+          break;
+        case 'overview':
+          this.currentView = 'overview';
+          break;
+        case 'synthesis':
+          this.currentView = 'synthesis';
+          break;
+        default:
+          this.currentView = 'ships';
+      }
+    });
   }
 
   disconnect() {

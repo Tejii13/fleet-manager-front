@@ -130,7 +130,7 @@ export class SearchShipsComponent implements OnInit {
   }
 
   emit() {
-    console.log('Emit');
+    console.log('Emit in search ships');
     this.getFleetData.emit();
   }
 }

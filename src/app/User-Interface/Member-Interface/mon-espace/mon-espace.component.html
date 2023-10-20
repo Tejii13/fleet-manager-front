@@ -28,8 +28,9 @@
           !ships &&
           currentView === 'ships'
         "
+        class="w-full flex items-center justify-center mt-4 md:mt-8"
       >
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <div class="loading-spinner"></div>
       </div>
       <div *ngIf="!isFetchingShipsData && !ships">
         <h2 class="text-red-500 italic">

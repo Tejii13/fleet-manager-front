@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { FetchFleetService } from 'src/app/fetch-fleet.service';
 import { Ship } from 'src/app/interfaces';
@@ -8,7 +16,7 @@ import { Ship } from 'src/app/interfaces';
   templateUrl: './display-ships.component.html',
   styleUrls: ['./display-ships.component.scss'],
 })
-export class DisplayShipsComponent implements OnInit {
+export class DisplayShipsComponent implements OnInit, OnChanges {
   @Input() userId!: number;
   @Input() isAdmin!: boolean;
   @Input() reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
@@ -58,6 +66,15 @@ export class DisplayShipsComponent implements OnInit {
     );
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['ships'] && !changes['ships'].firstChange) {
+      this.sortShipsByObtentionMethod(
+        this.sortBySelectValue,
+        this.shipToSortName
+      );
+    }
+  }
+
   toggleShipRemovePopup(shipId: number, shipName: string) {
     this.handleScrollLock();
     this.shipToRemove = shipId;
@@ -69,7 +86,8 @@ export class DisplayShipsComponent implements OnInit {
     this.handleScrollLock();
     this.showConfirmRemove = false;
     if (removingConfirmed) {
-      this.fetchFleet.deleteShip(this.shipToRemove).subscribe(() => {
+      this.fetchFleet.deleteShip(this.shipToRemove).subscribe((response) => {
+        console.log('Deleted');
         this.getFleetData.emit();
       });
     } else {
