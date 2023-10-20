@@ -128,7 +128,7 @@ export class ShipAddPopupComponent implements OnInit {
     this.isFetching = true;
     let newNickname = this.nickname;
     if (this.nickname) {
-      newNickname = this.nickname.toUpperCase();
+      newNickname = this.nickname.toUpperCase().replaceAll(' ', '-');
     }
 
     const requestBody = {

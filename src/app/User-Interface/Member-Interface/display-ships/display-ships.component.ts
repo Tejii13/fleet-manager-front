@@ -108,7 +108,9 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
   handleCheck(shipId: number) {
     this.shipToChange = null;
     this.reload();
-    const modifiedName = this.shipNameChanges[shipId].toUpperCase();
+    const modifiedName = this.shipNameChanges[shipId]
+      .toUpperCase()
+      .replaceAll(' ', '-');
     if (modifiedName !== undefined) {
       const shipIndex = this.ships.findIndex((ship) => ship.id === shipId);
       const ship = this.ships.find((ship) => ship.id === shipId);
