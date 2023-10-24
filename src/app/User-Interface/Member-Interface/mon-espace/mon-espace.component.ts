@@ -65,6 +65,7 @@ export class MonEspaceComponent implements OnInit {
               if (!data) {
                 this.disconnect();
               } else {
+                console.log(data);
                 this.handleDataFetch(data);
                 this.getShipsData();
                 this.getFleetData();

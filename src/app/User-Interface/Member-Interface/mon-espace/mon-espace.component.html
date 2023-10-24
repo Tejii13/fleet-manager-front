@@ -1,3 +1,10 @@
+<div
+  *ngIf="!showData && !verifyPassword"
+  class="w-full flex items-center justify-center mt-4 md:mt-8"
+>
+  <div class="loading-spinner"></div>
+</div>
+
 <!-- Shows password change form if it's the first connection -->
 <ng-container *ngIf="verifyPassword; else elseShowData">
   <app-change-password

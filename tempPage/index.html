@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Site en Construction</title>
+  </head>
+  <body>
+    <div class="background-image"></div>
+    <div class="background-blur"></div>
+    <div class="construction-page">
+      <div class="construction-content">
+        <h1>Site en Construction</h1>
+        <p>
+          Star flotilla est toujours en développement, une première version avec
+          les fonctionnalités de base sera mise en ligne bientôt!
+        </p>
+        <div class="progress-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // JavaScript to update the progress bar (adjust as needed)
+      const progressBar = document.getElementById("progress");
+      const progress = 80; // Change this value to adjust the progress (0-100)
+      progressBar.style.width = `${progress}%`;
+    </script>
+  </body>
+</html>
