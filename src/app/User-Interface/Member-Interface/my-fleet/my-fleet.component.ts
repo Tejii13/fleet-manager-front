@@ -63,12 +63,10 @@ export class MyFleetComponent implements OnInit {
   }
 
   emit() {
-    console.log('Emit in myFleet');
     this.getFleetData.emit();
   }
 
   reload() {
-    console.log(this.currentView);
     this.show = false;
     setTimeout(() => (this.show = true));
   }

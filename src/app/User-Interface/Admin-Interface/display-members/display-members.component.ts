@@ -44,7 +44,6 @@ export class DisplayMembersComponent implements OnInit {
     this.fetchData.getUsersList(this.organizationId).subscribe(
       (response: any) => {
         this.members = response;
-        console.log(this.members);
       },
       (error) => {
         console.error('Error fetching user list: ', error);
@@ -56,7 +55,6 @@ export class DisplayMembersComponent implements OnInit {
     this.handleScrollLock();
     this.showConfirmRemove = false;
     if (removingConfirmed) {
-      console.log('Delete user: ' + this.elementToRemove);
       this.updateAccount.deleteAccount(this.elementToRemove).subscribe(() => {
         this.members = [];
         this.getData();
@@ -75,7 +73,6 @@ export class DisplayMembersComponent implements OnInit {
 
   updateMembers() {
     this.showUpdateMembers = true;
-    console.log(this.organizationId);
   }
 
   cancelMemberAdd() {

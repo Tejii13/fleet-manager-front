@@ -23,8 +23,6 @@ export class MemberHangarDisplayComponent implements OnInit {
       if (response.length === 0) {
         this.fleetEmpty = true;
       }
-      console.log(response.length);
-      console.log(this.fleetEmpty);
       this.ships = response;
       this.responseReceived = true;
     });

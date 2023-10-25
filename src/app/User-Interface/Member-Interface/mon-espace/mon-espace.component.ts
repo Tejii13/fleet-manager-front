@@ -65,7 +65,6 @@ export class MonEspaceComponent implements OnInit {
               if (!data) {
                 this.disconnect();
               } else {
-                console.log(data);
                 this.handleDataFetch(data);
                 this.getShipsData();
                 this.getFleetData();
@@ -116,7 +115,6 @@ export class MonEspaceComponent implements OnInit {
         if (response && response.length !== 0) {
           this.ships = response.filter((ship) => ship !== null);
         } else {
-          console.log('There is no ship to display here');
         }
       },
       (error) => {
@@ -128,7 +126,6 @@ export class MonEspaceComponent implements OnInit {
   getFleetData() {
     this.getRoute();
 
-    console.log('Getting fleet data');
     this.isFetchingUsersFleet = true;
     if (this.userId) {
       this.fetchFleet.getShipInfo(this.userId).subscribe((response) => {

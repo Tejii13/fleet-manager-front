@@ -42,7 +42,6 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
   }[] = [];
 
   ngOnInit(): void {
-    console.log(this.fleetEmpty);
     this.sortShips();
   }
 

@@ -52,9 +52,7 @@ export class ShipAddPopupComponent implements OnInit {
     }
   }
 
-  onLoanerSelectChange() {
-    console.log(this.loanerFor);
-  }
+  onLoanerSelectChange() {}
 
   getPledgeShipList() {
     for (let ship of this.fleet) {
@@ -64,7 +62,6 @@ export class ShipAddPopupComponent implements OnInit {
       )
         this.canBeLoanerFor.push(ship);
     }
-    console.log(this.canBeLoanerFor);
   }
 
   cancel() {
@@ -154,7 +151,6 @@ export class ShipAddPopupComponent implements OnInit {
       this.handleShips.saveShip(requestBody).subscribe(
         (response) => {
           if (response) {
-            console.log(response);
             this.isFetching = false;
             this.reloadShipsDisplay.emit(true);
             this.cancelShipAdd.emit();

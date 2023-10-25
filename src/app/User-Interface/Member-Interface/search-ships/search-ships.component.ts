@@ -111,8 +111,6 @@ export class SearchShipsComponent implements OnInit {
           }
         }
       }
-      console.log('Popup: ' + this.showShipAddPopup);
-      console.log('Ship: ' + this.shipToPass);
       document.body.style.overflow = 'hidden';
     } else {
       this.cancelAdd();
@@ -130,7 +128,6 @@ export class SearchShipsComponent implements OnInit {
   }
 
   emit() {
-    console.log('Emit in search ships');
     this.getFleetData.emit();
   }
 }

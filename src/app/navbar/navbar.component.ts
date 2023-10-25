@@ -24,7 +24,6 @@ export class NavbarComponent implements OnInit {
       authCookie !== ''
     ) {
       this.isConnected = true;
-      console.log(this.isConnected);
     } else {
       this.disconnect();
     }

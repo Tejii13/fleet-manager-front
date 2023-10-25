@@ -24,9 +24,6 @@ export class AddUserComponent {
   public fetching: boolean = false;
 
   handleMemberAdd() {
-    console.log(this.fieldsAreValid);
-    console.log(this.username);
-    console.log(this.role);
     this.fetching = true;
     if (
       this.username &&
@@ -43,7 +40,6 @@ export class AddUserComponent {
         });
     } else {
       this.fieldsAreValid = false;
-      // console.log('Veuillez remplir tous les champs');
     }
   }
 

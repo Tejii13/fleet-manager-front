@@ -41,7 +41,6 @@ export class OverviewComponent implements OnInit {
   getData() {
     this.ships = [];
     this.types = [];
-    console.log(this.ships);
     this.fetchFleet.getOrgShipsList(this.orgId).subscribe((response) => {
       if (response.length > 0) this.fleetEmpty = false;
       this.sortShips(response);
@@ -50,7 +49,6 @@ export class OverviewComponent implements OnInit {
   }
 
   sortShips(ships: Ship[]) {
-    console.log(ships);
     for (let ship of ships) {
       const typeIndex = this.types.findIndex((t) => t.type === ship.type);
       if (typeIndex === -1) {
@@ -77,8 +75,6 @@ export class OverviewComponent implements OnInit {
     this.types.forEach((type) => {
       type.ships.sort((a, b) => a.name.localeCompare(b.name));
     });
-
-    console.log(this.types);
   }
 
   reloadPage() {
@@ -89,7 +85,6 @@ export class OverviewComponent implements OnInit {
     if (value) {
       const valueParts = value.split('/');
       this.memberId = +valueParts[valueParts.length - 1];
-      console.log(this.memberId);
     }
 
     this.scrollLocked = !this.scrollLocked;
