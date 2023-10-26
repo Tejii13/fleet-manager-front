@@ -1,0 +1,26 @@
+button.search {
+  height: 30px;
+  width: 30px;
+  margin-left: -30px;
+  padding-top: 2px;
+  border-radius: 10px;
+}
+
+input, select {
+  width: 160px;
+  height: 30px;
+  background-color: rgba(1, 80,126,0.5);
+  border: solid #adc8d3 1px;
+  border-radius: 2px;
+  margin-bottom: 4px;
+}
+
+input.search, select.search {
+  margin-bottom: 0;
+  width: 200px;
+}
+
+mat-icon.search {
+  padding-top: 2px;
+  padding-left: 2px;
+}

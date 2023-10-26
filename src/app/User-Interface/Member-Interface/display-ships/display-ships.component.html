@@ -1,43 +1,5 @@
 <div *ngIf="show">
-  <div *ngIf="fleetEmpty">
-    <p class="text-base text-center sm:text-left px-4">
-      Aucun vaisseau à afficher pour l'instant, utilisez la barre de recherche
-      au dessus pour en ajouter!
-    </p>
-  </div>
-
-  <div *ngIf="!fleetEmpty" class="flex justify-between px-4">
-    <div class="input-container mr-2">
-      <input
-        [(ngModel)]="shipToSortName"
-        class="search px-2"
-        type="text"
-        placeholder="Rechercher un vaisseau"
-      />
-      <button
-        class="search"
-        (click)="sortShipsByObtentionMethod(sortBySelectValue, shipToSortName)"
-      >
-        <mat-icon class="search">search</mat-icon>
-      </button>
-    </div>
-    <select
-      [(ngModel)]="sortBySelectValue"
-      class="search mt-0.5 px-2"
-      title="Trier"
-      name="sortBy"
-      id="sortbBySelect"
-      (change)="sortShipsByObtentionMethod(sortBySelectValue, shipToSortName)"
-    >
-      <option value="default">Tout afficher</option>
-      <option value="pledge">Pledge</option>
-      <option value="igBuy">Achat in game</option>
-      <option value="loaners">Loaners</option>
-      <option value="rentals">Location</option>
-      <option value="subscription">Abonnement</option>
-      <option value="referral">Referral</option>
-    </select>
-  </div>
+  <app-display-ships-filter-bar></app-display-ships-filter-bar>
 
   <mat-accordion>
     <ul class="flex flex-wrap lg:flex-no-wrap scroll-smooth focus:scroll-auto">

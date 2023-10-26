@@ -54,25 +54,6 @@ input, select {
   margin-bottom: 4px;
 }
 
-button.search {
-  height: 30px;
-  width: 30px;
-  margin-left: -30px;
-  padding-top: 2px;
-  border-radius: 10px;
-}
-
-input.search, select.search {
-  margin-bottom: 0;
-  width: 200px;
-}
-
-mat-icon.search {
-  padding-top: 2px;
-  padding-left: 2px;
-}
-
-
 ::placeholder {
   font-size: 12px;
 }

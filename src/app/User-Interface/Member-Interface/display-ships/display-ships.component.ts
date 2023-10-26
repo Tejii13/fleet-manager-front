@@ -21,8 +21,11 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
   @Input() isAdmin!: boolean;
   @Input() reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
   @Input() ships!: Ship[];
+  @Input() brands!: Map<any, any>;
   @Input() fleetEmpty!: boolean;
   @Output() getFleetData = new EventEmitter<void>();
+  public shipToSortName: string = '';
+  public sortBySelectValue: string = 'default';
 
   constructor(private fetchFleet: FetchFleetService) {}
 
@@ -44,10 +47,8 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
   public sortedShipsByObtMethod: Ship[] = [];
   public sortedShipsByName: Ship[] = [];
 
-  public shipToSortName: string = '';
-  public sortBySelectValue: string = 'default';
-
   ngOnInit(): void {
+    console.log(this.brands);
     if (this.firstRender) {
       this.firstRender = false;
       this.getFleetData.emit();
@@ -213,12 +214,18 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
         shipToSort.name.toLowerCase().includes(shipName.toLowerCase()) ||
         shipToSort.nickname
           ?.toLocaleLowerCase()
-          .includes(shipName.toLowerCase())
+          .includes(shipName.toLowerCase()) ||
+        // FIXME Remove it when dedicated function enabled
+        shipToSort.manufacturer.toLowerCase().includes(shipName.toLowerCase())
+        // Remove until here
       ) {
         this.sortedShipsByName.push(shipToSort);
       }
     }
   }
+
+  // TODO Add dedicated function to brands later
+  // sortShipsByBrand(shipBrand: string) {}
 
   fuseSortedShipTables() {
     this.sortedShips = [];
