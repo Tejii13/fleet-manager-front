@@ -50,12 +50,9 @@ export class LandingPageComponent implements OnInit {
     if (this.username && this.password) {
       this.fieldsAreValid = true;
       this.isConnecting = true;
-      console.log(this.username);
-      console.log(this.password);
       this.fetch
         .login(this.username, this.password)
         .subscribe((data: ConnectionStatus) => {
-          console.log(data);
           if (data.code === 201) {
             const expirationDate = new Date();
             expirationDate.setMonth(expirationDate.getMonth() + 1);
@@ -69,10 +66,8 @@ export class LandingPageComponent implements OnInit {
             );
             this.router.navigate([`/mon-espace/${data.username}`]);
           } else {
-            setTimeout(() => {
-              this.isConnecting = false;
-              this.fieldsAreValid = false;
-            }, Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000);
+            this.isConnecting = false;
+            this.fieldsAreValid = false;
           }
         });
     } else {

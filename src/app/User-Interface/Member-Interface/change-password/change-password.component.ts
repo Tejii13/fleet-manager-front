@@ -33,8 +33,6 @@ export class ChangePasswordComponent {
     const newPassword: string = this.newPasswordForm.get('newPassword')?.value;
     const confirmPassword: string =
       this.newPasswordForm.get('confirmPassword')?.value;
-    console.log(newPassword);
-    console.log(confirmPassword);
     if (
       newPassword &&
       newPassword.length >= 8 &&
@@ -42,7 +40,6 @@ export class ChangePasswordComponent {
       newPassword !== '' &&
       newPassword === confirmPassword
     ) {
-      console.log('Ok');
       this.changingPassword = true;
       this.message = '';
       this.updateAccount
@@ -50,14 +47,11 @@ export class ChangePasswordComponent {
         .subscribe((data) => {
           this.changingPassword = false;
           this.passwordVerifiedEvent.emit(true);
-          console.log(data);
         });
     } else {
       if (newPassword && newPassword.length < 8) {
-        console.log('size not ok');
         this.message = 'Le mot de passe doit comporter au minimum 8 caractères';
       } else {
-        console.log('equal not ok');
         this.message = 'Vérifiez le mot de passe saisi et réessayez.';
       }
     }

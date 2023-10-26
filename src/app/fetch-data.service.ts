@@ -47,7 +47,6 @@ export class FetchDataService {
     organizationId: number
   ): Observable<any> {
     const url = `${this.url}/api/register`;
-    console.log(url);
     const headers = new HttpHeaders({
       accept: 'application/ld+json',
       'Content-Type': 'application/ld+json',
@@ -123,7 +122,6 @@ export class FetchDataService {
   }
 
   getUsersList(id: number): Observable<UserListResponse> {
-    console.log(`${this.url}/api/organizations/${id}/users`);
     return this.http.get<UserListResponse>(
       `${this.url}/api/organizations/${id}/users`,
       {

@@ -36,7 +36,6 @@ export class StarCitizenApiService {
   }
 
   fetchAllShips(): Observable<any> {
-    console.log(`${this.url}`);
     return this.http.get<any>(this.url).pipe(
       switchMap((response: any) => {
         this.verifyData(response);

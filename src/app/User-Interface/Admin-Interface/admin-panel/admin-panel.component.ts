@@ -70,7 +70,6 @@ export class AdminPanelComponent implements OnInit {
   }
 
   reload() {
-    console.log(this.currentView);
     this.show = false;
     setTimeout(() => (this.show = true));
   }

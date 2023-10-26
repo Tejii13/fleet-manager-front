@@ -52,11 +52,9 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
     if (this.firstRender) {
       this.firstRender = false;
       this.getFleetData.emit();
-      console.log('Emit');
     }
     this.reloadShipsDisplay.subscribe((response) => {
       if (response) {
-        console.log('Emit');
         this.getFleetData.emit();
       }
     });
@@ -88,7 +86,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
     this.showConfirmRemove = false;
     if (removingConfirmed) {
       this.fetchFleet.deleteShip(this.shipToRemove).subscribe((response) => {
-        console.log('Deleted');
         this.getFleetData.emit();
       });
     } else {
@@ -116,7 +113,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
       const shipIndex = this.ships.findIndex((ship) => ship.id === shipId);
       const ship = this.ships.find((ship) => ship.id === shipId);
       if (shipIndex !== -1 && ship) {
-        console.log(ship);
         this.ships[shipIndex].nickname = modifiedName;
 
         const requestBody = {
@@ -149,11 +145,9 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
 
     switch (obtMethod) {
       case 'default':
-        console.log('default');
         this.sortedShipsByObtMethod = this.ships;
         break;
       case 'pledge':
-        console.log('pledge');
         for (let shipToSort of this.ships) {
           if (shipToSort.obtention_method === 'pledge') {
             this.sortedShipsByObtMethod.push(shipToSort);
@@ -161,7 +155,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
         }
         break;
       case 'igBuy':
-        console.log('igBuy');
         for (let shipToSort of this.ships) {
           if (shipToSort.obtention_method === 'igBuy') {
             this.sortedShipsByObtMethod.push(shipToSort);
@@ -169,7 +162,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
         }
         break;
       case 'loaners':
-        console.log('loaners');
         for (let shipToSort of this.ships) {
           if (shipToSort.obtention_method === 'loaner') {
             this.sortedShipsByObtMethod.push(shipToSort);
@@ -177,7 +169,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
         }
         break;
       case 'rentals':
-        console.log('rentals');
         for (let shipToSort of this.ships) {
           if (shipToSort.obtention_method === 'rental') {
             this.sortedShipsByObtMethod.push(shipToSort);
@@ -185,7 +176,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
         }
         break;
       case 'subscription':
-        console.log('subscription');
         for (let shipToSort of this.ships) {
           if (shipToSort.obtention_method === 'subscription') {
             this.sortedShipsByObtMethod.push(shipToSort);
@@ -193,7 +183,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
         }
         break;
       case 'referral':
-        console.log('referral');
         for (let shipToSort of this.ships) {
           if (shipToSort.obtention_method === 'referral') {
             this.sortedShipsByObtMethod.push(shipToSort);
@@ -248,7 +237,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
   }
 
   reload() {
-    console.log('reload');
     this.show = false;
     setTimeout(() => (this.show = true));
   }
