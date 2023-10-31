@@ -10,6 +10,13 @@
   <div class="loading-spinner"></div>
 </div>
 
+<div *ngIf="!fleetEmpty && data">
+  <app-display-ships-filter-bar
+    [ships]="ships"
+    (actualizedShips)="actualizeShips($event)"
+  ></app-display-ships-filter-bar>
+</div>
+
 <div *ngIf="!fleetEmpty && data" class="table-content p-4">
   <table class="w-full">
     <mat-accordion>

@@ -26,6 +26,8 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
 
   public show: boolean = true;
 
+  public sortedShips!: Ship[];
+
   public shipToRemove!: number;
   public shipToRemoveName!: string;
   public showConfirmRemove: boolean = false;
@@ -42,6 +44,7 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
   }[] = [];
 
   ngOnInit(): void {
+    this.sortedShips = this.ships;
     this.sortShips();
   }
 
@@ -53,7 +56,7 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
   }
 
   sortShips() {
-    for (let ship of this.ships) {
+    for (let ship of this.sortedShips) {
       const typeIndex = this.types.findIndex((t) => t.type === ship.type);
       if (typeIndex === -1) {
         this.types.push({
@@ -119,5 +122,13 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
     } else {
       document.body.style.overflow = 'auto';
     }
+  }
+
+  actualizeShips(sortedShips: Ship[]) {
+    this.sortedShips = [];
+    this.types = [];
+    this.sortedShips = sortedShips;
+    console.log(this.sortedShips);
+    this.sortShips();
   }
 }

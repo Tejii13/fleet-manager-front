@@ -5,6 +5,13 @@
   </p>
 </div>
 
+<div *ngIf="!fleetEmpty && show && types.length > 0">
+  <app-display-ships-filter-bar
+    [ships]="ships"
+    (actualizedShips)="actualizeShips($event)"
+  ></app-display-ships-filter-bar>
+</div>
+
 <div
   *ngIf="!fleetEmpty && show && types.length > 0"
   class="table-content p-0 pt-4 md:p-4"

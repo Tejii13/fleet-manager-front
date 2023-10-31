@@ -19,6 +19,7 @@ export class OverviewComponent implements OnInit {
   public showHangar: boolean = false;
 
   public ships!: Ship[];
+  public sortedShips!: Ship[];
   public shipToRemove!: number | null;
 
   public memberId!: number;
@@ -43,6 +44,7 @@ export class OverviewComponent implements OnInit {
     this.types = [];
     this.fetchFleet.getOrgShipsList(this.orgId).subscribe((response) => {
       if (response.length > 0) this.fleetEmpty = false;
+      this.ships = response;
       this.sortShips(response);
       this.data = true;
     });
@@ -96,5 +98,11 @@ export class OverviewComponent implements OnInit {
     }
 
     this.showHangar = !this.showHangar;
+  }
+
+  actualizeShips(sortedShips: Ship[]) {
+    this.sortedShips = [];
+    this.types = [];
+    this.sortShips(sortedShips);
   }
 }
