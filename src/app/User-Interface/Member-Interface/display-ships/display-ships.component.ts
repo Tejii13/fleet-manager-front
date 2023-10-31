@@ -46,8 +46,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.sortedShips = this.ships;
-    console.log(this.sortedShips);
-    console.log(this.ships);
     if (this.firstRender) {
       this.firstRender = false;
       this.getFleetData.emit();

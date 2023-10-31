@@ -18,6 +18,8 @@ export class DisplayShipsFilterBarComponent implements OnInit {
 
   public brands: string[] = [];
 
+  public shipsToPass: Ship[] = [];
+
   public sortedShips: Ship[] = [];
   public sortedShipsByName: Ship[] = [];
   public sortedShipsByObtMethod: Ship[] = [];
@@ -137,6 +139,42 @@ export class DisplayShipsFilterBarComponent implements OnInit {
     this.fuseSortedShipTables();
   }
 
+  sortShipsByOrder() {
+    this.sortedShipsByOrder = [];
+    this.sortByNameValue = '';
+
+    const order = this.sortByOrderValue;
+    console.log(order);
+
+    switch (order) {
+      case 'scuAsc':
+        this.shipsToPass = this.sortedShips
+          .slice()
+          .sort((a, b) => a.cargo_capacity - b.cargo_capacity);
+        break;
+      case 'scuDsc':
+        this.shipsToPass = this.sortedShips
+          .slice()
+          .sort((a, b) => b.cargo_capacity - a.cargo_capacity);
+        break;
+      case 'crewAsc':
+        this.shipsToPass = this.sortedShips
+          .slice()
+          .sort((a, b) => a.max_crew - b.max_crew);
+        break;
+      case 'crewDsc':
+        this.shipsToPass = this.sortedShips
+          .slice()
+          .sort((a, b) => b.max_crew - a.max_crew);
+        break;
+      default:
+        this.shipsToPass = this.sortedShips.slice(); // Default case to show all ships
+    }
+
+    console.log(this.shipsToPass);
+    this.actualizedShips.emit(this.shipsToPass);
+  }
+
   fuseSortedShipTables() {
     this.sortedShips = [];
 
@@ -148,17 +186,37 @@ export class DisplayShipsFilterBarComponent implements OnInit {
       this.sortedShipsByBrand = this.ships;
     }
 
+    if (this.sortedShipsByOrder.length === 0) {
+      this.sortedShipsByOrder = this.ships;
+    }
     for (let shipToSort of this.ships) {
       if (
         this.sortedShipsByObtMethod.includes(shipToSort) &&
-        this.sortedShipsByBrand.includes(shipToSort)
+        this.sortedShipsByBrand.includes(shipToSort) &&
+        this.sortedShipsByOrder.includes(shipToSort)
       ) {
         this.sortedShips.push(shipToSort);
       }
     }
 
-    this.getBrands();
-    this.actualizedShips.emit(this.sortedShips);
+    // if (
+    //   this.sortByOrderValue !== 'hidden' &&
+    //   this.sortByOrderValue !== 'default'
+    // ) {
+    //   this.sortByNameValue = '';
+    //   this.sortShipsByOrder();
+    // }
+
+    if (
+      this.sortByManufacturerValue === 'hidden' ||
+      this.sortByManufacturerValue === 'default'
+    ) {
+      this.getBrands();
+    }
+
+    this.sortShipsByOrder();
+
+    // this.actualizedShips.emit(this.sortedShips);
   }
 
   resetFilters() {
@@ -167,6 +225,9 @@ export class DisplayShipsFilterBarComponent implements OnInit {
     this.sortByManufacturerValue = 'hidden';
     this.sortByOrderValue = 'hidden';
     this.sortedShips = this.ships;
+    this.sortedShipsByObtMethod = [];
+    this.sortedShipsByBrand = [];
+    this.sortedShipsByOrder = [];
     this.actualizedShips.emit(this.sortedShips);
   }
 }
