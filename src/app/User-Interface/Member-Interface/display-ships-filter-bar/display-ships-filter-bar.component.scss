@@ -1,4 +1,4 @@
-button.search {
+button {
   height: 30px;
   width: 30px;
   margin-left: -30px;
@@ -6,21 +6,86 @@ button.search {
   border-radius: 10px;
 }
 
+button.reset {
+  width: 24px;
+  height: 24px;
+}
+
 input, select {
-  width: 160px;
+  width: 200px;
   height: 30px;
   background-color: rgba(1, 80,126,0.5);
   border: solid #adc8d3 1px;
   border-radius: 2px;
-  margin-bottom: 4px;
+  margin-bottom: 0px;
 }
 
-input.search, select.search {
-  margin-bottom: 0;
-  width: 200px;
+select {
+  width: 164px;
 }
 
 mat-icon.search {
   padding-top: 2px;
   padding-left: 2px;
+}
+
+@media screen and (max-width: 1140px) {
+  select{
+    min-width: 100px;
+    width: calc(33% - 20px);
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  select{
+    min-width: 100px;
+    width: calc(33% - 17px);
+  }
+}
+
+@media screen and (max-width: 720px) {
+  div.search-container {
+    flex-wrap: wrap;
+  }
+
+  div.input-container {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 4px;
+  }
+
+   input {
+    width: 100%;
+  }
+
+  div.selects-container {
+    justify-content: space-between;
+  }
+}
+
+// @media screen and (max-width: 640px) {
+//   input{
+//     min-width: 200px;
+//     width: calc(50% - 10px);
+//   }
+// }
+
+@media screen and (max-width: 570px) {
+  div.selects-container {
+    flex-wrap: wrap;
+  }
+
+  div.input-container {
+    width: 100%;
+    margin: 0;
+  }
+
+  select {
+    width: 100%;
+    margin: 0;
+  }
+
+  button.reset {
+    display: none;
+  }
 }

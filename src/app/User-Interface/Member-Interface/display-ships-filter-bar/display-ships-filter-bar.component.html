@@ -5,50 +5,72 @@
   </p>
 </div>
 
-<div *ngIf="!fleetEmpty" class="flex justify-between px-4">
-  <div class="input-container mr-2">
+<div
+  *ngIf="!fleetEmpty"
+  class="search-container flex justify-between flex-wrap sm:flex-nowrap px-4"
+>
+  <div class="input-container sm:mr-2">
     <input
       [(ngModel)]="sortByNameValue"
-      class="search px-2"
+      class="px-2"
       type="text"
       placeholder="Rechercher un vaisseau"
+      (input)="sortShipsByName()"
     />
-    <button class="search">
-      <!-- (click)="sortShipsByObtentionMethod(sortBySelectValue, shipToSortName)" -->
+    <button>
       <mat-icon class="search">search</mat-icon>
     </button>
   </div>
-  <div>
-    <select
-      [(ngModel)]="sortByOrderValue"
-      class="search mt-0.5 px-2 mx-2"
-      title="Trier par ordre"
-      name="sortByOrder"
-      id="sortByOrder"
-    >
-      <option value="default" selected hidden>Choisissez une option</option>
-      <option value="scuUP">SCU croissant</option>
-      <option value="scuDown">SCU décroissant</option>
-      <option value="crewUp">Crew croissant</option>
-      <option value="crewDown">Crew décroissant</option>
-      <option value="flightReady">Disponible</option>
-      <option value="notFlightReady">Indisponible</option>
-    </select>
+  <div
+    class="selects-container flex items-center justify-end flex-wrap sm:flex-nowrap w-full lg:w-1/2"
+  >
     <select
       [(ngModel)]="sortByObtMethodValue"
-      class="search mt-0.5 px-2"
+      class="mt-0.5 px-2"
       title="Trier par méthode d'obtention"
       name="sortByObtMethod"
       id="sortByObtMethod"
+      (change)="sortShipsByObtentionMethod()"
     >
-      <!-- (change)="sortShipsByObtentionMethod(sortBySelectValue, shipToSortName)" -->
+      <option value="hidden" selected hidden>Acquisition:</option>
       <option value="default">Tout afficher</option>
       <option value="pledge">Pledge</option>
-      <option value="igBuy">Achat in game</option>
+      <option value="In game">Achat in game</option>
       <option value="loaners">Loaners</option>
       <option value="rentals">Location</option>
       <option value="subscription">Abonnement</option>
       <option value="referral">Referral</option>
     </select>
+    <select
+      [(ngModel)]="sortByManufacturerValue"
+      class="mt-0.5 px-2 mx-2"
+      title="Trier"
+      name="sortByManufacturer"
+      id="sortByManufacturer"
+      (change)="sortShipsByBrand()"
+    >
+      <option value="hidden" selected hidden>Manufacturier:</option>
+      <option value="default">Tout afficher</option>
+      <option *ngFor="let brand of brands" value="{{ brand }}">
+        {{ brand | titlecase }}
+      </option>
+    </select>
+    <select
+      [(ngModel)]="sortByOrderValue"
+      class="mt-0.5 px-2 mr-9"
+      title="Trier"
+      name="sortByOrder"
+      id="sortByOrder"
+    >
+      <option value="hidden" selected hidden>Trier par:</option>
+      <option value="default">Tout afficher</option>
+      <option value="scuAsc">SCU croissant</option>
+      <option value="scuDsc">SCU décroissant</option>
+      <option value="crewAsc">Crew croissant</option>
+      <option value="crewDsc">Crew décroissant</option>
+    </select>
+    <button class="reset" (click)="resetFilters()">
+      <mat-icon>autorenew</mat-icon>
+    </button>
   </div>
 </div>

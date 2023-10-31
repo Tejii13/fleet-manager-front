@@ -1,5 +1,8 @@
 <div *ngIf="show">
-  <app-display-ships-filter-bar></app-display-ships-filter-bar>
+  <app-display-ships-filter-bar
+    [ships]="ships"
+    (actualizedShips)="actualizeShips($event)"
+  ></app-display-ships-filter-bar>
 
   <mat-accordion>
     <ul class="flex flex-wrap lg:flex-no-wrap scroll-smooth focus:scroll-auto">
@@ -64,7 +67,11 @@
           </mat-expansion-panel-header>
 
           <!-- Information container -->
-          <p lang="en" class="text-xs italic p-2">"{{ ship.description }}"</p>
+          <p lang="en" class="text-xs italic p-2">
+            <span *ngIf="ship.description" lang="en"
+              >"{{ ship.description }}"</span
+            >
+          </p>
           <div class="flex flex-wrap w-full mx-4 mb-4">
             <!-- General informations -->
             <div class="w-full sm:w-2/5">

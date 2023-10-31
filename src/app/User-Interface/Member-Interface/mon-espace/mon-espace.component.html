@@ -16,7 +16,7 @@
 <!-- Shows data if it isn't the first connection -->
 <ng-template #elseShowData>
   <div *ngIf="showData">
-    <h2>Bienvenue dans votre espace personnel {{ username }} !</h2>
+    <h2>Bienvenue dans ton hangar {{ username }} !</h2>
     <ng-container *ngIf="isAdmin">
       <app-admin-panel
         [userId]="userId"

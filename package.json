@@ -1,6 +1,6 @@
 {
   "name": "gestion-flotte-front",
-  "version": "0.6.0",
+  "version": "0.2.5",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

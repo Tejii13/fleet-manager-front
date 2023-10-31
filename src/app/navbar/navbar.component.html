@@ -1,5 +1,10 @@
 <mat-toolbar class="flex justify-between">
-  <h1 class="title justify-start"><a href="/">Star Flotilla</a></h1>
+  <div class="flex items-baseline">
+    <h1 class="title justify-start">
+      <a href="/">Star Flotilla</a>
+    </h1>
+    <p class="text-xs">Alpha 0.2.5</p>
+  </div>
   <button class="justify-end" *ngIf="isConnected" (click)="disconnect()">
     Logout
   </button>

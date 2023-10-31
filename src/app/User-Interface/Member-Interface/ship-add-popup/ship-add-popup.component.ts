@@ -70,7 +70,7 @@ export class ShipAddPopupComponent implements OnInit {
 
   handleAddButton() {
     if (
-      this.obtentionMethod !== 'null' &&
+      this.obtentionMethod !== 'default' &&
       ((this.obtentionMethod === 'loaner' && this.loanerFor) ||
         this.obtentionMethod !== 'loaner')
     ) {

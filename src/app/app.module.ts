@@ -44,6 +44,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { ShipAddPopupComponent } from './User-Interface/Member-Interface/ship-add-popup/ship-add-popup.component';
 import { DisplayShipsFilterBarComponent } from './User-Interface/Member-Interface/display-ships-filter-bar/display-ships-filter-bar.component';
+import { LegalComponent } from './legal/legal.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { DisplayShipsFilterBarComponent } from './User-Interface/Member-Interfac
     ConfirmDeleteComponent,
     ShipAddPopupComponent,
     DisplayShipsFilterBarComponent,
+    LegalComponent,
   ],
   imports: [
     BrowserModule,

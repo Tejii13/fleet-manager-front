@@ -21,7 +21,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
   @Input() isAdmin!: boolean;
   @Input() reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
   @Input() ships!: Ship[];
-  @Input() brands!: Map<any, any>;
   @Input() fleetEmpty!: boolean;
   @Output() getFleetData = new EventEmitter<void>();
   public shipToSortName: string = '';
@@ -39,16 +38,16 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
   public shipToRemoveName!: string;
   public shipToChange!: number | null;
 
+  public sortedShips!: Ship[];
+
   public show: boolean = true;
   public showConfirmRemove: boolean = false;
   private scrollLocked: boolean = false;
 
-  public sortedShips: Ship[] = [];
-  public sortedShipsByObtMethod: Ship[] = [];
-  public sortedShipsByName: Ship[] = [];
-
   ngOnInit(): void {
-    console.log(this.brands);
+    this.sortedShips = this.ships;
+    console.log(this.sortedShips);
+    console.log(this.ships);
     if (this.firstRender) {
       this.firstRender = false;
       this.getFleetData.emit();
@@ -58,21 +57,9 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
         this.getFleetData.emit();
       }
     });
-
-    this.sortShipsByObtentionMethod(
-      this.sortBySelectValue,
-      this.shipToSortName
-    );
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['ships'] && !changes['ships'].firstChange) {
-      this.sortShipsByObtentionMethod(
-        this.sortBySelectValue,
-        this.shipToSortName
-      );
-    }
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   toggleShipRemovePopup(shipId: number, shipName: string) {
     this.handleScrollLock();
@@ -140,102 +127,6 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
     }
   }
 
-  sortShipsByObtentionMethod(obtMethod: string, shipName: string) {
-    this.sortedShipsByObtMethod = [];
-
-    switch (obtMethod) {
-      case 'default':
-        this.sortedShipsByObtMethod = this.ships;
-        break;
-      case 'pledge':
-        for (let shipToSort of this.ships) {
-          if (shipToSort.obtention_method === 'pledge') {
-            this.sortedShipsByObtMethod.push(shipToSort);
-          }
-        }
-        break;
-      case 'igBuy':
-        for (let shipToSort of this.ships) {
-          if (shipToSort.obtention_method === 'igBuy') {
-            this.sortedShipsByObtMethod.push(shipToSort);
-          }
-        }
-        break;
-      case 'loaners':
-        for (let shipToSort of this.ships) {
-          if (shipToSort.obtention_method === 'loaner') {
-            this.sortedShipsByObtMethod.push(shipToSort);
-          }
-        }
-        break;
-      case 'rentals':
-        for (let shipToSort of this.ships) {
-          if (shipToSort.obtention_method === 'rental') {
-            this.sortedShipsByObtMethod.push(shipToSort);
-          }
-        }
-        break;
-      case 'subscription':
-        for (let shipToSort of this.ships) {
-          if (shipToSort.obtention_method === 'subscription') {
-            this.sortedShipsByObtMethod.push(shipToSort);
-          }
-        }
-        break;
-      case 'referral':
-        for (let shipToSort of this.ships) {
-          if (shipToSort.obtention_method === 'referral') {
-            this.sortedShipsByObtMethod.push(shipToSort);
-          }
-        }
-        break;
-    }
-
-    this.sortShipsByName(shipName);
-    this.fuseSortedShipTables();
-  }
-
-  sortShipsByName(shipName: string) {
-    this.sortedShipsByName = [];
-
-    for (let shipToSort of this.ships) {
-      if (
-        shipToSort.name.toLowerCase().includes(shipName.toLowerCase()) ||
-        shipToSort.nickname
-          ?.toLocaleLowerCase()
-          .includes(shipName.toLowerCase()) ||
-        // FIXME Remove it when dedicated function enabled
-        shipToSort.manufacturer.toLowerCase().includes(shipName.toLowerCase())
-        // Remove until here
-      ) {
-        this.sortedShipsByName.push(shipToSort);
-      }
-    }
-  }
-
-  // TODO Add dedicated function to brands later
-  // sortShipsByBrand(shipBrand: string) {}
-
-  fuseSortedShipTables() {
-    this.sortedShips = [];
-
-    if (this.shipToSortName !== '') {
-      for (let ship of this.sortedShipsByName) {
-        if (this.sortedShipsByObtMethod.includes(ship)) {
-          this.sortedShips.push(ship);
-        }
-      }
-    }
-    for (let ship of this.sortedShipsByObtMethod) {
-      if (
-        (this.sortedShipsByName.includes(ship) || this.shipToSortName === '') &&
-        !this.sortedShips.includes(ship)
-      ) {
-        this.sortedShips.push(ship);
-      }
-    }
-  }
-
   reload() {
     this.show = false;
     setTimeout(() => (this.show = true));
@@ -249,5 +140,10 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
     } else {
       document.body.style.overflow = 'auto';
     }
+  }
+
+  actualizeShips(sortedShips: Ship[]) {
+    this.sortedShips = sortedShips;
+    console.log(sortedShips);
   }
 }

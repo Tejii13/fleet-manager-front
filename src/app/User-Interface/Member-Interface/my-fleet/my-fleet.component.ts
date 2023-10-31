@@ -13,7 +13,6 @@ export class MyFleetComponent implements OnInit {
   @Input() userId!: number;
   @Input() isAdmin!: boolean;
   @Input() reloadShipsDisplay: Subject<boolean> = new Subject<boolean>();
-  @Input() brands!: Map<any, any>;
   @Input() ships!: Ship[];
   @Input() fleetEmpty!: boolean;
   @Input() orgId!: number;
@@ -26,7 +25,6 @@ export class MyFleetComponent implements OnInit {
   public show: boolean = true;
 
   ngOnInit(): void {
-    console.log(this.brands);
     this.route.queryParams.subscribe((params) => {
       switch (params['view']) {
         case 'synthesis':
