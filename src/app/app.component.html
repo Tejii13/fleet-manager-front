@@ -13,11 +13,17 @@
     <div class="background-image"></div>
     <div class="background-blur"></div>
     <main class="content">
-      <app-navbar></app-navbar>
-      <div class="page-content">
-        <router-outlet></router-outlet>
+      <header>
+        <app-navbar></app-navbar>
+      </header>
+      <div class="footer-fixer">
+        <div class="page-content">
+          <router-outlet></router-outlet>
+        </div>
+        <footer>
+          <app-footer></app-footer>
+        </footer>
       </div>
-      <!-- <app-footer></app-footer> -->
     </main>
   </body>
 </html>

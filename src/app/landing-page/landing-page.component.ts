@@ -17,8 +17,7 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private fetch: FetchDataService,
     private router: Router,
-    private cookieService: CookieService,
-    private inAppService: InAppService
+    private cookieService: CookieService
   ) {}
 
   public username!: string;
