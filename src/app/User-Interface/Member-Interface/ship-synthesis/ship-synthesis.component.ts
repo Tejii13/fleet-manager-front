@@ -45,18 +45,18 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.sortedShips = this.ships;
-    this.sortShips();
+    this.sortShips(this.sortedShips);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['ships'] && !changes['ships'].firstChange) {
       this.types = [];
-      this.sortShips();
+      this.sortShips(this.sortedShips);
     }
   }
 
-  sortShips() {
-    for (let ship of this.sortedShips) {
+  sortShips(sortedShips: Ship[]) {
+    for (let ship of sortedShips) {
       const typeIndex = this.types.findIndex((t) => t.type === ship.type);
       if (typeIndex === -1) {
         this.types.push({
@@ -127,8 +127,6 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
   actualizeShips(sortedShips: Ship[]) {
     this.sortedShips = [];
     this.types = [];
-    this.sortedShips = sortedShips;
-    console.log(this.sortedShips);
-    this.sortShips();
+    this.sortShips(sortedShips);
   }
 }

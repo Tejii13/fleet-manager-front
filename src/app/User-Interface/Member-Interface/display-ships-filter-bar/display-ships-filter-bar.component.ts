@@ -139,6 +139,7 @@ export class DisplayShipsFilterBarComponent implements OnInit {
     this.fuseSortedShipTables();
   }
 
+  // Populates the sortedShipsByOrder array with sortedShips in a certain order
   sortShipsByOrder() {
     this.sortedShipsByOrder = [];
     this.sortByNameValue = '';
@@ -168,7 +169,7 @@ export class DisplayShipsFilterBarComponent implements OnInit {
           .sort((a, b) => b.max_crew - a.max_crew);
         break;
       default:
-        this.shipsToPass = this.sortedShips.slice(); // Default case to show all ships
+        this.shipsToPass = this.sortedShips.slice();
     }
 
     console.log(this.shipsToPass);
@@ -199,14 +200,6 @@ export class DisplayShipsFilterBarComponent implements OnInit {
       }
     }
 
-    // if (
-    //   this.sortByOrderValue !== 'hidden' &&
-    //   this.sortByOrderValue !== 'default'
-    // ) {
-    //   this.sortByNameValue = '';
-    //   this.sortShipsByOrder();
-    // }
-
     if (
       this.sortByManufacturerValue === 'hidden' ||
       this.sortByManufacturerValue === 'default'
@@ -215,8 +208,6 @@ export class DisplayShipsFilterBarComponent implements OnInit {
     }
 
     this.sortShipsByOrder();
-
-    // this.actualizedShips.emit(this.sortedShips);
   }
 
   resetFilters() {

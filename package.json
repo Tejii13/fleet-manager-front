@@ -1,6 +1,6 @@
 {
-  "name": "gestion-flotte-front",
-  "version": "0.2.9",
+  "name": "star-flotilla",
+  "version": "0.3.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
