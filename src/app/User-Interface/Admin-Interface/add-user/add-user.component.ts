@@ -19,6 +19,7 @@ export class AddUserComponent {
   public role!: Array<string>;
 
   public mdpTemp!: string;
+  public userCreated: boolean = false;
 
   public fieldsAreValid: boolean = true;
   public fetching: boolean = false;
@@ -35,12 +36,21 @@ export class AddUserComponent {
       this.fetch
         .registerUser(this.username, this.role, this.organizationId)
         .subscribe((data) => {
-          this.mdpTemp = data.pass;
-          this.fetching = false;
+          if (data.pass) {
+            this.mdpTemp = data.pass;
+            this.fetching = false;
+          } else if (data.code === 201) {
+            this.userCreated = true;
+            this.fetching = false;
+          }
         });
     } else {
       this.fieldsAreValid = false;
     }
+  }
+
+  reloadDisplayFunction() {
+    this.reloadDisplay.emit();
   }
 
   copyToClipboard(text: string) {

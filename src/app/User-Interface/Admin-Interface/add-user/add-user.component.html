@@ -43,16 +43,28 @@
       </button>
     </div>
   </form>
-  <div class="text-base mt-2" *ngIf="mdpTemp">
-    Utilisateur crée avec succès, voici le mot de passe à lui fournir:
-    <button
-      type="submit"
-      class="hover:underline hover:italic"
-      (click)="copyToClipboard(mdpTemp)"
-      matTooltip="Cliquez ici pour copier le mot de passe"
-      matTooltipPosition="above"
-    >
-      {{ mdpTemp }}
-    </button>
+  <div class="text-base mt-2" *ngIf="mdpTemp || userCreated">
+    <p *ngIf="mdpTemp">
+      Utilisateur crée avec succès, voici le mot de passe à lui fournir:
+      <button
+        type="submit"
+        class="hover:underline hover:italic"
+        (click)="copyToClipboard(mdpTemp)"
+        matTooltip="Cliquez ici pour copier le mot de passe"
+        matTooltipPosition="above"
+      >
+        {{ mdpTemp }}
+      </button>
+    </p>
+    <p *ngIf="userCreated">
+      Utilisateur crée avec succès,
+      <button
+        type="submit"
+        class="hover:underline hover:italic"
+        (click)="reloadDisplayFunction()"
+      >
+        cliquez ici pour actualiser la liste.
+      </button>
+    </p>
   </div>
 </div>
