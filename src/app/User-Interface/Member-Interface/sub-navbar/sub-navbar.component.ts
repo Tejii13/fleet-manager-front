@@ -19,7 +19,7 @@ export class SubNavbarComponent {
   ) {}
 
   navigateToShips() {
-    this.inApp.navigateToShips(this.username);
+    // this.inApp.navigateToShips(this.username);
   }
 
   navigateToSynthesis() {

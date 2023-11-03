@@ -4,6 +4,8 @@
     (actualizedShips)="actualizeShips($event)"
   ></app-display-ships-filter-bar>
 
+  <div *ngIf="sortedShips.length === 0">Aucun vaisseau à afficher</div>
+
   <mat-accordion>
     <ul class="flex flex-wrap lg:flex-no-wrap scroll-smooth focus:scroll-auto">
       <li *ngFor="let ship of sortedShips" class="w-full lg:w-1/2 p-4">

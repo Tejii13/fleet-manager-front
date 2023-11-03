@@ -96,7 +96,7 @@ export class DisplayShipsFilterBarComponent implements OnInit {
           }
         }
         break;
-      case 'rentals':
+      case 'rental':
         for (let shipToSort of this.ships) {
           if (shipToSort.obtention_method === 'rental') {
             this.sortedShipsByObtMethod.push(shipToSort);
@@ -180,7 +180,7 @@ export class DisplayShipsFilterBarComponent implements OnInit {
     this.sortedShips = [];
 
     if (this.sortedShipsByObtMethod.length === 0) {
-      this.sortedShipsByObtMethod = this.ships;
+      this.sortedShipsByObtMethod = [];
     }
 
     if (this.sortedShipsByBrand.length === 0) {
