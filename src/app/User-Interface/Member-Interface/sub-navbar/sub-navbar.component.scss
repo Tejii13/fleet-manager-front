@@ -1,0 +1,19 @@
+button {
+  border: solid #adc8d3 1px;
+  width: 90px;
+  height: 30px;
+  color: #adc8d3;
+  border-radius: 4px;
+}
+
+button.bigButton {
+  width: 150px;
+}
+
+button:hover {
+  background-color: rgba(1, 80,126,0.5);
+}
+
+button.notAvailable:hover {
+  background-color: rgb(52, 7, 7)
+}

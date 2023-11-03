@@ -1,6 +1,4 @@
-<div class="sub-navbar">
-  <app-sub-navbar></app-sub-navbar>
-</div>
+<app-sub-navbar [isAdmin]="isAdmin" [username]="username"></app-sub-navbar>
 
 <div
   *ngIf="!showData && !verifyPassword"

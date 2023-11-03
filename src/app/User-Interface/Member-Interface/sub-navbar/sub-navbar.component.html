@@ -1,0 +1,22 @@
+<div class="flex justify-end mb-4 mt-2 text-sm text-teal-100">
+  <button class="mx-1" (click)="navigateToShips()">Vaisseaux</button
+  ><button class="mx-1" (click)="navigateToSynthesis()">Synthèse</button
+  ><button
+    class="mx-1 notAvailable"
+    matTooltip="Coming Soon"
+    matTooltipPosition="below"
+  >
+    Whishlist</button
+  ><span *ngIf="isAdmin"
+    ><button
+      class="mx-1 notAvailable"
+      matTooltip="Coming Soon"
+      matTooltipPosition="below"
+    >
+      Organisation</button
+    ><button class="mx-1" (click)="navigateToMembers()">Membres</button
+    ><button class="bigButton mx-1" (click)="navigateToOverview()">
+      Flotte de l'organisation
+    </button></span
+  ><button (click)="disconnect()" class="mx-1">Déconnexion</button>
+</div>
