@@ -1,33 +1,17 @@
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { Component, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   constructor(private router: Router, private cookieService: CookieService) {}
 
   private username!: string;
   public isConnected: boolean = false;
-
-  ngOnInit(): void {
-    this.username = this.cookieService.get('username');
-    const authCookie = this.cookieService.get('auth');
-
-    if (
-      this.username &&
-      authCookie &&
-      this.username !== '' &&
-      authCookie !== ''
-    ) {
-      this.isConnected = true;
-    } else {
-      this.disconnect();
-    }
-  }
 
   disconnect() {
     this.cookieService.delete('auth', '/');
