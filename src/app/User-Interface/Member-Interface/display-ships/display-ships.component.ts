@@ -57,7 +57,11 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['ships'] && !changes['ships'].firstChange) {
+      this.sortedShips = this.ships;
+    }
+  }
 
   toggleShipRemovePopup(shipId: number, shipName: string) {
     this.handleScrollLock();

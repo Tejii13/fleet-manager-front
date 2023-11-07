@@ -35,6 +35,12 @@ export class InAppService {
     });
   }
 
+  navigateToOrganization(id: string) {
+    this.router.navigate(['/mon-espace', id], {
+      queryParams: { view: 'organization' },
+    });
+  }
+
   sortShipsByOrder(orderValue: string, ships: Ship[]) {
     let sortedShipsByOrder: Ship[] = [];
 

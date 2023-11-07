@@ -1,4 +1,8 @@
-<app-sub-navbar [isAdmin]="isAdmin" [username]="username"></app-sub-navbar>
+<app-sub-navbar
+  [isAdmin]="isAdmin"
+  [username]="username"
+  [currentView]="currentView"
+></app-sub-navbar>
 
 <div
   *ngIf="!showData && !verifyPassword"
@@ -19,15 +23,21 @@
 <ng-template #elseShowData>
   <div *ngIf="showData">
     <h2>Bienvenue dans ton hangar {{ username }} !</h2>
-    <ng-container *ngIf="isAdmin">
-      <app-admin-panel
-        [userId]="userId"
-        [fleet]="fleet"
-        [ships]="ships"
-        (showShipsChange)="onShowShipsChange($event)"
-        [organizationId]="organizationId"
-      ></app-admin-panel>
-    </ng-container>
+    <!-- <ng-container *ngIf="isAdmin"> -->
+    <app-admin-panel
+      *ngIf="
+        isAdmin &&
+        (currentView === 'organization' ||
+          currentView === 'members' ||
+          currentView === 'overview')
+      "
+      [userId]="userId"
+      [fleet]="fleet"
+      [ships]="ships"
+      (showShipsChange)="onShowShipsChange($event)"
+      [organizationId]="organizationId"
+    ></app-admin-panel>
+    <!-- </ng-container> -->
 
     <div *ngIf="showShips">
       <div
@@ -53,7 +63,15 @@
         </h2>
       </div>
       <!-- Shows the ships component, ON by default -->
-      <div *ngIf="showShips && ships && fleet && currentView !== 'members'">
+      <div
+        *ngIf="
+          showShips &&
+          ships &&
+          fleet &&
+          currentView !== 'members' &&
+          currentView !== 'organization'
+        "
+      >
         <app-search-ships
           [ships]="ships"
           [userId]="userId"

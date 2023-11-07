@@ -6,23 +6,6 @@
     <h2 *ngIf="currentView === 'overview' && isAdmin" class="pl-4">
       Flotte de l'organisation
     </h2>
-    <div class="flex justify-around sm:justify-start pl-4">
-      <button
-        (click)="navigateToShips()"
-        *ngIf="currentView !== 'ships'"
-        title="Vaisseaux"
-        class="mr-2"
-      >
-        Vaisseaux
-      </button>
-      <button
-        (click)="navigateToSynthesis()"
-        *ngIf="currentView !== 'synthesis'"
-        title="Synthèse"
-      >
-        Synthèse
-      </button>
-    </div>
   </div>
 
   <!-- <hr class="my-2" /> -->

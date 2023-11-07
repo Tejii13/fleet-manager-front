@@ -23,7 +23,7 @@ export class MonEspaceComponent implements OnInit {
     private fetchFleet: FetchFleetService,
     private cookieService: CookieService,
     private router: Router,
-    private inAppService: InAppService
+    private inApp: InAppService
   ) {}
 
   public showData: boolean = false;
@@ -163,18 +163,25 @@ export class MonEspaceComponent implements OnInit {
           if (this.isAdmin) {
             this.currentView = 'members';
           } else {
-            this.currentView = 'ships';
+            this.inApp.navigateToShips(this.username);
           }
           break;
         case 'overview':
           if (this.isAdmin) {
             this.currentView = 'overview';
           } else {
-            this.currentView = 'ships';
+            this.inApp.navigateToShips(this.username);
           }
           break;
         case 'synthesis':
           this.currentView = 'synthesis';
+          break;
+        case 'organization':
+          if (this.isAdmin) {
+            this.currentView = 'organization';
+          } else {
+            this.inApp.navigateToShips(this.username);
+          }
           break;
         default:
           this.currentView = 'ships';

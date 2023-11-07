@@ -44,24 +44,6 @@ export class MyFleetComponent implements OnInit {
     });
   }
 
-  // Function to navigate to 'ships' view
-  navigateToShips() {
-    const id = this.route.snapshot.paramMap.get('id'); // Get the 'id' parameter from the current URL
-    if (id) {
-      this.inApp.navigateToShips(id);
-      this.reload();
-    }
-  }
-
-  // Function to navigate to 'synthesis' view
-  navigateToSynthesis() {
-    const id = this.route.snapshot.paramMap.get('id'); // Get the 'id' parameter from the current URL
-    if (id) {
-      this.inApp.navigateToSynthesis(id);
-      this.reload();
-    }
-  }
-
   emit() {
     this.getFleetData.emit();
   }

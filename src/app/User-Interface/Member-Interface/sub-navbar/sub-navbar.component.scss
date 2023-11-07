@@ -1,3 +1,13 @@
+.content {
+  overflow-x: auto;
+}
+
+.nav-container {
+  width: 100%;
+  // display: flex;
+  white-space: nowrap;
+}
+
 button {
   border: solid #adc8d3 1px;
   width: 90px;
@@ -11,9 +21,13 @@ button.bigButton {
 }
 
 button:hover {
-  background-color: rgba(1, 80,126,0.5);
+  background-color: rgba(45, 94, 123, 0.5);
 }
 
 button.notAvailable:hover {
   background-color: rgb(52, 7, 7)
+}
+
+.active {
+  background-color: rgba(1, 80,126,0.5);
 }

@@ -11,6 +11,7 @@ import { InAppService } from 'src/app/in-app.service';
 export class SubNavbarComponent {
   @Input() isAdmin: boolean = false;
   @Input() username!: string;
+  @Input() currentView!: string;
 
   constructor(
     private cookieService: CookieService,
@@ -19,7 +20,7 @@ export class SubNavbarComponent {
   ) {}
 
   navigateToShips() {
-    // this.inApp.navigateToShips(this.username);
+    this.inApp.navigateToShips(this.username);
   }
 
   navigateToSynthesis() {
@@ -35,6 +36,12 @@ export class SubNavbarComponent {
   navigateToOverview() {
     if (this.isAdmin) {
       this.inApp.navigateToOverview(this.username);
+    }
+  }
+
+  navigateToOrganization() {
+    if (this.isAdmin) {
+      this.inApp.navigateToOrganization(this.username);
     }
   }
 

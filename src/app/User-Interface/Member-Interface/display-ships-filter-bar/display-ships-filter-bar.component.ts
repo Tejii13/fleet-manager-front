@@ -183,18 +183,18 @@ export class DisplayShipsFilterBarComponent implements OnInit {
       this.sortedShipsByObtMethod = [];
     }
 
+    if (this.sortByObtMethodValue === 'default') {
+      this.sortedShipsByObtMethod = this.ships;
+    }
+
     if (this.sortedShipsByBrand.length === 0) {
       this.sortedShipsByBrand = this.ships;
     }
 
-    if (this.sortedShipsByOrder.length === 0) {
-      this.sortedShipsByOrder = this.ships;
-    }
     for (let shipToSort of this.ships) {
       if (
         this.sortedShipsByObtMethod.includes(shipToSort) &&
-        this.sortedShipsByBrand.includes(shipToSort) &&
-        this.sortedShipsByOrder.includes(shipToSort)
+        this.sortedShipsByBrand.includes(shipToSort)
       ) {
         this.sortedShips.push(shipToSort);
       }
