@@ -1,27 +1,79 @@
-# GestionFlotteFront
+# Fleet Manager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.8.
+Fleet Manager is an online interface designed to help organizations keep track of available ships and their owners. This README will provide you with an overview of the application and guide you on how to install and run it using Angular.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Fleet Manager currently offers the following features:
 
-## Code scaffolding
+- **Personal Space**: Users can have their own personalized accounts.
+- **Ship List**: View and manage all your ships.
+- **Type Summary**: Get a summary of ships categorized by their types.
+- **Organization Overview**: Provides a comprehensive ship overview for organizational leaders.
+- **Sorting by Brand**: Sort ships by their brand.
+- **Sorting by Acquisition Method**: Sort ships by their method of acquisition.
+<br />
+<br />
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Getting Started with Angular
 
-## Build
+Fleet Manager is built with Angular. To get started with the application, follow these steps:
+<br />
+<br />
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Prerequisites
 
-## Running unit tests
+Before you begin, make sure you have Node.js and npm (Node Package Manager) installed on your system. You can download them from [Node.js Official Website](https://nodejs.org/).
+<br />
+<br />
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Forking the Repository
 
-## Running end-to-end tests
+To contribute or work on Fleet Manager, fork the repository on GitHub:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Visit the Fleet Manager GitHub repository at [https://github.com/Tejii13/fleet-manager-front](https://github.com/Tejii13/fleet-manager-front).
 
-## Further help
+2. Click the "Fork" button in the upper right corner of the repository page. This will create a copy of the repository in your GitHub account.
+<br />
+<br />
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Installation
+
+1. Clone the Fleet Manager repository to your local machine using Git:
+
+   ```bash
+   git clone https://github.com/Tejii13/fleet-manager-front.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd fleet-manager
+   ```
+
+3. Install the project dependencies by running:
+
+   ```bash
+   npm install
+   ```
+
+<br />
+<br />
+
+### Running the Application
+
+After installing the required dependencies, you can run the Fleet Manager application:
+
+To start the development server, run:
+
+   ```bash
+   ng serve
+   ```
+
+Open your web browser and go to <http://localhost:4200> to access Fleet Manager.
+<br />
+<br />
+
+### Contact Us
+
+If you have any questions or need further information about Fleet Manager, please feel free to contact me at contact@star-flotilla.com or via discord (tejii_).
