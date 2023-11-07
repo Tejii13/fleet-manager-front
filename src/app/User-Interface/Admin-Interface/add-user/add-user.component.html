@@ -20,6 +20,7 @@
         >Le rôle à attribuer:&nbsp;</label
       >
       <select name="role" id="role_select" [(ngModel)]="role">
+        <option value="hidden" selected>Rôle (par défaut)</option>
         <option value="admin">Admin</option>
         <option value="membre">Membre</option>
       </select>
@@ -40,6 +41,14 @@
         type="submit"
       >
         Ajouter
+      </button>
+      <button
+        *ngIf="!fetching && !mdpTemp"
+        class="styleIt ml-2"
+        (click)="cancel()"
+        type="reset"
+      >
+        Annuler
       </button>
     </div>
   </form>

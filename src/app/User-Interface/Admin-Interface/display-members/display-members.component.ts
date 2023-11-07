@@ -17,11 +17,8 @@ export class DisplayMembersComponent implements OnInit {
 
   @Input() organizationId!: number;
   @Input() userId!: number;
-  @Input() showUpdateMembers!: boolean;
-  @Output() updateMembersAfterAdd: EventEmitter<void> =
-    new EventEmitter<void>();
-
   public members!: Member[];
+  public showUpdateMembers: boolean = false;
 
   public show: boolean = true;
   public showHangar: boolean = false;
@@ -80,7 +77,7 @@ export class DisplayMembersComponent implements OnInit {
   }
 
   reload() {
-    this.updateMembersAfterAdd.emit();
+    this.showUpdateMembers = false;
     this.members = [];
     this.getData();
   }

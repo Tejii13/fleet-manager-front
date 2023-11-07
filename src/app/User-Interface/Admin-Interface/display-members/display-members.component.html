@@ -1,20 +1,29 @@
+<h3 class="text-sm sm:text-base md:text-lg text-teal-100 px-4">
+  Liste de joueurs dans l'organisation
+</h3>
+
 <app-add-user
   *ngIf="showUpdateMembers"
   [organizationId]="organizationId"
   (reloadDisplay)="reload()"
+  (cancelAdd)="cancelMemberAdd()"
   (showPasswordPopup)="setShowPasswordPopup($event)"
 ></app-add-user>
-<h3 class="text-sm sm:text-base md:text-lg text-teal-100 px-4">
-  Liste de joueurs dans l'organisation
-</h3>
+
+<div class="mb-4 mx-4" *ngIf="!showUpdateMembers && members">
+  <button (click)="updateMembers()" class="bigButton">
+    Ajouter un utilisateur
+  </button>
+</div>
+
 <div
   *ngIf="!members"
   class="w-full flex items-center justify-center mt-4 md:mt-8"
 >
   <div class="loading-spinner"></div>
 </div>
-<div *ngIf="members">
-  <table class="w-full mx-4">
+<div *ngIf="members" class="mx-4">
+  <table class="w-full">
     <thead class="w-full">
       <th class="w-1/4 text-center py-2">Pseudo</th>
       <th class="w-1/4 text-center py-2">Hangar</th>

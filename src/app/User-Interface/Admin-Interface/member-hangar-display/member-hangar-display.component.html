@@ -1,5 +1,6 @@
-<div class="background"></div>
-<button (click)="exitHangarView()">Quitter</button>
+<button (click)="exitHangarView()" title="Quitter le vue hangar">
+  <div class="background"></div>
+</button>
 <div *ngIf="!responseReceived" class="w-full flex justify-center mt-4 md:mt-8">
   <div class="loading-spinner"></div>
 </div>

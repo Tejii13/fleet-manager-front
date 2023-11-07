@@ -12,11 +12,12 @@ export class AddUserComponent {
   @Output() reloadDisplay: EventEmitter<void> = new EventEmitter<void>();
   @Output() showPasswordPopup: EventEmitter<boolean> =
     new EventEmitter<boolean>();
+  @Output() cancelAdd: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private fetch: FetchDataService, private clipboard: Clipboard) {}
 
   public username!: string;
-  public role!: Array<string>;
+  public role: Array<string> = ['hidden'];
 
   public mdpTemp!: string;
   public userCreated: boolean = false;
@@ -45,12 +46,17 @@ export class AddUserComponent {
           }
         });
     } else {
+      this.fetching = false;
       this.fieldsAreValid = false;
     }
   }
 
   reloadDisplayFunction() {
     this.reloadDisplay.emit();
+  }
+
+  cancel() {
+    this.cancelAdd.emit();
   }
 
   copyToClipboard(text: string) {

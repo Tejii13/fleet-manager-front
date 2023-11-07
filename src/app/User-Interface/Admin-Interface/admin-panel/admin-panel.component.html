@@ -1,45 +1,6 @@
-<h2 class="px-4 w-full">Panneau d'Administration</h2>
-<!-- <hr class="my-2" /> -->
-<div *ngIf="show" class="my-2 px-4 flex flex-wrap">
-  <button
-    *ngIf="currentView !== 'ships'"
-    class="mr-2 mt-2"
-    (click)="navigateToShips()"
-  >
-    Vaisseaux
-  </button>
-
-  <button
-    *ngIf="currentView !== 'members'"
-    class="mr-2 mt-2"
-    (click)="navigateToMembers()"
-  >
-    Membres
-  </button>
-
-  <button
-    *ngIf="currentView !== 'overview' && currentView !== 'members'"
-    class="bigButton mt-2"
-    (click)="navigateToOverview()"
-  >
-    Flotte de l'organisation
-  </button>
-
-  <button
-    *ngIf="currentView === 'members' && !showUpdateMembers"
-    class="bigButton mr-2 mt-2"
-    (click)="updateMembers()"
-  >
-    Ajouter un utilisateur
-  </button>
-
-  <button
-    *ngIf="currentView === 'members' && showUpdateMembers"
-    class="bigButton mr-2 mt-2"
-    (click)="updateMembers()"
-  >
-    Annuler
-  </button>
+<div class="w-full">
+  <h2 *ngIf="currentView === 'organization'">Organisation</h2>
+  <h2 *ngIf="currentView === 'members'">Membres de l'organisation</h2>
 </div>
 
 <div
@@ -49,11 +10,12 @@
   <div class="loading-spinner"></div>
 </div>
 
-<div *ngIf="currentView === 'members'">
-  <app-display-members
-    [showUpdateMembers]="showUpdateMembers"
-    [organizationId]="organizationId"
-    [userId]="userId"
-    (updateMembersAfterAdd)="updateMembers()"
-  ></app-display-members>
-</div>
+<app-organization *ngIf="currentView === 'organization'"></app-organization>
+
+<!-- <div *ngIf="currentView === 'members'"> -->
+<app-display-members
+  *ngIf="currentView === 'members'"
+  [organizationId]="organizationId"
+  [userId]="userId"
+></app-display-members>
+<!-- </div> -->

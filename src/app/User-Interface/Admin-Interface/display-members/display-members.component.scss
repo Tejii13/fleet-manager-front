@@ -6,6 +6,10 @@ button {
   border-radius: 4px;
 }
 
+button.bigButton {
+  width: 150px;
+}
+
 thead{
   background-color: rgba(2,59,92,1);
   border: solid black 1px;

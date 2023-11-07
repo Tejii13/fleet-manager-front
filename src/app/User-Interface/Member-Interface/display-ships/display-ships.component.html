@@ -4,9 +4,14 @@
     (actualizedShips)="actualizeShips($event)"
   ></app-display-ships-filter-bar>
 
-  <div *ngIf="sortedShips.length === 0" class="p-4">
+  <p *ngIf="sortedShips.length === 0 && !fleetEmpty" class="p-4">
     Aucun vaisseau à afficher pour ces paramètres de recherche.
-  </div>
+  </p>
+
+  <p *ngIf="fleetEmpty" class="p-4">
+    Aucun vaisseau à afficher pour l'instant, utilisez la barre de recherche au
+    dessus pour en ajouter!
+  </p>
 
   <mat-accordion>
     <ul class="flex flex-wrap lg:flex-no-wrap scroll-smooth focus:scroll-auto">
