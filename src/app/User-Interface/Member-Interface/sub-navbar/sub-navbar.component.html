@@ -18,15 +18,17 @@
       matTooltip="Coming Soon"
       matTooltipPosition="below"
     >
-      Whishlist</button
-    ><span *ngIf="isAdmin"
-      ><button
-        [ngClass]="{ active: currentView === 'organization' }"
-        class="mx-1"
-        (click)="navigateToOrganization()"
-      >
-        Organisation</button
-      ><button
+      Whishlist
+    </button>
+    <button
+      [ngClass]="{ active: currentView === 'organization' }"
+      class="mx-1"
+      (click)="navigateToOrganization()"
+    >
+      Organisation
+    </button>
+    <span *ngIf="isAdmin">
+      <button
         [ngClass]="{ active: currentView === 'members' }"
         class="mx-1"
         (click)="navigateToMembers()"

@@ -40,9 +40,7 @@ export class SubNavbarComponent {
   }
 
   navigateToOrganization() {
-    if (this.isAdmin) {
-      this.inApp.navigateToOrganization(this.username);
-    }
+    this.inApp.navigateToOrganization(this.username);
   }
 
   disconnect() {

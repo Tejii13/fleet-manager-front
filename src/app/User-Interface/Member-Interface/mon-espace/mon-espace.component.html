@@ -39,6 +39,8 @@
     ></app-admin-panel>
     <!-- </ng-container> -->
 
+    <app-organization *ngIf="currentView === 'organization'"></app-organization>
+
     <div *ngIf="showShips">
       <div
         *ngIf="
@@ -62,6 +64,7 @@
           ou contactez le support si le problème persiste.
         </h2>
       </div>
+
       <!-- Shows the ships component, ON by default -->
       <div
         *ngIf="

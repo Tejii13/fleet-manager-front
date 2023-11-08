@@ -41,6 +41,7 @@ export class InAppService {
     });
   }
 
+  // FIXME Test see if it works
   sortShipsByOrder(orderValue: string, ships: Ship[]) {
     let sortedShipsByOrder: Ship[] = [];
 

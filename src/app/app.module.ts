@@ -46,7 +46,7 @@ import { ShipAddPopupComponent } from './User-Interface/Member-Interface/ship-ad
 import { DisplayShipsFilterBarComponent } from './User-Interface/Member-Interface/display-ships-filter-bar/display-ships-filter-bar.component';
 import { LegalComponent } from './legal/legal.component';
 import { SubNavbarComponent } from './User-Interface/Member-Interface/sub-navbar/sub-navbar.component';
-import { OrganizationComponent } from './organization/organization.component';
+import { OrganizationComponent } from './User-Interface/Member-Interface/organization/organization.component';
 
 @NgModule({
   declarations: [

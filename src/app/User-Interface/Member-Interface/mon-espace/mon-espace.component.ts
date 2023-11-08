@@ -177,11 +177,7 @@ export class MonEspaceComponent implements OnInit {
           this.currentView = 'synthesis';
           break;
         case 'organization':
-          if (this.isAdmin) {
-            this.currentView = 'organization';
-          } else {
-            this.inApp.navigateToShips(this.username);
-          }
+          this.currentView = 'organization';
           break;
         default:
           this.currentView = 'ships';

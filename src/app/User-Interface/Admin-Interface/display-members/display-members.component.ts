@@ -52,12 +52,14 @@ export class DisplayMembersComponent implements OnInit {
     this.handleScrollLock();
     this.showConfirmRemove = false;
     if (removingConfirmed) {
-      this.updateAccount.deleteAccount(this.elementToRemove).subscribe(() => {
-        this.members = [];
-        this.getData();
-        this.show = false;
-        setTimeout(() => (this.show = true));
-      });
+      this.updateAccount
+        .deleteAccount(this.organizationId, this.elementToRemove)
+        .subscribe(() => {
+          this.members = [];
+          this.getData();
+          this.show = false;
+          setTimeout(() => (this.show = true));
+        });
     }
   }
 
