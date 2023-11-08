@@ -8,7 +8,7 @@ import { APP_API_URL } from 'src/environments/environment.local';
 @Injectable({
   providedIn: 'root',
 })
-export class FetchFleetService {
+export class FetchFleetDataService {
   constructor(private http: HttpClient) {}
 
   private url = APP_API_URL;

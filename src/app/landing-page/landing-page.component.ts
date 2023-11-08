@@ -1,7 +1,7 @@
 import { InAppService } from 'src/app/in-app.service';
 import { Member } from 'src/app/interfaces';
 import { Component, OnInit } from '@angular/core';
-import { FetchDataService } from '../fetch-data.service';
+import { FetchUserDataService } from '../fetch-user-data.service';
 
 import { ConnectionStatus } from '../interfaces';
 
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
   constructor(
-    private fetch: FetchDataService,
+    private fetchUserData: FetchUserDataService,
     private router: Router,
     private cookieService: CookieService
   ) {}
@@ -49,7 +49,7 @@ export class LandingPageComponent implements OnInit {
     if (this.username && this.password) {
       this.fieldsAreValid = true;
       this.isConnecting = true;
-      this.fetch
+      this.fetchUserData
         .login(this.username, this.password)
         .subscribe((data: ConnectionStatus) => {
           if (data.code === 201) {

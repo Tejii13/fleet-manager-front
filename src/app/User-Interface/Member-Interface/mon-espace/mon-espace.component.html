@@ -31,6 +31,7 @@
           currentView === 'members' ||
           currentView === 'overview')
       "
+      [isLeader]="isLeader"
       [userId]="userId"
       [fleet]="fleet"
       [ships]="ships"
@@ -52,13 +53,29 @@
       >
         <div class="loading-spinner"></div>
       </div>
-      <div *ngIf="!isFetchingShipsData && !ships">
+      <div
+        *ngIf="
+          !isFetchingShipsData &&
+          !ships &&
+          (currentView === 'ships' ||
+            currentView === 'synthesis' ||
+            currentView === 'overview')
+        "
+      >
         <h2 class="text-red-500 italic">
           Impossible de récupérer la liste des vaisseaux du jeu, réessayez plus
           tard.
         </h2>
       </div>
-      <div *ngIf="!isFetchingUsersFleet && !fleet">
+      <div
+        *ngIf="
+          !isFetchingUsersFleet &&
+          !fleet &&
+          (currentView === 'ships' ||
+            currentView === 'synthesis' ||
+            currentView === 'overview')
+        "
+      >
         <h2 class="text-red-500 italic">
           Impossible de récupérer la liste de vos vaisseaux, réessayez plus tard
           ou contactez le support si le problème persiste.

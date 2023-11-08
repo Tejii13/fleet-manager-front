@@ -1,8 +1,8 @@
-import { FetchFleetService } from 'src/app/fetch-fleet.service';
+import { FetchFleetDataService } from 'src/app/fetch-fleet-data.service';
 import { CheckConnection, Ship, ShipData } from 'src/app/interfaces';
 import { StarCitizenApiService } from 'src/app/star-citizen-api.service';
-import { FetchDataService } from '../../../fetch-data.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { FetchUserDataService } from '../../../fetch-user-data.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -19,8 +19,8 @@ export class MonEspaceComponent implements OnInit {
   constructor(
     private scApi: StarCitizenApiService,
     private route: ActivatedRoute,
-    private fetchData: FetchDataService,
-    private fetchFleet: FetchFleetService,
+    private fetchUserData: FetchUserDataService,
+    private fetchFleetData: FetchFleetDataService,
     private cookieService: CookieService,
     private router: Router,
     private inApp: InAppService
@@ -28,6 +28,7 @@ export class MonEspaceComponent implements OnInit {
 
   public showData: boolean = false;
   public isAdmin: boolean = false;
+  public isLeader: boolean = false;
   public verifyPassword: boolean = false;
   public members: Array<any> = [];
   public username!: string;
@@ -57,11 +58,11 @@ export class MonEspaceComponent implements OnInit {
     // Verifies if the id in the route is not null
     if (urlUsername !== null) {
       // If not null, fetches user info if he is connected
-      this.fetchData
+      this.fetchUserData
         .checkConnection()
         .subscribe((response: CheckConnection) => {
           if (response && response.id) {
-            this.fetchData.getUserinfo(response.id).subscribe((data) => {
+            this.fetchUserData.getUserinfo(response.id).subscribe((data) => {
               if (!data) {
                 this.disconnect();
               } else {
@@ -87,13 +88,18 @@ export class MonEspaceComponent implements OnInit {
     if (!data.verified) {
       this.verifyPassword = true;
       this.isAdmin = false;
+      this.isLeader = false;
       this.showData = false;
     } else {
       // If it's not the first connection
       for (let role of data.roles) {
+        if (role === 'leader') {
+          this.isLeader = true;
+          console.log('isLeader');
+        }
         if (role === 'admin') {
           this.isAdmin = true;
-
+          console.log('isAdmin');
           // Isolate organization id from iri
           if (data.organization_leader || data.organizationLeader) {
             const organizationArray = data.organizations[0].split('/');
@@ -128,7 +134,7 @@ export class MonEspaceComponent implements OnInit {
 
     this.isFetchingUsersFleet = true;
     if (this.userId) {
-      this.fetchFleet.getShipInfo(this.userId).subscribe((response) => {
+      this.fetchFleetData.getShipInfo(this.userId).subscribe((response) => {
         this.isFetchingUsersFleet = false;
         this.fleet = [];
         this.fleet = response;

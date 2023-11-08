@@ -1,5 +1,5 @@
 import { catchError } from 'rxjs';
-import { FetchFleetService } from 'src/app/fetch-fleet.service';
+import { FetchFleetDataService } from 'src/app/fetch-fleet-data.service';
 import { Ship } from 'src/app/interfaces';
 import { ShipData } from './../../../interfaces';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
@@ -19,7 +19,7 @@ export class ShipAddPopupComponent implements OnInit {
   @Output() reloadShipsDisplay: EventEmitter<boolean> =
     new EventEmitter<boolean>();
 
-  constructor(private handleShips: FetchFleetService) {}
+  constructor(private fetchFleetData: FetchFleetDataService) {}
 
   public isLoaner: boolean = false;
   public fieldsAreValid: boolean = true;
@@ -148,7 +148,7 @@ export class ShipAddPopupComponent implements OnInit {
     };
 
     try {
-      this.handleShips.saveShip(requestBody).subscribe(
+      this.fetchFleetData.saveShip(requestBody).subscribe(
         (response) => {
           if (response) {
             this.isFetching = false;

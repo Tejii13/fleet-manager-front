@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { FetchDataService } from 'src/app/fetch-data.service';
+import { FetchOrganizationDataService } from 'src/app/fetch-organization-data.service';
 import { Member } from 'src/app/interfaces';
 import { UpdateAccountService } from 'src/app/update-account.service';
 
@@ -11,12 +11,14 @@ import { UpdateAccountService } from 'src/app/update-account.service';
 })
 export class DisplayMembersComponent implements OnInit {
   constructor(
-    private fetchData: FetchDataService,
-    private updateAccount: UpdateAccountService
+    private updateAccount: UpdateAccountService,
+    private fetchOrganizationData: FetchOrganizationDataService
   ) {}
 
   @Input() organizationId!: number;
   @Input() userId!: number;
+  @Input() isLeader!: boolean;
+
   public members!: Member[];
   public showUpdateMembers: boolean = false;
 
@@ -38,7 +40,7 @@ export class DisplayMembersComponent implements OnInit {
   }
 
   getData() {
-    this.fetchData.getUsersList(this.organizationId).subscribe(
+    this.fetchOrganizationData.getUsersList(this.organizationId).subscribe(
       (response: any) => {
         this.members = response;
       },

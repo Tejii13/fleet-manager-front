@@ -10,7 +10,7 @@
   (showPasswordPopup)="setShowPasswordPopup($event)"
 ></app-add-user>
 
-<div class="mb-4 mx-4" *ngIf="!showUpdateMembers && members">
+<div class="mb-4 mx-4" *ngIf="!showUpdateMembers && members && isLeader">
   <button (click)="updateMembers()" class="bigButton">
     Ajouter un utilisateur
   </button>

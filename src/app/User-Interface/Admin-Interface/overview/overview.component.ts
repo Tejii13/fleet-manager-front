@@ -1,5 +1,5 @@
 import { Ship } from 'src/app/interfaces';
-import { FetchFleetService } from 'src/app/fetch-fleet.service';
+import { FetchFleetDataService } from 'src/app/fetch-fleet-data.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class OverviewComponent implements OnInit {
   @Input() orgId!: number;
 
-  constructor(private fetchFleet: FetchFleetService) {}
+  constructor(private fetchFleetData: FetchFleetDataService) {}
 
   public isAdmin: boolean = true;
   public fleetEmpty: boolean = true;
@@ -42,7 +42,7 @@ export class OverviewComponent implements OnInit {
   getData() {
     this.ships = [];
     this.types = [];
-    this.fetchFleet.getOrgShipsList(this.orgId).subscribe((response) => {
+    this.fetchFleetData.getOrgShipsList(this.orgId).subscribe((response) => {
       if (response.length > 0) this.fleetEmpty = false;
       this.ships = response;
       this.sortShips(response);

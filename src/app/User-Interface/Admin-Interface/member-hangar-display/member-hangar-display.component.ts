@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import { FetchFleetService } from 'src/app/fetch-fleet.service';
+import { FetchFleetDataService } from 'src/app/fetch-fleet-data.service';
 import { Ship } from 'src/app/interfaces';
 
 @Component({
@@ -11,7 +11,7 @@ export class MemberHangarDisplayComponent implements OnInit {
   @Input() userId!: number;
   @Output() toggleHangarDisplay = new EventEmitter<void>();
 
-  constructor(private fetchFleet: FetchFleetService) {}
+  constructor(private fetchFleetData: FetchFleetDataService) {}
 
   public ships: Ship[] = [];
   public responseReceived: boolean = false;
@@ -19,7 +19,7 @@ export class MemberHangarDisplayComponent implements OnInit {
   public fleetEmpty: boolean = false;
 
   ngOnInit(): void {
-    this.fetchFleet.getShipInfo(this.userId).subscribe((response) => {
+    this.fetchFleetData.getShipInfo(this.userId).subscribe((response) => {
       if (response.length === 0) {
         this.fleetEmpty = true;
       }

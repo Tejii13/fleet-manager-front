@@ -32,7 +32,7 @@
           [(ngModel)]="obtentionMethod"
           (change)="getObtention()"
         >
-          <option value="default">- - -</option>
+          <option value="default" selected hidden>- - -</option>
           <option value="pledge">Pledge</option>
           <option
             *ngIf="shipToHandle.production_status === 'flight-ready'"

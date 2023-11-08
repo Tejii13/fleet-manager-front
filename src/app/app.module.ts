@@ -20,9 +20,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { FetchDataService } from './fetch-data.service';
+import { FetchUserDataService } from './fetch-user-data.service';
 import { StarCitizenApiService } from './star-citizen-api.service';
-import { FetchFleetService } from './fetch-fleet.service';
+import { FetchFleetDataService } from './fetch-fleet-data.service';
 import { UpdateAccountService } from './update-account.service';
 
 import { AppComponent } from './app.component';
@@ -95,9 +95,9 @@ import { OrganizationComponent } from './User-Interface/Member-Interface/organiz
   providers: [
     CookieService,
     StarCitizenApiService,
-    FetchDataService,
+    FetchUserDataService,
     UpdateAccountService,
-    FetchFleetService,
+    FetchFleetDataService,
   ],
   bootstrap: [AppComponent],
 })

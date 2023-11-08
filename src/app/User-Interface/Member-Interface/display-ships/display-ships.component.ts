@@ -8,7 +8,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { FetchFleetService } from 'src/app/fetch-fleet.service';
+import { FetchFleetDataService } from 'src/app/fetch-fleet-data.service';
 import { Ship } from 'src/app/interfaces';
 
 @Component({
@@ -26,7 +26,7 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
   public shipToSortName: string = '';
   public sortBySelectValue: string = 'default';
 
-  constructor(private fetchFleet: FetchFleetService) {}
+  constructor(private fetchFleetData: FetchFleetDataService) {}
 
   public isLoading: boolean = false;
 
@@ -74,9 +74,11 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
     this.handleScrollLock();
     this.showConfirmRemove = false;
     if (removingConfirmed) {
-      this.fetchFleet.deleteShip(this.shipToRemove).subscribe((response) => {
-        this.getFleetData.emit();
-      });
+      this.fetchFleetData
+        .deleteShip(this.shipToRemove)
+        .subscribe((response) => {
+          this.getFleetData.emit();
+        });
     } else {
       this.shipToRemove = -1;
     }
@@ -124,7 +126,7 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
           loanerFor: ship.loaner_for,
         };
 
-        this.fetchFleet.updateName(shipId, requestBody).subscribe();
+        this.fetchFleetData.updateName(shipId, requestBody).subscribe();
       }
     }
   }

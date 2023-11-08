@@ -1,4 +1,4 @@
-import { FetchFleetService } from 'src/app/fetch-fleet.service';
+import { FetchFleetDataService } from 'src/app/fetch-fleet-data.service';
 import {
   Component,
   Input,
@@ -22,7 +22,7 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
   @Input() fromAdmin: boolean = false;
   @Output() getFleetData = new EventEmitter<void>();
 
-  constructor(private fetchFleet: FetchFleetService) {}
+  constructor(private fetchFleetData: FetchFleetDataService) {}
 
   public show: boolean = true;
 
@@ -101,7 +101,7 @@ export class ShipSynthesisComponent implements OnInit, OnChanges {
     this.handleScrollLock();
     this.showConfirmRemove = false;
     if (removingConfirmed) {
-      this.fetchFleet.deleteShip(this.shipToRemove).subscribe(() => {
+      this.fetchFleetData.deleteShip(this.shipToRemove).subscribe(() => {
         this.getFleetData.emit();
       });
     } else {

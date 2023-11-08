@@ -10,6 +10,7 @@ import { Ship, ShipData } from 'src/app/interfaces';
 })
 export class AdminPanelComponent implements OnInit {
   @Input() userId!: number;
+  @Input() isLeader!: boolean;
   @Input() ships!: ShipData[];
   @Input() fleet!: Ship[];
   @Input() organizationId!: number;

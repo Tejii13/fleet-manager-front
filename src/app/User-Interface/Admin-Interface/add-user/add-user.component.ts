@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { FetchDataService } from '../../../fetch-data.service';
+import { FetchUserDataService } from '../../../fetch-user-data.service';
 
 @Component({
   selector: 'app-add-user',
@@ -14,7 +14,10 @@ export class AddUserComponent {
     new EventEmitter<boolean>();
   @Output() cancelAdd: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private fetch: FetchDataService, private clipboard: Clipboard) {}
+  constructor(
+    private fetch: FetchUserDataService,
+    private clipboard: Clipboard
+  ) {}
 
   public username!: string;
   public role: Array<string> = ['hidden'];

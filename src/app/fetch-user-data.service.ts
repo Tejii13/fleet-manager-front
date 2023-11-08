@@ -6,16 +6,12 @@ import { Observable, of, catchError, switchMap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { APP_API_URL } from 'src/environments/environment.local';
-import {
-  CheckConnection,
-  ConnectionStatus,
-  UserListResponse,
-} from './interfaces';
+import { CheckConnection, ConnectionStatus } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FetchDataService {
+export class FetchUserDataService {
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   private url = APP_API_URL;
@@ -119,14 +115,5 @@ export class FetchDataService {
           });
         })
       );
-  }
-
-  getUsersList(id: number): Observable<UserListResponse> {
-    return this.http.get<UserListResponse>(
-      `${this.url}/api/organizations/${id}/users`,
-      {
-        headers: { accept: 'application/json' },
-      }
-    );
   }
 }
