@@ -1,3 +1,4 @@
+import { Organization } from './../../../interfaces';
 import { FetchFleetDataService } from 'src/app/fetch-fleet-data.service';
 import { CheckConnection, Ship, ShipData } from 'src/app/interfaces';
 import { StarCitizenApiService } from 'src/app/star-citizen-api.service';
@@ -50,6 +51,8 @@ export class MonEspaceComponent implements OnInit {
 
   public currentView!: string;
 
+  userData!: any;
+
   ngOnInit(): void {
     const urlUsername = this.route.snapshot.paramMap.get('id'); // Get the 'id' parameter from the current URL
 
@@ -66,7 +69,9 @@ export class MonEspaceComponent implements OnInit {
               if (!data) {
                 this.disconnect();
               } else {
-                this.handleDataFetch(data);
+                console.log(data);
+                this.userData = data;
+                this.handleDataFetch();
                 this.getShipsData();
                 this.getFleetData();
               }
@@ -80,37 +85,43 @@ export class MonEspaceComponent implements OnInit {
     }
   }
 
-  handleDataFetch(data: any) {
+  handleDataFetch() {
     this.showData = true;
-    this.username = data.username;
-    this.userId = data.id;
+    this.username = this.userData.username;
+    this.userId = this.userData.id;
     // Verifies if it's the first connection
-    if (!data.verified) {
+    if (!this.userData.verified) {
       this.verifyPassword = true;
       this.isAdmin = false;
       this.isLeader = false;
       this.showData = false;
     } else {
-      // If it's not the first connection
-      for (let role of data.roles) {
-        if (role === 'leader') {
-          this.isLeader = true;
-          console.log('isLeader');
-        }
-        if (role === 'admin') {
-          this.isAdmin = true;
-          console.log('isAdmin');
-          // Isolate organization id from iri
-          if (data.organization_leader || data.organizationLeader) {
-            const organizationArray = data.organizations[0].split('/');
-            this.organizationId =
-              organizationArray[organizationArray.length - 1];
-            return true;
-          }
-        }
-      }
+      console.log(this.userData.organizations);
+      this.getOrganizations();
+      return this.getRoles();
     }
     return false;
+  }
+
+  getRoles() {
+    // If it's not the first connection
+    for (let role of this.userData.roles) {
+      if (role === 'leader') {
+        this.isLeader = true;
+        console.log('isLeader');
+      }
+      if (role === 'admin') {
+        this.isAdmin = true;
+        console.log('isAdmin');
+      }
+    }
+    return true;
+  }
+
+  getOrganizations() {
+    // Isolate organization id from iri
+    const organizationArray = this.userData.organizations[0].split('/');
+    this.organizationId = organizationArray[organizationArray.length - 1];
   }
 
   getShipsData() {
@@ -154,6 +165,8 @@ export class MonEspaceComponent implements OnInit {
   // Verifies if a new password is already set
   handlePasswordVerified(passwordVerified: boolean) {
     if (passwordVerified) {
+      this.getRoles();
+      this.getOrganizations();
       this.showData = true;
       this.verifyPassword = false;
     }

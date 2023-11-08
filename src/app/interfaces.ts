@@ -5,8 +5,8 @@ export interface Member {
   roles: Array<string>;
   ships: string[];
   auth: string;
-  organizationsLeader: string;
   organizations: string;
+  main_org: string;
 }
 
 export interface Ship {
@@ -28,6 +28,18 @@ export interface Ship {
   owner_username: string;
   obtention_method: string;
   loaner_for: string;
+}
+
+export interface Organization {
+  id: number;
+  name: string;
+  sid: string;
+  archetype: string;
+  banner: string;
+  focus: string;
+  language: string;
+  logo: string;
+  members: string;
 }
 
 export interface ConnectionStatus {

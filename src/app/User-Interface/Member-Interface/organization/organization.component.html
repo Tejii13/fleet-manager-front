@@ -1,1 +1,24 @@
-<p>organization works!</p>
+<div
+  *ngIf="isFetchingOrgData"
+  class="w-full flex items-center justify-center mt-4 md:mt-8"
+>
+  <div class="loading-spinner"></div>
+</div>
+
+<p *ngIf="!isFetchingOrgData && errorWhileRecoveringData">
+  Une erreur est survenue lors de la récupération des données, réessayez plus
+  tard.
+</p>
+
+<div *ngIf="!isFetchingOrgData" class="mt-4 sm:mt-8">
+  <img src="{{ orgData.banner }}" alt="Bannière" />
+  <div class="flex flex-wrap md:flex-nowrap">
+    <img class="logo" src="{{ orgData.logo }}" alt="Logo" />
+    <h3>{{ orgData.name }}&nbsp;[&nbsp;{{ orgData.sid }}&nbsp;]</h3>
+  </div>
+
+  <p>Archetype: {{ orgData.archetype }}</p>
+  <p>Activités: {{ orgData.focus }}</p>
+  <p>Langue: {{ orgData.language }}</p>
+  <p>Membres: {{ orgData.members }}</p>
+</div>

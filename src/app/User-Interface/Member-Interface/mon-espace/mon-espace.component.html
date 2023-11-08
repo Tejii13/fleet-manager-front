@@ -22,8 +22,10 @@
 <!-- Shows data if it isn't the first connection -->
 <ng-template #elseShowData>
   <div *ngIf="showData">
-    <h2>Bienvenue dans ton hangar {{ username }} !</h2>
-    <!-- <ng-container *ngIf="isAdmin"> -->
+    <h2>
+      Bienvenue dans ton hangar
+      <span class="text-teal-100">{{ username }}</span> !
+    </h2>
     <app-admin-panel
       *ngIf="
         isAdmin &&
@@ -38,9 +40,11 @@
       (showShipsChange)="onShowShipsChange($event)"
       [organizationId]="organizationId"
     ></app-admin-panel>
-    <!-- </ng-container> -->
 
-    <app-organization *ngIf="currentView === 'organization'"></app-organization>
+    <app-organization
+      *ngIf="currentView === 'organization'"
+      [orgId]="organizationId"
+    ></app-organization>
 
     <div *ngIf="showShips">
       <div
