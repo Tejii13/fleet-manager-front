@@ -11,10 +11,15 @@
 </p>
 
 <div *ngIf="!isFetchingOrgData" class="mt-4 sm:mt-8">
+  <p class="px-4 pb-4 text-red-300">
+    Cette page est toujours en construction, plus de fonctionnalités arriveront
+    bientôt!
+  </p>
+  <h3 class="text-xl text-teal-100">Organisation principale</h3>
   <img src="{{ orgData.banner }}" alt="Bannière" />
   <div class="flex flex-wrap md:flex-nowrap">
     <img class="logo" src="{{ orgData.logo }}" alt="Logo" />
-    <h3>{{ orgData.name }}&nbsp;[&nbsp;{{ orgData.sid }}&nbsp;]</h3>
+    <h4>{{ orgData.name }}&nbsp;[&nbsp;{{ orgData.sid }}&nbsp;]</h4>
   </div>
 
   <p>Archetype: {{ orgData.archetype }}</p>

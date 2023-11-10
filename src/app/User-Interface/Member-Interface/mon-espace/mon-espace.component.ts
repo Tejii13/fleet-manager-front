@@ -1,4 +1,3 @@
-import { Organization } from './../../../interfaces';
 import { FetchFleetDataService } from 'src/app/fetch-fleet-data.service';
 import { CheckConnection, Ship, ShipData } from 'src/app/interfaces';
 import { StarCitizenApiService } from 'src/app/star-citizen-api.service';
@@ -50,6 +49,8 @@ export class MonEspaceComponent implements OnInit {
   public inputRole!: Array<string>;
 
   public currentView!: string;
+
+  public showNav: boolean = false;
 
   userData!: any;
 
@@ -202,6 +203,10 @@ export class MonEspaceComponent implements OnInit {
           this.currentView = 'ships';
       }
     });
+  }
+
+  handleNavigationButton() {
+    this.showNav = !this.showNav;
   }
 
   disconnect() {

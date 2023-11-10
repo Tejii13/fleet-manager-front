@@ -1,8 +1,24 @@
-<app-sub-navbar
+<div class="sub-navbar">
+  <app-sub-navbar
+    [isAdmin]="isAdmin"
+    [username]="username"
+    [currentView]="currentView"
+  ></app-sub-navbar>
+</div>
+
+<div class="burger" *ngIf="!showNav">
+  <button (click)="handleNavigationButton()" class="text-lg">
+    Navigation&nbsp;<mat-icon>menu</mat-icon>
+  </button>
+</div>
+
+<app-sub-navbar-burger
+  *ngIf="showNav"
   [isAdmin]="isAdmin"
   [username]="username"
   [currentView]="currentView"
-></app-sub-navbar>
+  (hideNav)="handleNavigationButton()"
+></app-sub-navbar-burger>
 
 <div
   *ngIf="!showData && !verifyPassword"
@@ -21,7 +37,7 @@
 
 <!-- Shows data if it isn't the first connection -->
 <ng-template #elseShowData>
-  <div *ngIf="showData">
+  <div *ngIf="showData && !showNav">
     <h2>
       Bienvenue dans ton hangar
       <span class="text-teal-100">{{ username }}</span> !

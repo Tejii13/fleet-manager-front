@@ -47,6 +47,7 @@ import { DisplayShipsFilterBarComponent } from './User-Interface/Member-Interfac
 import { LegalComponent } from './legal/legal.component';
 import { SubNavbarComponent } from './User-Interface/Member-Interface/sub-navbar/sub-navbar.component';
 import { OrganizationComponent } from './User-Interface/Member-Interface/organization/organization.component';
+import { SubNavbarBurgerComponent } from './User-Interface/Member-Interface/sub-navbar-burger/sub-navbar-burger.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { OrganizationComponent } from './User-Interface/Member-Interface/organiz
     LegalComponent,
     SubNavbarComponent,
     OrganizationComponent,
+    SubNavbarBurgerComponent,
   ],
   imports: [
     BrowserModule,

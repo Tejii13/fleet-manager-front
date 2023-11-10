@@ -1,0 +1,57 @@
+<nav class="nav-container text-teal-100">
+  <div class="justify-center flex flex-col">
+    <button
+      [ngClass]="{ active: currentView === 'ships' }"
+      class="mx-1"
+      (click)="navigateToShips()"
+    >
+      Vaisseaux
+    </button>
+
+    <button
+      [ngClass]="{ active: currentView === 'synthesis' }"
+      class="mx-1"
+      (click)="navigateToSynthesis()"
+    >
+      Synthèse
+    </button>
+
+    <button
+      class="mx-1 notAvailable"
+      matTooltip="Coming Soon"
+      matTooltipPosition="below"
+    >
+      Whishlist
+    </button>
+
+    <button
+      [ngClass]="{ active: currentView === 'organization' }"
+      class="mx-1"
+      (click)="navigateToOrganization()"
+    >
+      Organisation
+    </button>
+
+    <button
+      *ngIf="isAdmin"
+      [ngClass]="{ active: currentView === 'members' }"
+      class="mx-1"
+      (click)="navigateToMembers()"
+    >
+      Membres
+    </button>
+
+    <button
+      *ngIf="isAdmin"
+      [ngClass]="{ active: currentView === 'overview' }"
+      class="bigButton mx-1"
+      (click)="navigateToOverview()"
+    >
+      Flotte de l'organisation
+    </button>
+
+    <button (click)="disconnect()" class="mx-1 notAvailable">
+      Déconnexion
+    </button>
+  </div>
+</nav>
