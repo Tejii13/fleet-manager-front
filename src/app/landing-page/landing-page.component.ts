@@ -29,6 +29,8 @@ export class LandingPageComponent implements OnInit {
   public isConnecting: boolean = false;
   public fieldsAreValid: boolean = true;
 
+  public isFrench: boolean = false;
+
   ngOnInit(): void {
     this.username = this.cookieService.get('username');
     const authCookie = this.cookieService.get('auth');
@@ -43,6 +45,10 @@ export class LandingPageComponent implements OnInit {
     } else {
       this.disconnect();
     }
+  }
+
+  selectLanguage(value: boolean) {
+    this.isFrench = value;
   }
 
   onSubmit() {

@@ -1,3 +1,31 @@
+<div class="text-center mt-4">
+  <button (click)="selectLanguage(true)">Français</button> |
+  <button (click)="selectLanguage(false)">English</button>
+</div>
+
+<p lang="en" *ngIf="!isFrench" class="text-center text-xs py-4 text-teal-50">
+  This website is still a work in progress. I aim to offer you a fleet
+  management solution enjoyable and easy to use for organizations or solo
+  players. The app is usable in its current state and will be improved and
+  translated in the future. I have lots of ideas so if you have inquiries or you
+  to register, you can contact me at
+  <a class="underline hover:italic" href="mailto:contact@star-flotilla.com"
+    >contact@star-flotilla.com</a
+  >.
+</p>
+
+<p lang="fr" *ngIf="isFrench" class="text-center text-xs py-4 text-teal-50">
+  Ce site web est encore en cours de développement. Mon objectif est de vous
+  proposer une solution de gestion de flotte agréable et facile à utiliser pour
+  les organisations ou les utilisateurs individuels. L'application est
+  utilisable dans son état actuel et sera améliorée et traduite dans le futur.
+  J'ai beaucoup d'idées, donc si vous avez des questions ou si vous souhaitez
+  vous inscrire, vous pouvez me contacter à l'adresse
+  <a class="underline hover:italic" href="mailto:contact@star-flotilla.com"
+    >contact@star-flotilla.com</a
+  >.
+</p>
+
 <section>
   <div *ngIf="!isConnected">
     <form (ngSubmit)="onSubmit()" class="text-center">
