@@ -10,37 +10,15 @@
   margin-right: auto;
 }
 
-p {
-  color: #b1fffb;
-  margin-bottom: 10px;
-  margin-top: auto;
-}
-
-button {
-  font-size: 1.6em;
-  padding: 20px;
-  color: #b1fffb;
-  text-shadow: 0 0 7px #b1fffb, 0 0 21px #b1fffb, 0 0 60px #3ec9e1, 0 0 80px #3ec9e1;
-  margin-right: 5%;
-}
-
 mat-toolbar {
   background-color: rgba(0, 0, 0, 0.2);
   height: 3.5em;
+  padding: 0;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 768px) {
   .title {
     font-size: 1.2em;
-    margin-left: 20px;
-  }
-
-  p {
-    font-size: 0.6em;
-  }
-
-  button {
-    font-size: 1.2em;
-    margin-right: 20px;
+    margin-left: 10%;
   }
 }
