@@ -9,10 +9,10 @@ Fleet Manager currently offers the following features:
 - **Personal Space**: Users can have their own personalized accounts.
 - **Ship List**: View and manage all your ships.
 - **Type Summary**: Get a summary of ships categorized by their types.
-- **Organization Overview**: Provides a comprehensive ship overview for organizational leaders.
-- **Sorting by Brand**: Sort ships by their brand.
-- **Sorting by Acquisition Method**: Sort ships by their method of acquisition.
+- **Organization Overview**: Provides a comprehensive ship overview for organization leaders.
+- **Sorting ships**: Sort ships by their brand/name/scu/crew.
 <br />
+
 <br />
 
 ## Getting Started with Angular
@@ -23,7 +23,8 @@ Fleet Manager is built with Angular. To get started with the application, follow
 
 ### Prerequisites
 
-Before you begin, make sure you have Node.js and npm (Node Package Manager) installed on your system. You can download them from [Node.js Official Website](https://nodejs.org/).
+Before you begin, make sure you have Node.js and npm (Node Package Manager) installed on your system. You can download them from [Node.js Official Website](https://nodejs.org/). <br />
+The app runs well with Node.js@18.17.0 and npm@9.6.7
 <br />
 <br />
 
@@ -35,6 +36,7 @@ To contribute or work on Fleet Manager, fork the repository on GitHub:
 
 2. Click the "Fork" button in the upper right corner of the repository page. This will create a copy of the repository in your GitHub account.
 <br />
+
 <br />
 
 ### Installation
@@ -74,6 +76,19 @@ Open your web browser and go to <http://localhost:4200> to access Fleet Manager.
 <br />
 <br />
 
-### Contact Us
+### Documentation
 
-If you have any questions or need further information about Fleet Manager, please feel free to contact me at contact@star-flotilla.com or via discord (tejii_).
+I didn't have time to add documentation yet, I'll try to work on that in the future.
+<br />
+<br />
+
+### Partnership
+
+If you are a dev and want to work with me, find my contact information below.
+<br />
+<br />
+
+### Contact me
+
+If you have any questions or need further information about Fleet Manager, please feel free to contact me at <contact@star-flotilla.com> or via discord (tejii_). <br />
+For other professional requests, contact me at <telmosousapro@proton.me>.
