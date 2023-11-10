@@ -90,5 +90,5 @@ If you are a dev and want to work with me, find my contact information below.
 
 ### Contact me
 
-If you have any questions or need further information about Fleet Manager, please feel free to contact me at <contact@star-flotilla.com> or via discord (tejii_). <br />
+If you have any questions or need further information about Star Flotilla, please feel free to contact me at <contact@star-flotilla.com> or via discord (tejii_). <br />
 For other professional requests, contact me at <telmosousapro@proton.me>.
