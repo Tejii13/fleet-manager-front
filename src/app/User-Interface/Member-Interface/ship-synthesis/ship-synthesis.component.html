@@ -1,15 +1,16 @@
-<div *ngIf="fleetEmpty" class="pt-4">
-  <p class="text-base text-center sm:text-left px-4">
-    Aucun vaisseau à afficher pour l'instant, utilisez la barre de recherche au
-    dessus pour en ajouter et rechargez la page!
-  </p>
-</div>
+<!-- BUG Doesn't work at all as expected -->
+<!-- <div>
+  <app-display-ships-filter-bar>
+    [ships]="ships" (actualizedShips)="actualizeShips($event)"
+    ></app-display-ships-filter-bar
+  >
+</div> -->
 
-<div *ngIf="!fleetEmpty && show && types.length > 0">
-  <app-display-ships-filter-bar
-    [ships]="ships"
-    (actualizedShips)="actualizeShips($event)"
-  ></app-display-ships-filter-bar>
+<div *ngIf="fleetEmpty || types.length === 0" class="pt-4">
+  <p class="text-base text-center sm:text-left px-4">
+    Aucun vaisseau à afficher pour l'instant, si vous pensez que c'est une
+    erreur, contactez le support!
+  </p>
 </div>
 
 <div

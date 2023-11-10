@@ -72,6 +72,8 @@ export class DisplayShipsFilterBarComponent implements OnInit {
     this.sortByOrderValue = 'hidden';
     this.sortByNameValue = '';
 
+    console.log(this.sortByObtMethodValue);
+
     const obtMethod = this.sortByObtMethodValue;
 
     switch (obtMethod) {
@@ -145,7 +147,6 @@ export class DisplayShipsFilterBarComponent implements OnInit {
     this.sortByNameValue = '';
 
     const order = this.sortByOrderValue;
-    console.log(order);
 
     switch (order) {
       case 'scuAsc':
@@ -183,7 +184,10 @@ export class DisplayShipsFilterBarComponent implements OnInit {
       this.sortedShipsByObtMethod = [];
     }
 
-    if (this.sortByObtMethodValue === 'default') {
+    if (
+      this.sortByObtMethodValue === 'default' ||
+      this.sortByObtMethodValue === 'hidden'
+    ) {
       this.sortedShipsByObtMethod = this.ships;
     }
 

@@ -148,6 +148,5 @@ export class DisplayShipsComponent implements OnInit, OnChanges {
 
   actualizeShips(sortedShips: Ship[]) {
     this.sortedShips = sortedShips;
-    console.log(sortedShips);
   }
 }

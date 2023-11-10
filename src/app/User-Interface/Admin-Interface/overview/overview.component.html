@@ -1,4 +1,11 @@
-<div *ngIf="fleetEmpty && data" class="pt-4">
+<div *ngIf="!fleetEmpty && data">
+  <app-display-ships-filter-bar
+    [ships]="ships"
+    (actualizedShips)="actualizeShips($event)"
+  ></app-display-ships-filter-bar>
+</div>
+
+<div *ngIf="(fleetEmpty && data) || (types.length === 0 && data)" class="pt-4">
   <p class="text-base text-center sm:text-left px-4">
     Il n'y a aucun vaisseau dans votre organisation à afficher pour l'instant,
     utilisez la barre de recherche au dessus pour en ajouter et rechargez la
@@ -10,14 +17,7 @@
   <div class="loading-spinner"></div>
 </div>
 
-<div *ngIf="!fleetEmpty && data">
-  <app-display-ships-filter-bar
-    [ships]="ships"
-    (actualizedShips)="actualizeShips($event)"
-  ></app-display-ships-filter-bar>
-</div>
-
-<div *ngIf="!fleetEmpty && data" class="table-content p-4">
+<div *ngIf="!fleetEmpty && data && types.length > 0" class="table-content p-4">
   <table class="w-full">
     <mat-accordion>
       <mat-card class="border-black mb-2 sticky-thead">
