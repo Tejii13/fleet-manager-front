@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { FetchFleetDataService } from 'src/app/fetch-fleet-data.service';
-import { CheckConnection, Ship, ShipData } from 'src/app/interfaces';
-import { StarCitizenApiService } from 'src/app/star-citizen-api.service';
+import { CheckConnection, Ship, ShipData, apiData } from 'src/app/interfaces';
 import { FetchUserDataService } from '../../../fetch-user-data.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,13 +17,13 @@ export class MonEspaceComponent implements OnInit {
   // @Input() currentView: string = 'ships';
 
   constructor(
-    private scApi: StarCitizenApiService,
     private route: ActivatedRoute,
     private fetchUserData: FetchUserDataService,
     private fetchFleetData: FetchFleetDataService,
     private cookieService: CookieService,
     private router: Router,
-    private inApp: InAppService
+    private inApp: InAppService,
+    private http: HttpClient
   ) {}
 
   public showData: boolean = false;
@@ -127,11 +127,16 @@ export class MonEspaceComponent implements OnInit {
 
   getShipsData() {
     this.isFetchingShipsData = true;
-    this.scApi.fetchAllShips().subscribe(
-      (response: Array<ShipData>) => {
+
+    this.http.get<apiData>('http://localhost:8000/api/sc_api').subscribe(
+      (response: apiData) => {
         this.isFetchingShipsData = false;
-        if (response && response.length !== 0) {
-          this.ships = response.filter((ship) => ship !== null);
+        console.log(response);
+
+        if (response && response.success) {
+          let data: Array<ShipData> = response.data;
+          this.ships = data.filter((ship) => ship !== null);
+          // this.ships = [];
         } else {
         }
       },

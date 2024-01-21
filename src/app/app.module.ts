@@ -21,7 +21,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FetchUserDataService } from './fetch-user-data.service';
-import { StarCitizenApiService } from './star-citizen-api.service';
 import { FetchFleetDataService } from './fetch-fleet-data.service';
 import { UpdateAccountService } from './update-account.service';
 
@@ -96,7 +95,6 @@ import { SubNavbarBurgerComponent } from './User-Interface/Member-Interface/sub-
   ],
   providers: [
     CookieService,
-    StarCitizenApiService,
     FetchUserDataService,
     UpdateAccountService,
     FetchFleetDataService,

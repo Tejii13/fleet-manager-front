@@ -76,6 +76,13 @@ export interface Data {
   success: number;
 }
 
+export interface apiData {
+  data: ShipData[];
+  message: string;
+  source: string;
+  success: boolean;
+}
+
 export interface ShipData {
   cargocapacity: number;
   // compiled // TODO Add it when making loadout app
